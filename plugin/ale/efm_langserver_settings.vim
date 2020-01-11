@@ -42,21 +42,30 @@ function! s:linter_setup() abort
   let b:ale_linters = uniq(sort(lintlist + ['efm-langserver']))
 endfunction
 
-autocmd! ale_efm_langserver_settings
+augroup ale_efm_langserver_settings
+  autocmd!
+augroup END
+augroup ale_efm_langserver_settings_init
+  autocmd!
+augroup END
 
 for typename in s:whitelist
-  call ale#linter#Define(typename, {
-            \   'name': 'efm-langserver',
-            \   'lsp': 'stdio',
-            \   'executable': 'efm-langserver',
-            \   'command': '%e',
-            \   'project_root':
-            \     {buffer->ale#path#FindNearestDirectory(buffer, '')},
-            \})
+  autocmd ale_efm_langserver_settings_init VimEnter *
+            \ if get(g:, 'loaded_ale_dont_use_this_in_other_plugins_please', 0)
+            \ |  call ale#linter#Define(typename, {
+            \     'name': 'efm-langserver',
+            \     'lsp': 'stdio',
+            \     'executable': 'efm-langserver',
+            \     'command': '%e',
+            \     'project_root':
+            \        {buffer->ale#path#FindNearestDirectory(buffer, '')},
+            \   })
+            \ | endif
 
   execute 'autocmd ale_efm_langserver_settings Filetype ' . typename
             \ . ' call ' . printf('<SNR>%s_', s:_SID()) . 'linter_setup()'
 endfor
+" autocmd ale_efm_langserver_settings_init VimEnter * autocmd! ale_efm_langserver_settings_init
 
 unlet s:config_dir s:config_file s:whitelist s:settings s:data
 

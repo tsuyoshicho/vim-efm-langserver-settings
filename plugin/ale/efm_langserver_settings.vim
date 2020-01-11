@@ -63,7 +63,9 @@ for typename in s:whitelist
             \ | endif
 
   execute 'autocmd ale_efm_langserver_settings Filetype ' . typename
-            \ . ' call ' . printf('<SNR>%s_', s:_SID()) . 'linter_setup()'
+            \ . ' if get(g:, 'loaded_ale_dont_use_this_in_other_plugins_please', 0)'
+            \ . ' | call ' . printf('<SNR>%s_', s:_SID()) . 'linter_setup()'
+            \ . ' | endif'
 endfor
 " autocmd ale_efm_langserver_settings_init VimEnter * autocmd! ale_efm_langserver_settings_init
 

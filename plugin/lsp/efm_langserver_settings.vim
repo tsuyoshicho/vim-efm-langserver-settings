@@ -18,9 +18,9 @@ let s:settings    = json_decode(join(readfile(s:config_dir
           \                                    . '/settings.json'), "\n"))
 
 let s:whitelist = []
-for data in s:settings
-  if executable(data.cmd)
-    call extend(s:whitelist, data.whitelist)
+for s:data in s:settings
+  if executable(s:data.cmd)
+    call extend(s:whitelist, s:data.whitelist)
   endif
 endfor
 
@@ -40,6 +40,8 @@ if get(g:, 'efm_langserver_settings#debug', 0)
             \                 '-log=' . expand('~/efm-langserver.log')]
             \}
 endif
+
+unlet s:config_dir s:config_file s:whitelist s:settings s:data
 
 function! s:lsp_efm_langserver_setup() abort
   call lsp#register_server(g:efm_langserver_settings#item)

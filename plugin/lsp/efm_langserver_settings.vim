@@ -22,7 +22,7 @@ for data in s:settings
   endif
 endfor
 
-let g:efm_langserver_settings#items = get(g:, efm_langserver_settings#items, [])
+let g:efm_langserver_settings#items = get(g:, 'efm_langserver_settings#items', [])
 let efm_debug = 0
 if !efm_debug
   call add(g:efm_langserver_settings#items, {

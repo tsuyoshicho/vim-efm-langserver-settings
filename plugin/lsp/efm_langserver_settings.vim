@@ -40,6 +40,8 @@ if get(g:, 'efm_langserver_settings#debug', 0)
             \}
 endif
 
+unlet s:config_dir s:config_file s:whitelist s:settings s:data
+
 function! s:lsp_efm_langserver_setup() abort
   call lsp#register_server(g:efm_langserver_settings#item)
 endfunction

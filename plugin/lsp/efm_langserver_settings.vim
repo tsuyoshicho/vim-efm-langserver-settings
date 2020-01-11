@@ -6,14 +6,16 @@
 
 scriptencoding utf-8
 
-if exists('g:loaded_lsp_efm_langserver_settings') && !executable('efm-langserver')
+if exists('g:loaded_lsp_efm_langserver_settings')
+          \ || !executable('efm-langserver')
     finish
 endif
 let g:loaded_lsp_efm_langserver_settings = 1
 
 let s:config_dir  = expand('<sfile>:h:h:h') . '/config/efm-langserver'
 let s:config_file = expand(s:config_dir . '/config.yaml')
-let s:settings    = json_decode(join(readfile(s:config_dir . '/settings.json'), "\n"))
+let s:settings    = json_decode(join(readfile(s:config_dir
+          \                                    . '/settings.json'), "\n"))
 
 let s:whitelist = []
 for data in s:settings
@@ -45,7 +47,8 @@ endfunction
 
 augroup vim-lsp-efm-langserver-settings
   autocmd!
-  autocmd User lsp_setup call s:lsp_efm_langserver_setup() | autocmd! vim-lsp-efm-langserver-settings
+  autocmd User lsp_setup call s:lsp_efm_langserver_setup()
+            \ | autocmd! vim-lsp-efm-langserver-settings
 augroup END
 
 " EOF

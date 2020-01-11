@@ -16,7 +16,6 @@ let s:config_file = expand(s:config_dir . '/config.yaml')
 let s:settings    = json_decode(join(readfile(s:config_dir . '/settings.json'), "\n"))
 
 let s:whitelist = []
-" exe check temp impl
 for data in s:settings
   if executable(data.cmd)
     call extend(s:whitelist, data.whitelist)

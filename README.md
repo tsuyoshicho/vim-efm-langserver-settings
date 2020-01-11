@@ -1,16 +1,26 @@
 # vim-efm-langserver-settings
 
 ## detail
+
 trial vim lsp client - efm-langserver link and configure settings
 
-
 ## installation
+
+ex. with `vim-lsp` plugin
+
 ```vim
 [[plugins]]
 repo = 'tsuyoshicho/vim-efm-langserver-settings'
 merged = 0
 depends = ['vim-lsp']
 ```
+
+### install command/plugin
+
+- [efm-langserver](https://github.com/mattn/efm-langserver)
+- lsp plugin
+  - [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
+- linter commands if you need
 
 ## support linter
 
@@ -26,5 +36,5 @@ depends = ['vim-lsp']
 If not linter exists, not set support type at efm-langserver.
 
 ## related
-[efm-langserver](https://github.com/mattn/efm-langserver)
 
+- [efm-langserver](https://github.com/mattn/efm-langserver)

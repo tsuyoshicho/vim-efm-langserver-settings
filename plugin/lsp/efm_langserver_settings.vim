@@ -11,8 +11,9 @@ if exists('g:loaded_efm_langserver_settings') && !executable('efm-langserver')
 endif
 let g:loaded_efm_langserver_settings = 1
 
-let s:config_dir = expand('<sfile>:h:h:h').'/config'
-let s:settings = json_decode(join(readfile(s:config_dir.'/settings.json'), "\n"))
+let s:config_dir  = expand('<sfile>:h:h:h') . '/config/efm-langserver'
+let s:config_file = expand(s:config_dir . '/config.yaml')
+let s:settings    = json_decode(join(readfile(s:config_dir . '/settings.json'), "\n"))
 
 let s:whitelist = []
 " exe check temp impl
@@ -26,7 +27,7 @@ let g:efm_langserver_settings#item = {
           \ 'name': 'efm-langserver',
           \ 'cmd': {
           \   server_info->['efm-langserver',
-          \                 '-c=' . expand(s:config_dir . '/config.yaml')]
+          \                 '-c=' . s:config_file]
           \ },
           \ 'whitelist': uniq(sort(copy(s:whitelist))),
           \ }

@@ -6,7 +6,7 @@
 
 scriptencoding utf-8
 
-if exists('g:loaded_ale_efm_langserver_settings') && !executable('efm-langserver')
+if exists('g:loaded_ale_efm_langserver_settings') || !executable('efm-langserver')
   finish
 endif
 let g:loaded_ale_efm_langserver_settings = 1
@@ -15,6 +15,24 @@ let s:config_dir  = expand('<sfile>:h:h:h') . '/config/efm-langserver'
 let s:config_file = expand(s:config_dir . '/config.yaml')
 let s:settings    = json_decode(join(readfile(s:config_dir . '/settings.json'), "\n"))
 
+function! s:_SID() abort
+  return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze__SID$')
+endfunction
+
+function! s:linter_setup() abort
+  let lintlist = []
+  if exists(b:ale_linters)
+    if type(b:ale_linters) is type('')
+      let lintlist = [b:ale_linters]
+    elseif type(b:ale_linters) is type([])
+      let lintlist = b:ale_linters
+    else
+      " ignore / force overwrite
+    endif
+  endif
+  let b:ale_linters = uniq(sort(lintlist + ['efm-langserver']))
+endfunction
+
 let s:whitelist = []
 for data in s:settings
   if executable(data.cmd)
@@ -22,26 +40,18 @@ for data in s:settings
   endif
 endfor
 
-let g:ale_linters  = get(g:, 'ale_linters', {})
+for typename in s:whitelist
+  call ale#linter#Define(typename, {
+            \   'name': 'efm-langserver',
+            \   'lsp': 'stdio',
+            \   'executable': 'efm-langserver',
+            \   'command': '%e',
+            \   'project_root': {buffer->ale#path#FindNearestDirectory(buffer, '')},
+            \})
 
-if !emtpy(s:whitelist)
-  for typename in s:whitelist
-    call ale#linter#Define(typename, {
-              \   'name': 'efm-langserver',
-              \   'lsp': 'stdio',
-              \   'executable': 'efm-langserver',
-              \   'command': '%e',
-              \   'project_root': {buffer->ale#path#FindNearestDirectory(buffer, '')},
-              \})
-
-    let lintlist = []
-    if has_key(g:ale_linters, typename)
-      let lintlist = g:ale_linters[typename]
-    endif
-    let g:ale_linters[typename] = uniq(sort(lintlist + ['efm-langserver']))
-
-  endfor
-endif
+  execute 'autocmd ale_efm_langserver_settings Filetype ' . typename
+            \ . ' call ' . printf('<SNR>%s_', s:_SID()) . 'linter_setup()'
+endfor
 
 " EOF
 

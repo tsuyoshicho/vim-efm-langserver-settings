@@ -40,7 +40,11 @@ if get(g:, 'efm_langserver_settings#debug', 0)
 endif
 
 function! s:lsp_efm_langserver_setup() abort
-  call lsp#register_server(g:efm_langserver_settings#item)
+  " call lsp#register_server(g:efm_langserver_settings#item)
+
+  item = g:efm_langserver_settings#item
+  echomsg 'call lsp#register_server(item)' ':' item
+  echomsg 'cmd list:' item.cmd([])
 endfunction
 
 augroup vim-lsp-efm-langserver-settings

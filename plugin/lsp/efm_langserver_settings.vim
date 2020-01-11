@@ -22,35 +22,25 @@ for data in s:settings
   endif
 endfor
 
-let g:efm_langserver_settings#items = get(g:, 'efm_langserver_settings#items', [])
-let efm_debug = 0
-if !efm_debug
-  call add(g:efm_langserver_settings#items, {
-            \ 'name': 'efm-langserver',
-            \ 'cmd': {
-            \   server_info->['efm-langserver',
-            \                 '-c=' . expand(s:config_dir . '/config.yaml')]
-            \ },
-            \ 'whitelist': uniq(sort(copy(s:whitelist))),
-            \ })
-else
-  call add(g:efm_langserver_settings#items, {
-            \ 'name': 'efm-langserver',
-            \ 'cmd': {
+let g:efm_langserver_settings#item = {
+          \ 'name': 'efm-langserver',
+          \ 'cmd': {
+          \   server_info->['efm-langserver',
+          \                 '-c=' . expand(s:config_dir . '/config.yaml')]
+          \ },
+          \ 'whitelist': uniq(sort(copy(s:whitelist))),
+          \ }
+
+if get(g:, 'efm_langserver_settings#debug', 0)
+  let g:efm_langserver_settings#item.cmd = {
             \   server_info->['efm-langserver',
             \                 '-c=' . expand(s:config_dir . '/config.yaml'),
             \                 '-log=' . expand('~/efm-langserver.log')]
-            \ },
-            \ 'whitelist': uniq(sort(copy(s:whitelist))),
-            \ })
+            \}
 endif
 
 function! s:lsp_efm_langserver_setup() abort
-  for item in g:efm_langserver_settings#items
-    " call lsp#register_server(item)
-    echomsg 'call lsp#register_server(item)' ':' item
-    echomsg 'cmd list:' item.cmd([])
-  endfor
+  call lsp#register_server(g:efm_langserver_settings#item)
 endfunction
 
 augroup vim-lsp-efm-langserver-settings

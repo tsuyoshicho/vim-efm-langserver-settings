@@ -47,7 +47,9 @@ endif
 
 function! s:lsp_efm_langserver_setup() abort
   for item in g:efm_langserver_settings#items
-    call lsp#register_server(item)
+    " call lsp#register_server(item)
+    echomsg 'call lsp#register_server(item)' ':' item
+    echomsg 'cmd list:' item.cmd([])
   endfor
 endfunction
 

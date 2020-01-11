@@ -7,6 +7,7 @@ trial vim lsp client - efm-langserver link and configure settings
 ### support lsp client
 
 - [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
+- [ale](https://github.com/dense-analysis/ale)
 
 ## installation
 

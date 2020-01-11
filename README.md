@@ -4,6 +4,10 @@
 
 trial vim lsp client - efm-langserver link and configure settings
 
+### support lsp client
+
+- [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
+
 ## installation
 
 ex. with `vim-lsp` plugin
@@ -19,7 +23,6 @@ depends = ['vim-lsp']
 
 - [efm-langserver](https://github.com/mattn/efm-langserver)
 - lsp plugin
-  - [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
 - linter commands if you need
 
 ## support linter

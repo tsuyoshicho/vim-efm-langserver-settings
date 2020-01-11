@@ -63,7 +63,7 @@ for typename in s:whitelist
             \ | endif
 
   execute 'autocmd ale_efm_langserver_settings Filetype ' . typename
-            \ . ' if get(g:, 'loaded_ale_dont_use_this_in_other_plugins_please', 0)'
+            \ . ' if get(g:, "loaded_ale_dont_use_this_in_other_plugins_please", 0)'
             \ . ' | call ' . printf('<SNR>%s_', s:_SID()) . 'linter_setup()'
             \ . ' | endif'
 endfor

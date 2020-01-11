@@ -17,6 +17,13 @@ let s:config_file = expand(s:config_dir . '/config.yaml')
 let s:settings    = json_decode(join(readfile(s:config_dir
           \                                   . '/settings.json'), "\n"))
 
+let s:whitelist = []
+for s:data in s:settings
+  if executable(s:data.cmd)
+    call extend(s:whitelist, s:data.whitelist)
+  endif
+endfor
+
 function! s:_SID() abort
   return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze__SID$')
 endfunction
@@ -35,13 +42,6 @@ function! s:linter_setup() abort
   let b:ale_linters = uniq(sort(lintlist + ['efm-langserver']))
 endfunction
 
-let s:whitelist = []
-for data in s:settings
-  if executable(data.cmd)
-    call extend(s:whitelist, data.whitelist)
-  endif
-endfor
-
 autocmd! ale_efm_langserver_settings
 
 for typename in s:whitelist
@@ -57,6 +57,8 @@ for typename in s:whitelist
   execute 'autocmd ale_efm_langserver_settings Filetype ' . typename
             \ . ' call ' . printf('<SNR>%s_', s:_SID()) . 'linter_setup()'
 endfor
+
+unlet s:config_dir s:config_file s:whitelist s:settings s:data
 
 " EOF
 

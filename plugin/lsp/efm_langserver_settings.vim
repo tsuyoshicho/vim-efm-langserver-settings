@@ -12,29 +12,17 @@ endif
 let g:loaded_efm_langserver_settings = 1
 
 let s:config_dir = expand('<sfile>:h:h:h').'/config'
+let s:settings = json_decode(join(readfile(s:config_dir.'/settings.json'), "\n"))
 
 let s:whitelist = []
 " exe check temp impl
-if executable('vint')
-  call extend(s:whitelist, ['vim'])
-endif
-if executable('markdownlint')
-  call extend(s:whitelist, ['markdown'])
-endif
-if executable('vale')
-  call extend(s:whitelist, ['text', 'asciidoc', 'markdown'])
-endif
-if executable('cppcheck')
-  call extend(s:whitelist, ['c', 'cpp'])
-endif
-if executable('shellcheck')
-  call extend(s:whitelist, ['sh'])
-endif
-if executable('jq')
-  call extend(s:whitelist, ['json'])
-endif
+for data in s:settings
+  if executable(data.cmd)
+    call extend(s:whitelist, data.whitelist)
+  endif
+endfor
 
-let g:efm_langserver_settings#items = []
+let g:efm_langserver_settings#items = get(g:, efm_langserver_settings#items, [])
 let efm_debug = 0
 if !efm_debug
   call add(g:efm_langserver_settings#items, {

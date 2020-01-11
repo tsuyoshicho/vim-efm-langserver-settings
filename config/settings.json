@@ -1,0 +1,41 @@
+[
+  {
+    "cmd": "vint",
+    "whitelist": [
+      "vim"
+    ]
+  },
+  {
+    "cmd": "markdownlint",
+    "whitelist": [
+      "markdown"
+    ]
+  },
+  {
+    "cmd": "vale",
+    "whitelist": [
+      "text",
+      "asciidoc",
+      "markdown"
+    ]
+  },
+  {
+    "cmd": "cppcheck",
+    "whitelist": [
+      "c",
+      "cpp"
+    ]
+  },
+  {
+    "cmd": "shellcheck",
+    "whitelist": [
+      "sh"
+    ]
+  },
+  {
+    "cmd": "jq",
+    "whitelist": [
+      "json"
+    ]
+  }
+]

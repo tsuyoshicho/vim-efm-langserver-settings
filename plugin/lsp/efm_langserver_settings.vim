@@ -17,9 +17,9 @@ let s:settings    = json_decode(join(readfile(s:config_dir . '/settings.json'), 
 
 let s:whitelist = []
 " exe check temp impl
-for data in s:settings
-  if executable(data.cmd)
-    call extend(s:whitelist, data.whitelist)
+for s:data in s:settings
+  if executable(s:data.cmd)
+    call extend(s:whitelist, s:data.whitelist)
   endif
 endfor
 

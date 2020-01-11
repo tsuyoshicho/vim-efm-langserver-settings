@@ -22,6 +22,8 @@ for data in s:settings
   endif
 endfor
 
+let g:ale_linters  = get(g:, 'ale_linters', {})
+
 if !emtpy(s:whitelist)
   for typename in s:whitelist
     call ale#linter#Define(typename, {
@@ -31,6 +33,13 @@ if !emtpy(s:whitelist)
               \   'command': '%e',
               \   'project_root': {buffer->ale#path#FindNearestDirectory(buffer, '')},
               \})
+
+    let lintlist = []
+    if has_key(g:ale_linters, typename)
+      let lintlist = g:ale_linters[typename]
+    endif
+    let g:ale_linters[typename] = uniq(sort(lintlist + ['efm-langserver']))
+
   endfor
 endif
 

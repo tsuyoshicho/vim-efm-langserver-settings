@@ -1,38 +1,34 @@
-languages:
-  vim:
-    lint-command: 'vint -'
-    lint-stdin: true
-
-  markdown:
-    lint-command: 'markdownlint -s'
-    lint-stdin: true
+# tools setting
+tools:
+  cppcheck: &cppcheck
+    lint-command: 'cppcheck --enable=style --error-exitcode=1 ${INPUT}'
+    lint-stdin: false
     lint-formats:
-      - '%f:%l %m'
+      - '%f:%l:%c: %m'
 
-  json:
-    format-command: 'jq .'
-    lint-stdin: true
-    lint-ignore-exit-code: true
-
-  text:
+  vale: &vale
     lint-command: 'vale --relative --output line ${INPUT}'
     lint-stdin: false
     lint-ignore-exit-code: true
     lint-formats:
       - '%f:%l:%c:%*[^:]:%m'
 
-  cpp:
-    lint-command: 'cppcheck --enable=style --error-exitcode=1 ${INPUT}'
-    lint-stdin: false
-    lint-formats:
-      - '%f:%l:%c: %m'
-  c:
-    lint-command: 'cppcheck --enable=style --error-exitcode=1 ${INPUT}'
-    lint-stdin: false
-    lint-formats:
-      - '%f:%l:%c: %m'
+  vint: &vint
+    lint-command: 'vint -'
+    lint-stdin: true
 
-  sh:
+  markdownlint: &markdownlint
+    lint-command: 'markdownlint -s'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l %m'
+
+  jq: &jq
+    format-command: 'jq .'
+    lint-stdin: true
+    lint-ignore-exit-code: true
+
+  shellcheck: &shellcheck
     lint-command: 'shellcheck -s bash -f gcc -x -o all -'
     lint-stdin: true
     lint-formats:
@@ -40,3 +36,25 @@ languages:
       - '%f:%l:%c: %tarning: %m'
       - '%f:%l:%c: %tote: %m'
 
+# languages setting
+languages:
+  vim:
+    <<: *vint
+
+  markdown:
+    <<: *markdownlint
+
+  json:
+    <<: *jq
+
+  text:
+    <<: *vale
+
+  cpp:
+    <<: *cppcheck
+
+  c:
+    <<: *cppcheck
+
+  sh:
+    <<: *shellcheck

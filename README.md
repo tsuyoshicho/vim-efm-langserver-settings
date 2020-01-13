@@ -31,10 +31,10 @@ depends = ['vim-lsp']
 | linter       | type     | config status                            | lint/format | note                                                                             |
 |--------------|----------|------------------------------------------|-------------|----------------------------------------------------------------------------------|
 | vint         | vim      | not need config                          | lint        |                                                                                  |
-| markdownlint | markdown | not need config / user config affected   | lint        | [setting in project root sample](example\efm-langserver\root\.markdownlint.json) |
-| vale         | text     | not included config / user config needed | lint        | [setting in home sample](example\efm-langserver\home\.vale.ini)                  |
+| markdownlint | markdown | not need config / user config affected   | lint        | [setting in project root sample](example/efm-langserver/root/.markdownlint.json) |
+| vale         | text     | not included config / user config needed | lint        | [setting in home sample](example/efm-langserver/home/.vale.ini)                  |
 | cppcheck     | c, cpp   | not need config                          | lint        |                                                                                  |
-| shellcheck   | sh       | not need config / user config affected   | lint        | [setting in home sample](example\efm-langserver\home\.shellcheckrc)              |
+| shellcheck   | sh       | not need config / user config affected   | lint        | [setting in home sample](example/efm-langserver/home/.shellcheckrc)              |
 | jq           | json     | not need config                          | format      |                                                                                  |
 
 If not linter exists, not set support type at efm-langserver.

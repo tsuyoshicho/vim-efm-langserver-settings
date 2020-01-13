@@ -39,6 +39,9 @@ depends = ['vim-lsp']
 
 If not linter exists, not set support type at efm-langserver.
 
+**Please contribute any other linter setting(mapping, efm-langserver setting, user setting sample)**
+If you contribute, fork and create PR.
+
 ## related
 
 - [efm-langserver](https://github.com/mattn/efm-langserver)

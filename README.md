@@ -16,7 +16,6 @@ ex. with `vim-lsp` plugin
 ```vim
 [[plugins]]
 repo = 'tsuyoshicho/vim-efm-langserver-settings'
-merged = 0
 depends = ['vim-lsp']
 ```
 

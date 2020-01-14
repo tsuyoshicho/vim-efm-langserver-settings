@@ -1,3 +1,4 @@
+---
 # tools setting
 tools:
   cppcheck: &cppcheck
@@ -37,6 +38,13 @@ tools:
       - '%f:%l:%c: %tarning: %m'
       - '%f:%l:%c: %tote: %m'
 
+  yamllint: &yamllint
+    lint-command: 'yamllint --strict --format parsable ${INPUT}'
+    lint-stdin: false
+    lint-formats:
+      - '%f:%l:%c: [%trror] %m'
+      - '%f:%l:%c: [%tarning] %m'
+
 # languages setting
 languages:
   vim:
@@ -62,3 +70,7 @@ languages:
 
   sh:
     <<: *shellcheck
+
+  yaml:
+    <<: *yamllint
+...

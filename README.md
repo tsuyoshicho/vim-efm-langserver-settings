@@ -35,6 +35,7 @@ depends = ['vim-lsp']
 | cppcheck     | c, cpp   | not need config                          | lint        |                                                                                  |
 | shellcheck   | sh       | not need config / user config affected   | lint        | [setting in home sample](example/efm-langserver/home/.shellcheckrc)              |
 | jq           | json     | not need config                          | format      |                                                                                  |
+| fixjson      | json5    | not need config                          | format      |                                                                                  |
 
 If not linter exists, not set support type at efm-langserver.
 

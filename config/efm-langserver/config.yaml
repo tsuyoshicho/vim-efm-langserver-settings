@@ -26,6 +26,9 @@ tools:
   jq: &jq
     format-command: 'jq .'
 
+  fixjson: &fixjson
+    format-command: 'fixjson'
+
   shellcheck: &shellcheck
     lint-command: 'shellcheck -s bash -f gcc -x -o all -'
     lint-stdin: true
@@ -44,6 +47,9 @@ languages:
 
   json:
     <<: *jq
+
+  json:
+    <<: *fixjson
 
   text:
     <<: *vale

@@ -48,7 +48,7 @@ languages:
   json:
     <<: *jq
 
-  json:
+  json5:
     <<: *fixjson
 
   text:

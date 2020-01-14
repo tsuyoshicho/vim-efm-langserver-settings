@@ -43,5 +43,11 @@
     "whitelist": [
       "json5"
     ]
+  },
+  {
+    "cmd": "yamllint",
+    "whitelist": [
+      "yaml"
+    ]
   }
 ]

@@ -44,6 +44,8 @@ tools:
     lint-formats:
       - '%f:%l:%c: [%trror] %m'
       - '%f:%l:%c: [%tarning] %m'
+    env:
+        - 'PYTHONIOENCODING=UTF-8'
 
 # languages setting
 languages:

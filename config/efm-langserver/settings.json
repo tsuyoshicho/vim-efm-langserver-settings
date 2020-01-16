@@ -47,5 +47,11 @@
     "whitelist": [
       "yaml"
     ]
+  },
+  {
+    "cmd": "restructuredtext-lint",
+    "whitelist": [
+      "rst"
+    ]
   }
 ]

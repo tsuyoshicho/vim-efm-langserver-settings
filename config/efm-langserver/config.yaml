@@ -47,6 +47,14 @@ tools:
     env:
         - 'PYTHONIOENCODING=UTF-8'
 
+  restructuredtext-lint: &restructuredtext-lint
+    lint-command: 'restructuredtext-lint --level warning --format text ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%tARNING %f:%l %m'
+      - '%tRROR %f:%l %m'
+
 # languages setting
 languages:
   vim:
@@ -75,4 +83,7 @@ languages:
 
   yaml:
     <<: *yamllint
+
+  rst:
+    <<: *restructuredtext-lint
 ...

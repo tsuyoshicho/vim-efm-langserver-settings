@@ -14,9 +14,7 @@
   {
     "cmd": "vale",
     "whitelist": [
-      "text",
-      "asciidoc",
-      "markdown"
+      "text"
     ]
   },
   {

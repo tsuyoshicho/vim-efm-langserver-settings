@@ -45,7 +45,7 @@ tools:
       - '%f:%l:%c: [%trror] %m'
       - '%f:%l:%c: [%tarning] %m'
     env:
-        - 'PYTHONIOENCODING=UTF-8'
+      - 'PYTHONIOENCODING=UTF-8'
 
   restructuredtext-lint: &restructuredtext-lint
     lint-command: 'restructuredtext-lint --encoding utf-8 --level warning --format text ${INPUT}'

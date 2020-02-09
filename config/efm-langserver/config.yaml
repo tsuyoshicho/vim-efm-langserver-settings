@@ -15,7 +15,7 @@ tools:
       - '%f:%l:%c:%*[^:]:%m'
 
   vint: &vint
-    lint-command: 'vint -'
+    lint-command: 'vint --stdin-display-name ${INPUT} -'
     lint-stdin: true
 
   markdownlint: &markdownlint

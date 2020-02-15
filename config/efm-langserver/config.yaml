@@ -1,36 +1,38 @@
 ---
-# tools setting
+version: 2
+commands:
+
 tools:
-  cppcheck: &cppcheck
+  cppcheck: &cppcheck-lint
     lint-command: 'cppcheck --enable=style --error-exitcode=1 ${INPUT}'
     lint-stdin: false
     lint-formats:
       - '%f:%l:%c: %m'
 
-  vale: &vale
+  vale: &vale-lint
     lint-command: 'vale --relative --output line ${INPUT}'
     lint-stdin: false
     lint-ignore-exit-code: true
     lint-formats:
       - '%f:%l:%c:%*[^:]:%m'
 
-  vint: &vint
+  vint: &vint-lint
     lint-command: 'vint --stdin-display-name ${INPUT} -'
     lint-stdin: true
 
-  markdownlint: &markdownlint
+  markdownlint: &markdownlint-lint
     lint-command: 'markdownlint -s'
     lint-stdin: true
     lint-formats:
       - '%f:%l %m'
 
-  jq: &jq
+  jq: &jq-format
     format-command: 'jq .'
 
-  fixjson: &fixjson
+  fixjson: &fixjson-format
     format-command: 'fixjson'
 
-  shellcheck: &shellcheck
+  shellcheck: &shellcheck-lint
     lint-command: 'shellcheck -s bash -f gcc -x -o all -'
     lint-stdin: true
     lint-formats:
@@ -38,7 +40,7 @@ tools:
       - '%f:%l:%c: %tarning: %m'
       - '%f:%l:%c: %tote: %m'
 
-  yamllint: &yamllint
+  yamllint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
     lint-stdin: false
     lint-formats:
@@ -47,7 +49,7 @@ tools:
     env:
       - 'PYTHONIOENCODING=UTF-8'
 
-  restructuredtext-lint: &restructuredtext-lint
+  restructuredtext-lint: &restructuredtext-lint-lint
     lint-command: 'restructuredtext-lint --encoding utf-8 --level warning --format text ${INPUT}'
     lint-stdin: false
     lint-ignore-exit-code: true
@@ -58,32 +60,33 @@ tools:
 # languages setting
 languages:
   vim:
-    <<: *vint
+    - <<: *vint-lint
 
   markdown:
-    <<: *markdownlint
+    - <<: *markdownlint-lint
 
   json:
-    <<: *jq
+    - <<: *jq-format
+    - <<: *fixjson-format
 
   json5:
-    <<: *fixjson
+    - <<: *fixjson-format
 
   text:
-    <<: *vale
+    - <<: *vale-lint
 
   cpp:
-    <<: *cppcheck
+    - <<: *cppcheck-lint
 
   c:
-    <<: *cppcheck
+    - <<: *cppcheck-lint
 
   sh:
-    <<: *shellcheck
+    - <<: *shellcheck-lint
 
   yaml:
-    <<: *yamllint
+    - <<: *yamllint-lint
 
   rst:
-    <<: *restructuredtext-lint
+    - <<: *restructuredtext-lint-lint
 ...

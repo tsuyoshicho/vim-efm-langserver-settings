@@ -24,14 +24,17 @@ for s:data in s:settings
   endif
 endfor
 
-call coc#config('languageserver',{
+let s:userconfig = get(g:, 'coc_user_config', {})
+let s:userconfig['languageserver'] = get(s:userconfig,'languageserver', {})
+
+call coc#config('languageserver',extend(s:userconfig.languageserver,{
 \ 'efm': {
 \   'command': 'efm-langserver',
 \   'args': ['-c=' . s:config_file],
 \   'filetypes': s:whitelist
 \ }
-\})
+\}, 'force'))
 
-unlet s:config_dir s:config_file s:whitelist s:settings
+unlet s:config_dir s:config_file s:whitelist s:settings s:userconfig
 
 " EOF

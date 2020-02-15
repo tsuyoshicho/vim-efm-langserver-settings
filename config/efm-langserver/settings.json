@@ -14,7 +14,9 @@
   {
     "cmd": "vale",
     "whitelist": [
-      "text"
+      "text",
+      "markdown",
+      "rst"
     ]
   },
   {

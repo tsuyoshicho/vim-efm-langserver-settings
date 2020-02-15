@@ -56,7 +56,7 @@ for typename in s:whitelist
             \     'name': 'efm-langserver',
             \     'lsp': 'stdio',
             \     'executable': 'efm-langserver',
-            \     'command': '%e',
+            \     'command': 'efm-langserver -c=' . s:config_file,
             \     'project_root':
             \        {buffer->ale#path#FindNearestDirectory(buffer, '')},
             \   })
@@ -72,4 +72,3 @@ endfor
 unlet s:config_dir s:config_file s:whitelist s:settings s:data
 
 " EOF
-

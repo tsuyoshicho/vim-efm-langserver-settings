@@ -8,6 +8,7 @@ trial vim lsp client - efm-langserver link and configure settings
 
 - [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
 - [ale](https://github.com/dense-analysis/ale)
+- [coc.nvim](https://github.com/neoclide/coc.nvim)
 
 ## installation
 

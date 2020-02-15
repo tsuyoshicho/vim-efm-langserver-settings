@@ -39,6 +39,7 @@
   {
     "cmd": "fixjson",
     "whitelist": [
+      "json",
       "json5"
     ]
   },

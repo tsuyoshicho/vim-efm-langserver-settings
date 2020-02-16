@@ -7,7 +7,7 @@
 scriptencoding utf-8
 
 if exists('g:loaded_ale_efm_langserver_settings')
-          \ || !executable('efm-langserver')
+\ || !executable('efm-langserver')
   finish
 endif
 let g:loaded_ale_efm_langserver_settings = 1
@@ -15,7 +15,7 @@ let g:loaded_ale_efm_langserver_settings = 1
 let s:config_dir  = expand('<sfile>:h:h:h') . '/config/efm-langserver'
 let s:config_file = expand(s:config_dir . '/config.yaml')
 let s:settings    = json_decode(join(readfile(s:config_dir
-          \                                   . '/settings.json'), "\n"))
+\                                   . '/settings.json'), "\n"))
 
 let s:whitelist = []
 for s:data in s:settings
@@ -42,33 +42,35 @@ function! s:linter_setup() abort
   let b:ale_linters = uniq(sort(lintlist + ['efm-langserver']))
 endfunction
 
-augroup ale_efm_langserver_settings
+unlet s:config_dir s:whitelist s:settings s:data
+
+augroup ale-efm-langserver-settings-init
+  autocmd!
+  autocmd  VimEnter * autocmd! ale-efm-langserver-settings-init
+augroup END
+augroup  ale-efm-langserver-settings
   autocmd!
 augroup END
-augroup ale_efm_langserver_settings_init
-  autocmd!
-augroup END
 
-for typename in s:whitelist
-  autocmd ale_efm_langserver_settings_init VimEnter *
-            \ if get(g:, 'loaded_ale_dont_use_this_in_other_plugins_please', 0)
-            \ |  call ale#linter#Define(typename, {
-            \     'name': 'efm-langserver',
-            \     'lsp': 'stdio',
-            \     'executable': 'efm-langserver',
-            \     'command': 'efm-langserver -c=' . s:config_file,
-            \     'project_root':
-            \        {buffer->ale#path#FindNearestDirectory(buffer, '')},
-            \   })
-            \ | endif
+if exists('*ale#linter#Define')
+  for typename in s:whitelist
+    autocmd ale-efm-langserver-settings-init VimEnter *
+    \ if get(g:, 'loaded_ale_dont_use_this_in_other_plugins_please', 0)
+    \ |  call ale#linter#Define(typename, {
+    \     'name': 'efm-langserver',
+    \     'lsp': 'stdio',
+    \     'executable': 'efm-langserver',
+    \     'command': 'efm-langserver -c=' . s:config_file,
+    \     'project_root':
+    \        {buffer->ale#path#FindNearestDirectory(buffer, '')},
+    \   })
+    \ | endif
 
-  execute 'autocmd ale_efm_langserver_settings Filetype ' . typename
-            \ . ' if get(g:, "loaded_ale_dont_use_this_in_other_plugins_please", 0)'
-            \ . ' | call ' . printf('<SNR>%s_', s:_SID()) . 'linter_setup()'
-            \ . ' | endif'
-endfor
-" autocmd ale_efm_langserver_settings_init VimEnter * autocmd! ale_efm_langserver_settings_init
-
-unlet s:config_dir s:config_file s:whitelist s:settings s:data
+    execute 'autocmd ale-efm-langserver-settings Filetype ' . typename
+    \ . ' if get(g:, "loaded_ale_dont_use_this_in_other_plugins_please", 0)'
+    \ . ' | call ' . printf('<SNR>%s_', s:_SID()) . 'linter_setup()'
+    \ . ' | endif'
+  endfor
+endif
 
 " EOF

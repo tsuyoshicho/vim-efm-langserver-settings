@@ -25,6 +25,7 @@ tools:
     lint-stdin: true
     lint-formats:
       - '%f:%l %m'
+      - '%f: %l: %m'
 
   markdownlint-format: &markdownlint-format
     format-command: 'markdownlint -f ${INPUT}'

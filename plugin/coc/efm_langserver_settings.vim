@@ -29,9 +29,15 @@ unlet s:config_dir s:settings
 function s:coc_efm_langserver_setup() abort
   let userconfig = get(g:, 'coc_user_config', {})
   let userconfig['languageserver'] = get(userconfig,'languageserver', {})
+
+  let args = ['-c=' . s:config_file]
+  if get(g:, 'efm_langserver_settings#debug', 0)
+    let args = extend(args, ['-log=' . expand('~/efm-langserver.log')])
+  endif
+
   let userconfig['languageserver']['efm'] = {
   \  'command': 'efm-langserver',
-  \  'args': ['-c=' . s:config_file],
+  \  'args': args,
   \  'filetypes': s:whitelist
   \}
 

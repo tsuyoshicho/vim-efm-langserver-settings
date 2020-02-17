@@ -53,6 +53,10 @@ augroup  ale-efm-langserver-settings
 augroup END
 
 if exists('*ale#linter#Define')
+  let cmd = 'efm-langserver -c=' . s:config_file
+  if get(g:, 'efm_langserver_settings#debug', 0)
+    let cmd = cmd . ' -log=' . expand('~/efm-langserver.log')])
+  endif
   for typename in s:whitelist
     autocmd ale-efm-langserver-settings-init VimEnter *
     \ if get(g:, 'loaded_ale_dont_use_this_in_other_plugins_please', 0)
@@ -60,7 +64,7 @@ if exists('*ale#linter#Define')
     \     'name': 'efm-langserver',
     \     'lsp': 'stdio',
     \     'executable': 'efm-langserver',
-    \     'command': 'efm-langserver -c=' . s:config_file,
+    \     'command': cmd,
     \     'project_root':
     \        {buffer->ale#path#FindNearestDirectory(buffer, '')},
     \   })

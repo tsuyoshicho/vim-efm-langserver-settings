@@ -17,27 +17,33 @@ let s:config_file = expand(s:config_dir . '/config.yaml')
 let s:settings    = json_decode(join(readfile(s:config_dir
 \                                    . '/settings.json'), "\n"))
 
+let s:V = vital#efmlangserversettings#new()
+let s:List = s:V.import('Data.List')
+
 let s:whitelist = []
 for s:data in s:settings
   if executable(s:data.cmd)
     call extend(s:whitelist, s:data.whitelist)
   endif
 endfor
+let s:whitelist = uniq(sort(copy(s:whitelist)))
+if s:List.has(s:whitelist,'*')
+  let s:whitelist = ['*']
+endif
 
 let g:efm_langserver_settings#item = {
 \ 'name': 'efm-langserver',
 \ 'cmd': {
-\   server_info->['efm-langserver',
-\                 '-c=' . s:config_file]
+\   server_info->['efm-langserver', '-c' , s:config_file]
 \ },
-\ 'whitelist': uniq(sort(copy(s:whitelist))),
+\ 'whitelist': s:whitelist,
 \ }
 
 if get(g:, 'efm_langserver_settings#debug', 0)
   let g:efm_langserver_settings#item.cmd = {
   \   server_info->['efm-langserver',
-  \                 '-c=' . s:config_file,
-  \                 '-log=' . expand('~/efm-langserver.log')]
+  \                 '-c' , s:config_file,
+  \                 '-log' , expand('~/efm-langserver.log')]
   \}
 endif
 
@@ -54,4 +60,3 @@ augroup vim-lsp-efm-langserver-settings
 augroup END
 
 " EOF
-

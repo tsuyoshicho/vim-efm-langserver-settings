@@ -56,5 +56,18 @@
     "whitelist": [
       "rst"
     ]
+  },
+  {
+    "cmd": "npx",
+    "whitelist": [
+      "javascript",
+      "typescript"
+    ]
+  },
+  {
+    "cmd": "excitetranslate",
+    "whitelist": [
+      "*"
+    ]
   }
 ]

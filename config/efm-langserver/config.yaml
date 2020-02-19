@@ -61,6 +61,18 @@ tools:
       - '%tARNING %f:%l %m'
       - '%tRROR %f:%l %m'
 
+  eslint-lint: &eslint-lint
+    lint-command: 'npx --no-install eslint -f unix --stdin'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+
+  eslint-format: &eslint-format
+    lint-command: 'npx --no-install eslint --fix ${INPUT}'
+
+  excitetranslate-hover: &excitetranslate-hover
+    hover-command: 'excitetranslate'
+    hover-stdin: true
+
 # languages setting
 languages:
   vim:
@@ -96,4 +108,15 @@ languages:
   rst:
     - <<: *restructuredtext-lint-lint
     - <<: *vale-lint
+
+  javascript:
+    - <<: *eslint-lint
+    - <<: *eslint-format
+
+  typescript:
+    - <<: *eslint-lint
+    - <<: *eslint-format
+
+  _:
+    - <<: *excitetranslate-hover
 ...

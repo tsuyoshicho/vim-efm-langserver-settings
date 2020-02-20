@@ -36,13 +36,16 @@ tools:
   fixjson-format: &fixjson-format
     format-command: 'fixjson'
 
-  shellcheck: &shellcheck-lint
+  shellcheck-lint: &shellcheck-lint
     lint-command: 'shellcheck -s bash -f gcc -x -o all -'
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %trror: %m'
       - '%f:%l:%c: %tarning: %m'
       - '%f:%l:%c: %tote: %m'
+
+  shfmt-format: &shfmt-format
+    format-command: 'shfmt -ln bash -kp'
 
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
@@ -101,6 +104,7 @@ languages:
 
   sh:
     - <<: *shellcheck-lint
+    - <<: *shfmt-format
 
   yaml:
     - <<: *yamllint-lint

@@ -33,6 +33,12 @@
     ]
   },
   {
+    "cmd": "shfmt",
+    "whitelist": [
+      "sh"
+    ]
+  },
+  {
     "cmd": "jq",
     "whitelist": [
       "json"

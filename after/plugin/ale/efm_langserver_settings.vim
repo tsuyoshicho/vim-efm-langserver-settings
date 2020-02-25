@@ -13,7 +13,7 @@ if exists('g:loaded_ale_efm_langserver_settings')
 endif
 let g:loaded_ale_efm_langserver_settings = 1
 
-let s:config_dir  = expand('<sfile>:h:h:h') . '/config/efm-langserver'
+let s:config_dir  = expand('<sfile>:h:h:h:h') . '/config/efm-langserver'
 let s:config_file = expand(s:config_dir . '/config.yaml')
 let s:settings    = json_decode(join(readfile(s:config_dir
 \                                   . '/settings.json'), "\n"))

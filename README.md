@@ -20,6 +20,10 @@ repo = 'tsuyoshicho/vim-efm-langserver-settings'
 depends = ['vim-lsp']
 ```
 
+NOTE:
+If you install `vim-lsp-settings` plugin,  LspInstallServer command using are ok, but settings please keeping to disabled.
+This plugin setup efm-langserver.
+
 ### install command/plugin
 
 - [efm-langserver](https://github.com/mattn/efm-langserver)
@@ -28,7 +32,7 @@ depends = ['vim-lsp']
 
 ## support linter
 
-| linter                | type                   | config status                            | lint/format  | note                                                                                                                                                                                                                                                                                               |
+| command                | type                   | config status                            | lint/format  | note                                                                                                                                                                                                                                                                                               |
 |-----------------------|------------------------|------------------------------------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | vint                  | vim                    | not need config                          | lint         |                                                                                                                                                                                                                                                                                                    |
 | markdownlint          | markdown               | not need config / user config affected   | lint, format | `.markdownlint.json` in the current directory<br> [setting in project root sample](example/efm-langserver/root/.markdownlint.json)                                                                                                                                                                 |
@@ -42,7 +46,7 @@ depends = ['vim-lsp']
 | yamllint              | yaml                   | not need config / user config affected   | lint         | `.yamllint` , `.yamllint.yaml` or `.yamllint.yml` in the current working directory<br> `$XDG_CONFIG_HOME/yamllint/config` <br> `~/.config/yamllint/config`                                                                                                                                         |
 | restructuredtext-lint | rst                    | not need config                          | lint         |                                                                                                                                                                                                                                                                                                    |
 
-If not linter exists, not set support type at efm-langserver.
+If not command exists, command's supporting type no setup.
 
 **Please contribute any other linter setting(mapping, efm-langserver setting, user setting sample)**
 If you contribute, fork and create PR.

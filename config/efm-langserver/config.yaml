@@ -30,6 +30,9 @@ tools:
   markdownlint-format: &markdownlint-format
     format-command: 'markdownlint -f ${INPUT}'
 
+  jq-lint: &jq-lint
+    lint-command: 'jq .'
+
   jq-format: &jq-format
     format-command: 'jq .'
 
@@ -46,6 +49,13 @@ tools:
 
   shfmt-format: &shfmt-format
     format-command: 'shfmt -ln bash -kp'
+
+  mypy-lint: &mypy-lint
+    lint-command: 'mypy --show-column-numbers'
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
 
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
@@ -87,6 +97,7 @@ languages:
     - <<: *vale-lint
 
   json:
+    - <<: *jq-lint
     - <<: *jq-format
     - <<: *fixjson-format
 
@@ -120,6 +131,9 @@ languages:
   typescript:
     - <<: *eslint-lint
     - <<: *eslint-format
+
+  python:
+    - <<: *mypy-lint
 
   _:
     - <<: *excitetranslate-hover

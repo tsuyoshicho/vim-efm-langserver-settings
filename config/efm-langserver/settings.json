@@ -58,6 +58,12 @@
     ]
   },
   {
+    "cmd": "mypy",
+    "whitelist": [
+      "python"
+    ]
+  },
+  {
     "cmd": "restructuredtext-lint",
     "whitelist": [
       "rst"

@@ -8,6 +8,7 @@ scriptencoding utf-8
 
 if exists('g:loaded_ale_efm_langserver_settings')
 \ || !executable('efm-langserver')
+\ || !exists('g:loaded_ale')
   finish
 endif
 let g:loaded_ale_efm_langserver_settings = 1

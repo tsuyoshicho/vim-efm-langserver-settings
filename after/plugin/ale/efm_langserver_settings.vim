@@ -61,7 +61,7 @@ if get(g:, 'efm_langserver_settings#debug', 0)
 endif
 for s:typename in s:whitelist
   autocmd ale-efm-langserver-settings-init VimEnter *
-  \ if get(g:, 'loaded_ale_dont_use_this_in_other_plugins_please', 0)
+  \ if get(g:, 'loaded_ale', 0)
   \ |  call ale#linter#Define(s:typename, {
   \     'name': 'efm-langserver',
   \     'lsp': 'stdio',
@@ -73,12 +73,12 @@ for s:typename in s:whitelist
   \ | endif
 
   execute 'autocmd ale-efm-langserver-settings Filetype ' . s:typename
-  \ . ' if get(g:, "loaded_ale_dont_use_this_in_other_plugins_please", 0)'
+  \ . ' if get(g:, "loaded_ale", 0)'
   \ . ' | call ' . printf('<SNR>%s_', s:_SID()) . 'linter_setup()'
   \ . ' | endif'
 endfor
 autocmd ale-efm-langserver-settings-init VimEnter * autocmd! ale-efm-langserver-settings-init
 
-unlet s:config_dir s:whitelist s:settings s:data s:cmd
+unlet s:config_dir s:whitelist s:settings s:data s:cmd s:typename
 
 " EOF

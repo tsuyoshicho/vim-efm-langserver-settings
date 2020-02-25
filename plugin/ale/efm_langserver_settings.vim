@@ -62,7 +62,7 @@ if exists('*ale#linter#Define')
   if get(g:, 'efm_langserver_settings#debug', 0)
     let cmd = cmd . ' -log ' . expand('~/efm-langserver.log')
   endif
-  for typename in s:whitelist
+  for s:typename in s:whitelist
     autocmd ale-efm-langserver-settings-init VimEnter *
     \ if get(g:, 'loaded_ale_dont_use_this_in_other_plugins_please', 0)
     \ |  call ale#linter#Define(typename, {

@@ -30,9 +30,6 @@ tools:
   markdownlint-format: &markdownlint-format
     format-command: 'markdownlint -f ${INPUT}'
 
-  jq-lint: &jq-lint
-    lint-command: 'jq .'
-
   jq-format: &jq-format
     format-command: 'jq .'
 
@@ -97,7 +94,6 @@ languages:
     - <<: *vale-lint
 
   json:
-    - <<: *jq-lint
     - <<: *jq-format
     - <<: *fixjson-format
 

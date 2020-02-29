@@ -26,6 +26,9 @@ tools:
     lint-formats:
       - '%f:%l: %m'
 
+  nvcheck-format: &nvcheck-format
+    format-command: 'nvcheck -r ${INPUT}'
+
   markdownlint-lint: &markdownlint-lint
     lint-command: 'markdownlint -s'
     lint-stdin: true
@@ -99,6 +102,7 @@ languages:
     - <<: *markdownlint-format
     - <<: *vale-lint
     - <<: *nvcheck-lint
+    - <<: *nvcheck-format
 
   json:
     - <<: *jq-format
@@ -110,10 +114,12 @@ languages:
   text:
     - <<: *vale-lint
     - <<: *nvcheck-lint
+    - <<: *nvcheck-format
 
   help:
     - <<: *vale-lint
     - <<: *nvcheck-lint
+    - <<: *nvcheck-format
 
   cpp:
     - <<: *cppcheck-lint
@@ -132,6 +138,7 @@ languages:
     - <<: *restructuredtext-lint-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
+    - <<: *nvcheck-format
 
   javascript:
     - <<: *eslint-lint

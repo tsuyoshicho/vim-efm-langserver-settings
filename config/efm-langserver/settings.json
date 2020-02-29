@@ -16,7 +16,17 @@
     "whitelist": [
       "text",
       "markdown",
-      "rst"
+      "rst",
+      "help"
+    ]
+  },
+  {
+    "cmd": "nvcheck",
+    "whitelist": [
+      "text",
+      "markdown",
+      "rst",
+      "help"
     ]
   },
   {

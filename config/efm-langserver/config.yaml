@@ -20,6 +20,12 @@ tools:
     lint-command: 'vint --stdin-display-name ${INPUT} -'
     lint-stdin: true
 
+  nvcheck-lint: &nvcheck-lint
+    lint-command: 'nvcheck ${INPUT}'
+    lint-stdin: false
+    lint-formats:
+      - '%f:%l: %m'
+
   markdownlint-lint: &markdownlint-lint
     lint-command: 'markdownlint -s'
     lint-stdin: true
@@ -92,6 +98,7 @@ languages:
     - <<: *markdownlint-lint
     - <<: *markdownlint-format
     - <<: *vale-lint
+    - <<: *nvcheck-lint
 
   json:
     - <<: *jq-format
@@ -102,6 +109,11 @@ languages:
 
   text:
     - <<: *vale-lint
+    - <<: *nvcheck-lint
+
+  help:
+    - <<: *vale-lint
+    - <<: *nvcheck-lint
 
   cpp:
     - <<: *cppcheck-lint
@@ -119,6 +131,7 @@ languages:
   rst:
     - <<: *restructuredtext-lint-lint
     - <<: *vale-lint
+    - <<: *nvcheck-lint
 
   javascript:
     - <<: *eslint-lint

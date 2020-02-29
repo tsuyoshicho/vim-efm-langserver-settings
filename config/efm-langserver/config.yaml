@@ -114,12 +114,20 @@ tools:
       - '%tRROR %f:%l %m'
 
   eslint-lint: &eslint-lint
-    lint-command: 'npx --no-install eslint -f unix --stdin'
+    lint-command: 'npx --no-install eslint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
 
   eslint-format: &eslint-format
     lint-command: 'npx --no-install eslint --fix ${INPUT}'
+
+  stylelint-lint: &stylelint-lint
+    lint-command: 'npx --no-install stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: false
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m [%trror]'
+      - '%f:%l:%c: %m [%tarning]'
 
   excitetranslate-hover: &excitetranslate-hover
     hover-command: 'excitetranslate'
@@ -180,6 +188,21 @@ languages:
   typescript:
     - <<: *eslint-lint
     - <<: *eslint-format
+
+  css:
+    - <<: *stylelint-lint
+
+  scss:
+    - <<: *stylelint-lint
+
+  sass:
+    - <<: *stylelint-lint
+
+  less:
+    - <<: *stylelint-lint
+
+  sugarss:
+    - <<: *stylelint-lint
 
   python:
     - <<: *mypy-lint

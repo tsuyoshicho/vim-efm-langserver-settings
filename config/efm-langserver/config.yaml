@@ -1,7 +1,40 @@
 ---
 version: 2
+# command define
 commands:
+  - title: Reload
+    command: :reload-config
 
+  - title: Editor
+    os: windows
+    command: notepad
+    arguments:
+      - "${INPUT}"
+  - title: Editor
+    os: linux
+    command: gedit
+    arguments:
+      - ${INPUT}
+  - title: Editor
+    os: mac
+    command: open
+    arguments:
+      - '-e'
+      - ${INPUT}
+
+  - title: Explorer
+    os: windows
+    command: explorer
+    arguments:
+      - '/select,"${INPUT}"'
+  - title: Explorer
+    os: mac
+    command: open
+    arguments:
+      - '-R'
+      - ${INPUT}
+
+# linter,formatter setting
 tools:
   cppcheck-lint: &cppcheck-lint
     lint-command: 'cppcheck --enable=style --error-exitcode=1 ${INPUT}'

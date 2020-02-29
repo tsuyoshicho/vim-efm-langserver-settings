@@ -83,7 +83,12 @@
     "cmd": "npx",
     "whitelist": [
       "javascript",
-      "typescript"
+      "typescript",
+      "css",
+      "scss",
+      "sass",
+      "less",
+      "sugarss"
     ]
   },
   {

@@ -68,6 +68,12 @@
     ]
   },
   {
+    "cmd": "flake8",
+    "whitelist": [
+      "python"
+    ]
+  },
+  {
     "cmd": "mypy",
     "whitelist": [
       "python"

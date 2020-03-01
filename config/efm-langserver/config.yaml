@@ -125,7 +125,7 @@ tools:
     lint-stdin: true
 
   eslint-format: &eslint-format
-    lint-command: 'npx --no-install eslint --fix ${INPUT}'
+    format-command: 'npx --no-install eslint --fix ${INPUT}'
 
   stylelint-lint: &stylelint-lint
     lint-command: 'npx --no-install stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
@@ -134,6 +134,9 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m [%trror]'
       - '%f:%l:%c: %m [%tarning]'
+
+  prettier-format: &prettier-format
+    format-command: 'npx --no-install prettier ${INPUT}'
 
   excitetranslate-hover: &excitetranslate-hover
     hover-command: 'excitetranslate'
@@ -150,13 +153,16 @@ languages:
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
+    - <<: *prettier-format
 
   json:
     - <<: *jq-format
     - <<: *fixjson-format
+    - <<: *prettier-format
 
   json5:
     - <<: *fixjson-format
+    - <<: *prettier-format
 
   text:
     - <<: *vale-lint
@@ -180,6 +186,7 @@ languages:
 
   yaml:
     - <<: *yamllint-lint
+    - <<: *prettier-format
 
   rst:
     - <<: *restructuredtext-lint-lint
@@ -194,12 +201,15 @@ languages:
   typescript:
     - <<: *eslint-lint
     - <<: *eslint-format
+    - <<: *prettier-format
 
   css:
     - <<: *stylelint-lint
+    - <<: *prettier-format
 
   scss:
     - <<: *stylelint-lint
+    - <<: *prettier-format
 
   sass:
     - <<: *stylelint-lint
@@ -213,6 +223,15 @@ languages:
   python:
     - <<: *flake8-lint
     - <<: *mypy-lint
+
+  graphql:
+    - <<: *prettier-format
+
+  vue:
+    - <<: *prettier-format
+
+  html:
+    - <<: *prettier-format
 
   _:
     - <<: *excitetranslate-hover

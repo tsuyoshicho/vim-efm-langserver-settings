@@ -88,13 +88,20 @@
   {
     "cmd": "npx",
     "whitelist": [
-      "javascript",
-      "typescript",
       "css",
       "scss",
       "sass",
       "less",
-      "sugarss"
+      "sugarss",
+      "graphql",
+      "html",
+      "markdown",
+      "javascript",
+      "typescript",
+      "vue",
+      "yaml",
+      "json",
+      "json5"
     ]
   },
   {

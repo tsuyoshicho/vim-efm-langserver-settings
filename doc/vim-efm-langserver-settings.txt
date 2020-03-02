@@ -1,0 +1,85 @@
+*vim-efm-langserver-settings.txt*	a summary
+
+Version :
+Author  : Tsuyoshi CHO <Tsuyoshi.CHO+develop@Gmail.com>
+License : MIT license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+}}}
+
+==============================================================================
+CONTENTS					*vim-efm-langserver-settings-contents*
+
+INTRODUCTION			|vim-efm-langserver-settings-introduction|
+USAGE				|vim-efm-langserver-settings-usage|
+INTERFACE			|vim-efm-langserver-settings-interface|
+SETTING				|vim-efm-langserver-settings-setting|
+  g:efm_langserver_settings#debug |g:efm_langserver_settings#debug|
+
+
+==============================================================================
+INTRODUCTION					*vim-efm-langserver-settings-introduction*
+
+*vim-efm-langserver-settings* is a Vim plugin that auto-enable and work for
+efm-langserver (https://github.com/mattn/efm-langserver) under lsp clients.
+
+This plugin are under development inspired by mattn/vim-lsp-settings
+(https://github.com/mattn/vim-lsp-settings).
+
+Latest version:
+https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
+
+
+==============================================================================
+USAGE						*vim-efm-langserver-settings-usage*
+
+Installing under plugin-manger usage.
+
+Now, support lsp clients below:
+
+- vim-lsp (https://github.com/prabirshrestha/vim-lsp)
+- ale (https://github.com/dense-analysis/ale)
+- coc.nvim (https://github.com/neoclide/coc.nvim)
+
+See README for supported commands.
+
+
+==============================================================================
+INTERFACE					*vim-efm-langserver-settings-interface*
+
+Nothing.
+
+
+==============================================================================
+SETTING						*vim-efm-langserver-settings-setting*
+
+g:efm_langserver_settings#debug			*g:efm_langserver_settings#debug*
+    Type: |Number|
+    Default: `0`
+
+    When set 1 to enable efm-langserver's log-file output.
+    Currently log file is fixed file at "~/efm-langserver.log".
+
+TODO:
+    logfile
+    config file (user default or custom path)
+    Will implement this configuration.
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:

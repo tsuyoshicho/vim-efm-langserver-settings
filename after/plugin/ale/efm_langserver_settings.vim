@@ -60,17 +60,17 @@ if get(g:, 'efm_langserver_settings#debug', 0)
   let s:cmd = s:cmd . ' -log ' . expand('~/efm-langserver.log')
 endif
 for s:typename in s:whitelist
-  autocmd ale-efm-langserver-settings-init VimEnter *
-  \ if get(g:, 'loaded_ale', 0)
-  \ |  call ale#linter#Define(s:typename, {
-  \     'name': 'efm-langserver',
-  \     'lsp': 'stdio',
-  \     'executable': 'efm-langserver',
-  \     'command': s:cmd,
-  \     'project_root':
-  \        {buffer->ale#path#FindNearestDirectory(buffer, '')},
-  \   })
-  \ | endif
+  execute 'autocmd ale-efm-langserver-settings-init VimEnter *'
+  \ . 'if get(g:, "loaded_ale", 0)'
+  \ . '|  call ale#linter#Define("' . s:typename . '", {'
+  \ . '   "name": "efm-langserver",'
+  \ . '   "lsp": "stdio",'
+  \ . '   "executable": "efm-langserver",'
+  \ . '   "command":"' .  s:cmd . '",'
+  \ . '   "project_root":'
+  \ . '     {buffer->ale#path#FindNearestDirectory(buffer, "")},'
+  \ . '  })'
+  \ . '| endif'
 
   execute 'autocmd ale-efm-langserver-settings Filetype ' . s:typename
   \ . ' if get(g:, "loaded_ale", 0)'
@@ -79,6 +79,6 @@ for s:typename in s:whitelist
 endfor
 autocmd ale-efm-langserver-settings-init VimEnter * autocmd! ale-efm-langserver-settings-init
 
-unlet s:config_dir s:whitelist s:settings s:data s:cmd
+unlet s:config_dir s:whitelist s:settings s:data s:cmd s:typename
 
 " EOF

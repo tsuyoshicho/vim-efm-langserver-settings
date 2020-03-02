@@ -102,6 +102,14 @@ tools:
       - '%f:%l:%c: %tarning: %m'
       - '%f:%l:%c: %tote: %m'
 
+
+  rubocop-lint: &rubocop-lint
+    lint-command: 'rubocop --format emacs --force-exclusion --stdin ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
     lint-stdin: false
@@ -223,6 +231,9 @@ languages:
   python:
     - <<: *flake8-lint
     - <<: *mypy-lint
+
+  ruby:
+    - <<: *rubocop-lint
 
   graphql:
     - <<: *prettier-format

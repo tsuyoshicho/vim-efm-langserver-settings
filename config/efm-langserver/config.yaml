@@ -104,7 +104,7 @@ tools:
 
 
   rubocop-lint: &rubocop-lint
-    lint-command: 'rubocop --format emacs --force-exclusion --stdin ${INPUT}'
+    lint-command: 'bundle exec rubocop --format emacs --force-exclusion --stdin ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:

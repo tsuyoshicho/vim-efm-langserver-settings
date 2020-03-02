@@ -80,7 +80,7 @@
     ]
   },
   {
-    "cmd": "rubocop",
+    "cmd": "bundle",
     "whitelist": [
       "ruby"
     ]

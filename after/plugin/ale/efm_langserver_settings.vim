@@ -36,7 +36,7 @@ endfunction
 
 function! s:linter_setup() abort
   let lintlist = []
-  if exists(b:ale_linters)
+  if exists('b:ale_linters')
     if type(b:ale_linters) is type('')
       let lintlist = [b:ale_linters]
     elseif type(b:ale_linters) is type([])
@@ -79,6 +79,6 @@ for s:typename in s:whitelist
 endfor
 autocmd ale-efm-langserver-settings-init VimEnter * autocmd! ale-efm-langserver-settings-init
 
-unlet s:config_dir s:whitelist s:settings s:data s:cmd s:typename
+unlet s:config_dir s:whitelist s:settings s:data s:cmd
 
 " EOF

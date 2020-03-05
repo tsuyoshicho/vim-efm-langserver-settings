@@ -50,7 +50,7 @@ tools:
       - '%f:%l:%c:%*[^:]:%m'
 
   vint-lint: &vint-lint
-    lint-command: 'vint --stdin-display-name ${INPUT} -'
+    lint-command: 'vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -'
     lint-stdin: true
 
   nvcheck-lint: &nvcheck-lint

@@ -14,7 +14,8 @@ endif
 let g:loaded_coc_efm_langserver_settings = 1
 
 let s:config_dir  = expand('<sfile>:h:h:h:h') . '/config/efm-langserver'
-let s:config_file = expand(s:config_dir . '/config.yaml')
+let s:config_file = get(g:, 'efm_langserver_settings#config_file', expand(s:config_dir . '/config.yaml'))
+let s:debug_file  = get(g:, 'efm_langserver_settings#debug_file',  expand($HOME . '/efm-langserver.log'))
 let s:settings    = json_decode(join(readfile(s:config_dir
 \                                   . '/settings.json'), "\n"))
 
@@ -30,20 +31,20 @@ endfor
 let s:whitelist = uniq(sort(copy(s:whitelist)))
 let s:whitelist = s:List.filter(s:whitelist, 'v:val !=? "*"')
 
-unlet s:config_dir s:settings
-
+let s:args = []
+if get(g:, 'efm_langserver_settings#config', 1)
+  let s:args = extend(s:args, ['-c' , s:config_file ])
+endif
+if get(g:, 'efm_langserver_settings#debug', 0)
+  let s:args = extend(s:args, ['-log' , s:debug_file ])
+endif
 function s:coc_efm_langserver_setup() abort
   let userconfig = get(g:, 'coc_user_config', {})
   let userconfig['languageserver'] = get(userconfig,'languageserver', {})
 
-  let args = ['-c' , s:config_file]
-  if get(g:, 'efm_langserver_settings#debug', 0)
-    let args = extend(args, ['-log' , expand('~/efm-langserver.log')])
-  endif
-
   let userconfig['languageserver']['efm'] = {
   \  'command': 'efm-langserver',
-  \  'args': args,
+  \  'args': s:args,
   \  'filetypes': s:whitelist
   \}
 
@@ -58,5 +59,8 @@ augroup coc-efm-langserver-settings-init
   \ | endif
   autocmd VimEnter * autocmd! coc-efm-langserver-settings-init
 augroup END
+
+unlet s:config_dir s:settings
+unlet s:V s:List
 
 " EOF

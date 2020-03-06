@@ -13,23 +13,6 @@ if exists('g:loaded_ale_efm_langserver_settings')
 endif
 let g:loaded_ale_efm_langserver_settings = 1
 
-let s:config_dir  = expand('<sfile>:h:h:h:h') . '/config/efm-langserver'
-let s:config_file = expand(s:config_dir . '/config.yaml')
-let s:settings    = json_decode(join(readfile(s:config_dir
-\                                   . '/settings.json'), "\n"))
-
-let s:V = vital#efmlangserversettings#new()
-let s:List = s:V.import('Data.List')
-
-let s:whitelist = []
-for s:data in s:settings
-  if executable(s:data.cmd)
-    call extend(s:whitelist, s:data.whitelist)
-  endif
-endfor
-let s:whitelist = uniq(sort(copy(s:whitelist)))
-let s:whitelist = s:List.filter(s:whitelist, 'v:val !=? "*"')
-
 function! s:_SID() abort
   return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze__SID$')
 endfunction
@@ -55,11 +38,16 @@ augroup ale-efm-langserver-settings
   autocmd!
 augroup END
 
-let s:cmd = 'efm-langserver -c ' . s:config_file
-if get(g:, 'efm_langserver_settings#debug', 0)
-  let s:cmd = s:cmd . ' -log ' . expand('~/efm-langserver.log')
+let s:args = ['efm-langserver']
+if efm_langserver_settings#config_enable()
+  let s:args = extend(s:args, ['-c', efm_langserver_settings#config_path()])
 endif
-for s:typename in s:whitelist
+if efm_langserver_settings#debug_enable()
+  let s:args = extend(s:args, ['-log', efm_langserver_settings#debug_path()])
+endif
+let s:cmd = join(s:args, ' ')
+
+for s:typename in efm_langserver_settings#whitelist_without_any()
   execute 'autocmd ale-efm-langserver-settings-init VimEnter *'
   \ . 'if get(g:, "loaded_ale", 0)'
   \ . '|  call ale#linter#Define("' . s:typename . '", {'
@@ -79,6 +67,6 @@ for s:typename in s:whitelist
 endfor
 autocmd ale-efm-langserver-settings-init VimEnter * autocmd! ale-efm-langserver-settings-init
 
-unlet s:config_dir s:whitelist s:settings s:data s:cmd s:typename
+unlet s:args s:cmd s:typename
 
 " EOF

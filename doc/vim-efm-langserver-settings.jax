@@ -1,4 +1,4 @@
-*vim-efm-langserver-settings.txt*	日本語ヘルプ
+*vim-efm-langserver-settings.txt*				日本語ヘルプ
 
 Version :
 Author  : Tsuyoshi CHO <Tsuyoshi.CHO+develop@Gmail.com>
@@ -23,17 +23,37 @@ License : MIT license  {{{
 }}}
 
 ==============================================================================
-目次						*vim-efm-langserver-settings-contents*
+目次					*vim-efm-langserver-settings-contents*
 
 概要				|vim-efm-langserver-settings-introduction|
 使い方				|vim-efm-langserver-settings-usage|
 インターフェイス		|vim-efm-langserver-settings-interface|
+  関数				  |vim-efm_langserver_settings-functions|
+  efm_langserver_settings#whitelist()
+					|efm_langserver_settings#whitelist()|
+  efm_langserver_settings#whitelist_without_any()
+    				|efm_langserver_settings#whitelist_without_any()|
+  efm_langserver_settings#config_path()
+					|efm_langserver_settings#config_path()|
+  efm_langserver_settings#debug_path()
+					|efm_langserver_settings#debug_path()|
+  efm_langserver_settings#config_enable()
+					|efm_langserver_settings#config_enable()|
+  efm_langserver_settings#debug_enable()
+					|efm_langserver_settings#debug_enable()|
 設定				|vim-efm-langserver-settings-setting|
-  g:efm_langserver_settings#debug |g:efm_langserver_settings#debug|
-
+  変数				  |vim-efm_langserver_settings-variables|
+  g:efm_langserver_settings#config        |g:efm_langserver_settings#config|
+  g:efm_langserver_settings#debug         |g:efm_langserver_settings#debug|
+  g:efm_langserver_settings#config_file   |g:efm_langserver_settings#config_file|
+  g:efm_langserver_settings#debug_file    |g:efm_langserver_settings#debug_file|
+  g:efm_langserver_settings#skip_filetype_list
+				|g:efm_langserver_settings#skip_filetype_list|
+  g:efm_langserver_settings#custom_filetype_list
+				|g:efm_langserver_settings#custom_filetype_list|
 
 ==============================================================================
-概要						*vim-efm-langserver-settings-introduction*
+概要					*vim-efm-langserver-settings-introduction*
 
 *vim-efm-langserver-settings* は efm-langserver
 (https://github.com/mattn/efm-langserver) を lsp クライアント下で自動的に有効
@@ -47,7 +67,7 @@ https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
 
 
 ==============================================================================
-使い方						*vim-efm-langserver-settings-usage*
+使い方					*vim-efm-langserver-settings-usage*
 
 プラグインマネージャの設定に沿ってインストールしてください。
 
@@ -61,13 +81,65 @@ https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
 
 
 ==============================================================================
-インターフェイス				*vim-efm-langserver-settings-interface*
+インターフェイス			*vim-efm-langserver-settings-interface*
 
-ありません。
+------------------------------------------------------------------------------
+関数					  *vim-efm_langserver_settings-functions*
+
+
+					*efm_langserver_settings#whitelist()*
+efm_langserver_settings#whitelist()
+		lsp で efm-langserver を動作させるに有効な |filetype| のリスト
+		を返します。
+		内部で '*' を含んでいた場合は ['*'] を返します。
+
+    				*efm_langserver_settings#whitelist_without_any()*
+efm_langserver_settings#whitelist_without_any()
+		lsp で efm-langserver を動作させるに有効な |filetype| のリスト
+		を返します。
+		内部で '*' を含んでいた場合は除外して返します。
+
+
+					*efm_langserver_settings#config_path()*
+efm_langserver_settings#config_path()
+		efm-langserver の設定ファイルのパスを返します。
+
+
+
+					*efm_langserver_settings#debug_path()*
+efm_langserver_settings#debug_path()
+		efm-langserver のデバッグファイルのパスを返します。
+
+
+
+					*efm_langserver_settings#config_enable()*
+efm_langserver_settings#config_enable()
+		efm-langserver の設定ファイルを使うかを返します。
+
+
+					*efm_langserver_settings#debug_enable()*
+efm_langserver_settings#debug_enable()
+		efm-langserver のデバッグファイルを使うかを返します。
+
 
 
 ==============================================================================
-設定						*vim-efm-langserver-settings-setting*
+設定					*vim-efm-langserver-settings-setting*
+
+------------------------------------------------------------------------------
+変数					  *vim-efm_langserver_settings-variables*
+
+
+g:efm_langserver_settings#config		*g:efm_langserver_settings#config*
+    Type: |Number|
+    Default: `1`
+
+    1を設定(デフォルト)すると efm-langserver の設定ファイルでの内部自動設定を
+    有効にします。
+    0を設定すると efm-langserver の設定を無効にします、efm-langserver を使うな
+    ら efm-langserver がデフォルトで読む設定ファイルを用意する必要があります。
+    (逆に言うと、下記の設定ファイルの指定
+     |g:efm_langserver_settings#config_file| をしないで自分の設定を反映できます)
 
 
 g:efm_langserver_settings#debug			*g:efm_langserver_settings#debug*
@@ -75,12 +147,43 @@ g:efm_langserver_settings#debug			*g:efm_langserver_settings#debug*
     Default: `0`
 
     1を設定すると efm-langserver のログ出力を有効にします。
-    現在ログファイルは "~/efm-langserver.log" 固定です。
 
-TODO:
-    ログファイル
-    設定ファイル(指定、ユーザーデフォルト)
-    の設定を実装する予定
+
+					*g:efm_langserver_settings#config_file*
+g:efm_langserver_settings#config_file
+    Type: |String|
+    Default: `<repo_config>/config.yaml`
+
+    efm-langserver の設定ファイルを指定できます。
+    初期値はプラグイン同梱のファイルが設定されます。
+
+
+					*g:efm_langserver_settings#debug_file*
+g:efm_langserver_settings#debug_file
+    Type: |String|
+    Default: `$HOME/efm-langserver.log`
+
+    efm-langserver のデバッグログファイルを指定できます。
+    初期値は $HOME 以下に生成するようになっています。
+
+
+				*g:efm_langserver_settings#skip_filetype_list*
+g:efm_langserver_settings#skip_filetype_list
+    Type: |List|
+    Default: `[]`
+
+    現在の内部設定から除外する |filetype| のリスト。
+    ただし、以下の |g:efm_langserver_settings#custom_filetype_list| が利用され
+    る時には影響しません。
+
+
+				*g:efm_langserver_settings#custom_filetype_list*
+g:efm_langserver_settings#custom_filetype_list
+    Type: |List|
+    Default: `[]`
+
+    |g:efm_langserver_settings#config| を0に設定した際に、efm-langserver を
+    lsp のどの |filetype| で動作するか設定させるためのリスト。
 
 
 ==============================================================================

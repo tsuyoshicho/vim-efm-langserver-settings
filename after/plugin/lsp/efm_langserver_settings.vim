@@ -13,45 +13,20 @@ if exists('g:loaded_lsp_efm_langserver_settings')
 endif
 let g:loaded_lsp_efm_langserver_settings = 1
 
-let s:config_dir  = expand('<sfile>:h:h:h:h') . '/config/efm-langserver'
-let s:config_file = expand(s:config_dir . '/config.yaml')
-let s:settings    = json_decode(join(readfile(s:config_dir
-\                                    . '/settings.json'), "\n"))
-
-let s:V = vital#efmlangserversettings#new()
-let s:List = s:V.import('Data.List')
-
-let s:whitelist = []
-for s:data in s:settings
-  if executable(s:data.cmd)
-    call extend(s:whitelist, s:data.whitelist)
-  endif
-endfor
-let s:whitelist = uniq(sort(copy(s:whitelist)))
-if s:List.has(s:whitelist,'*')
-  let s:whitelist = ['*']
+let s:args = ['efm-langserver']
+if efm_langserver_settings#config_enable()
+  let s:args = extend(s:args, ['-c', efm_langserver_settings#config_path()])
 endif
-
-let g:efm_langserver_settings#item = {
-\ 'name': 'efm-langserver',
-\ 'cmd': {
-\   server_info->['efm-langserver', '-c' , s:config_file]
-\ },
-\ 'whitelist': s:whitelist,
-\ }
-
-if get(g:, 'efm_langserver_settings#debug', 0)
-  let g:efm_langserver_settings#item.cmd = {
-  \   server_info->['efm-langserver',
-  \                 '-c' , s:config_file,
-  \                 '-log' , expand('~/efm-langserver.log')]
-  \}
+if efm_langserver_settings#debug_enable()
+  let s:args = extend(s:args, ['-log', efm_langserver_settings#debug_path()])
 endif
-
-unlet s:config_dir s:whitelist s:settings s:data
 
 function! s:lsp_efm_langserver_setup() abort
-  call lsp#register_server(g:efm_langserver_settings#item)
+  call lsp#register_server({
+  \  'name': 'efm-langserver',
+  \  'cmd': { server_info->s:args },
+  \  'whitelist': efm_langserver_settings#whitelist(),
+  \})
 endfunction
 
 augroup vim-lsp-efm-langserver-settings

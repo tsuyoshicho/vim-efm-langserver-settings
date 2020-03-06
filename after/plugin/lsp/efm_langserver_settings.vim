@@ -21,14 +21,12 @@ if efm_langserver_settings#debug_enable()
   let s:args = extend(s:args, ['-log', efm_langserver_settings#debug_path()])
 endif
 
-let s:item = {
-\  'name': 'efm-langserver',
-\  'cmd': { server_info->s:args },
-\  'whitelist': efm_langserver_settings#whitelist(),
-\}
-
 function! s:lsp_efm_langserver_setup() abort
-  call lsp#register_server(s:item)
+  call lsp#register_server({
+  \  'name': 'efm-langserver',
+  \  'cmd': { server_info->s:args },
+  \  'whitelist': efm_langserver_settings#whitelist(),
+  \}
 endfunction
 
 augroup vim-lsp-efm-langserver-settings

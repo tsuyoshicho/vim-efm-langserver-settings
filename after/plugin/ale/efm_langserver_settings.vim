@@ -38,13 +38,15 @@ augroup ale-efm-langserver-settings
   autocmd!
 augroup END
 
-let s:cmd = 'efm-langserver'
+let s:args = ['efm-langserver']
 if efm_langserver_settings#config_enable()
-  let s:cmd = s:cmd . ' -c ' . efm_langserver_settings#config_path()
+  let s:args = extend(s:args, ['-c', efm_langserver_settings#config_path()])
 endif
 if efm_langserver_settings#debug_enable()
-  let s:cmd = s:cmd . ' -log ' . efm_langserver_settings#debug_path()
+  let s:args = extend(s:args, ['-log', efm_langserver_settings#debug_path()])
 endif
+let s:cmd = join(s:args, ' ')
+
 for s:typename in efm_langserver_settings#whitelist_without_any()
   execute 'autocmd ale-efm-langserver-settings-init VimEnter *'
   \ . 'if get(g:, "loaded_ale", 0)'
@@ -65,6 +67,6 @@ for s:typename in efm_langserver_settings#whitelist_without_any()
 endfor
 autocmd ale-efm-langserver-settings-init VimEnter * autocmd! ale-efm-langserver-settings-init
 
-unlet s:cmd s:typename
+unlet s:args s:cmd s:typename
 
 " EOF

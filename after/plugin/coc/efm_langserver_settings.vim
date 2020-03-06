@@ -20,6 +20,7 @@ endif
 if efm_langserver_settings#debug_enable()
   let s:args = extend(s:args, ['-log', efm_langserver_settings#debug_path()])
 endif
+
 function s:coc_efm_langserver_setup() abort
   let userconfig = get(g:, 'coc_user_config', {})
   let userconfig['languageserver'] = get(userconfig,'languageserver', {})

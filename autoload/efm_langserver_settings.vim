@@ -16,7 +16,7 @@ function! s:get_whitelist() abort
   let wl = []
   if get(g:, 'efm_langserver_settings#config', 1)
     " use inner
-    if exists('s:whitelist')
+    if !exists('s:whitelist')
       let whitelist = []
       for data in s:settings
         if executable(data.cmd)
@@ -28,7 +28,7 @@ function! s:get_whitelist() abort
     " remove skiplist
     let skiplist = get(g:, 'efm_langserver_settings#skip_filelist', [])
 
-    let wl = s:List.filter(s:whitelist, '!s:List.has(skiplist, v:val)')
+    let wl = s:List.filter(s:whitelist, {v -> !s:List.has(skiplist, v)})
   else
     " use custom
     let wl = get(g:, 'efm_langserver_settings#custom_filelist', [])
@@ -41,6 +41,7 @@ function! efm_langserver_settings#whitelist() abort
   if s:List.has(wl,'*')
     let wl = ['*']
   endif
+  return wl
 endfunction
 
 function! efm_langserver_settings#whitelist_without_any() abort

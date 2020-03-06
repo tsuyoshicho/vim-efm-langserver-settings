@@ -28,11 +28,17 @@ CONTENTS				*vim-efm-langserver-settings-contents*
 INTRODUCTION			|vim-efm-langserver-settings-introduction|
 USAGE				|vim-efm-langserver-settings-usage|
 INTERFACE			|vim-efm-langserver-settings-interface|
+  FUNCTIONS			  |vim-efm_langserver_settings-functions|
 SETTING				|vim-efm-langserver-settings-setting|
-  g:efm_langserver_settings#config      |g:efm_langserver_settings#config|
-  g:efm_langserver_settings#debug       |g:efm_langserver_settings#debug|
-  g:efm_langserver_settings#config_file |g:efm_langserver_settings#config_file|
-  g:efm_langserver_settings#debug_file  |g:efm_langserver_settings#debug_file|
+  VARIABLES			  |vim-efm_langserver_settings-variables|
+  g:efm_langserver_settings#config        |g:efm_langserver_settings#config|
+  g:efm_langserver_settings#debug         |g:efm_langserver_settings#debug|
+  g:efm_langserver_settings#config_file   |g:efm_langserver_settings#config_file|
+  g:efm_langserver_settings#debug_file    |g:efm_langserver_settings#debug_file|
+  g:efm_langserver_settings#skip_filetype_list
+				|g:efm_langserver_settings#skip_filetype_list|
+  g:efm_langserver_settings#custom_filetype_list
+				|g:efm_langserver_settings#custom_filetype_list|
 
 
 ==============================================================================
@@ -65,13 +71,18 @@ See README for supported commands.
 ==============================================================================
 INTERFACE				*vim-efm-langserver-settings-interface*
 
-Nothing.
+------------------------------------------------------------------------------
+FUNCTIONS				  *vim-efm_langserver_settings-functions*
 
 
 ==============================================================================
 SETTING					*vim-efm-langserver-settings-setting*
 
-g:efm_langserver_settings#config	  *g:efm_langserver_settings#config*
+------------------------------------------------------------------------------
+VARIABLES				  *vim-efm_langserver_settings-variables*
+
+
+g:efm_langserver_settings#config		*g:efm_langserver_settings#config*
     Type: |Number|
     Default: `1`
 
@@ -83,26 +94,48 @@ g:efm_langserver_settings#config	  *g:efm_langserver_settings#config*
      configuration file)
 
 
-g:efm_langserver_settings#debug		  *g:efm_langserver_settings#debug*
+g:efm_langserver_settings#debug			*g:efm_langserver_settings#debug*
     Type: |Number|
     Default: `0`
 
     When set 1 to enable efm-langserver's log-file output.
 
 
-g:efm_langserver_settings#config_file	  *g:efm_langserver_settings#config_file*
+					*g:efm_langserver_settings#config_file*
+g:efm_langserver_settings#config_file
     Type: |String|
     Default: `<repo_config>/config.yaml`
 
     Specify custom efm-langserver config file.
     Default value is build-in inner config file.
 
-g:efm_langserver_settings#debug_file	  *g:efm_langserver_settings#debug_file*
+
+					*g:efm_langserver_settings#debug_file*
+g:efm_langserver_settings#debug_file
     Type: |String|
     Default: `$HOME/efm-langserver.log`
 
     Specify efm-langserver debug log file.
     Default value is generated under $HOME.
+
+
+				*g:efm_langserver_settings#skip_filetype_list*
+g:efm_langserver_settings#skip_filetype_list
+    Type: |List|
+    Default: `[]`
+
+     |filetype| list that is ignored from built-in config settings.
+    But, when using below |g:efm_langserver_settings#custom_filetype_list|
+    does not work.
+
+
+				*g:efm_langserver_settings#custom_filetype_list*
+g:efm_langserver_settings#custom_filetype_list
+    Type: |List|
+    Default: `[]`
+
+    A list to set which |filetype| of lsp to run efm-langserver when
+    |g:efm_langserver_settings#config| is set to 0.
 
 
 ==============================================================================

@@ -26,7 +26,7 @@ function! s:lsp_efm_langserver_setup() abort
   \  'name': 'efm-langserver',
   \  'cmd': { server_info->s:args },
   \  'whitelist': efm_langserver_settings#whitelist(),
-  \}
+  \})
 endfunction
 
 augroup vim-lsp-efm-langserver-settings

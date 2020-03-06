@@ -37,6 +37,4 @@ augroup vim-lsp-efm-langserver-settings
   \ | autocmd! vim-lsp-efm-langserver-settings
 augroup END
 
-unlet s:args
-
 " EOF

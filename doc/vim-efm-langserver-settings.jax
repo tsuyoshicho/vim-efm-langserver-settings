@@ -29,6 +29,18 @@ License : MIT license  {{{
 使い方				|vim-efm-langserver-settings-usage|
 インターフェイス		|vim-efm-langserver-settings-interface|
   関数				  |vim-efm_langserver_settings-functions|
+  efm_langserver_settings#whitelist()
+					|efm_langserver_settings#whitelist()|
+  efm_langserver_settings#whitelist_without_any()
+    				|efm_langserver_settings#whitelist_without_any()|
+  efm_langserver_settings#config_path()
+					|efm_langserver_settings#config_path()|
+  efm_langserver_settings#debug_path()
+					|efm_langserver_settings#debug_path()|
+  efm_langserver_settings#config_enable()
+					|efm_langserver_settings#config_enable()|
+  efm_langserver_settings#debug_enable()
+					|efm_langserver_settings#debug_enable()|
 設定				|vim-efm-langserver-settings-setting|
   変数				  |vim-efm_langserver_settings-variables|
   g:efm_langserver_settings#config        |g:efm_langserver_settings#config|
@@ -73,6 +85,41 @@ https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
 
 ------------------------------------------------------------------------------
 関数					  *vim-efm_langserver_settings-functions*
+
+
+					*efm_langserver_settings#whitelist()*
+efm_langserver_settings#whitelist()
+		lsp で efm-langserver を動作させるに有効な |filetype| のリスト
+		を返します。
+		内部で '*' を含んでいた場合は ['*'] を返します。
+
+    				*efm_langserver_settings#whitelist_without_any()*
+efm_langserver_settings#whitelist_without_any()
+		lsp で efm-langserver を動作させるに有効な |filetype| のリスト
+		を返します。
+		内部で '*' を含んでいた場合は除外して返します。
+
+
+					*efm_langserver_settings#config_path()*
+efm_langserver_settings#config_path()
+		efm-langserver の設定ファイルのパスを返します。
+
+
+
+					*efm_langserver_settings#debug_path()*
+efm_langserver_settings#debug_path()
+		efm-langserver のデバッグファイルのパスを返します。
+
+
+
+					*efm_langserver_settings#config_enable()*
+efm_langserver_settings#config_enable()
+		efm-langserver の設定ファイルを使うかを返します。
+
+
+					*efm_langserver_settings#debug_enable()*
+efm_langserver_settings#debug_enable()
+		efm-langserver のデバッグファイルを使うかを返します。
 
 
 

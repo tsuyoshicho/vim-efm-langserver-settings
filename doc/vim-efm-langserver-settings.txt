@@ -29,6 +29,18 @@ INTRODUCTION			|vim-efm-langserver-settings-introduction|
 USAGE				|vim-efm-langserver-settings-usage|
 INTERFACE			|vim-efm-langserver-settings-interface|
   FUNCTIONS			  |vim-efm_langserver_settings-functions|
+  efm_langserver_settings#whitelist()
+					|efm_langserver_settings#whitelist()|
+  efm_langserver_settings#whitelist_without_any()
+    				|efm_langserver_settings#whitelist_without_any()|
+  efm_langserver_settings#config_path()
+					|efm_langserver_settings#config_path()|
+  efm_langserver_settings#debug_path()
+					|efm_langserver_settings#debug_path()|
+  efm_langserver_settings#config_enable()
+					|efm_langserver_settings#config_enable()|
+  efm_langserver_settings#debug_enable()
+					|efm_langserver_settings#debug_enable()|
 SETTING				|vim-efm-langserver-settings-setting|
   VARIABLES			  |vim-efm_langserver_settings-variables|
   g:efm_langserver_settings#config        |g:efm_langserver_settings#config|
@@ -73,6 +85,38 @@ INTERFACE				*vim-efm-langserver-settings-interface*
 
 ------------------------------------------------------------------------------
 FUNCTIONS				  *vim-efm_langserver_settings-functions*
+
+
+					*efm_langserver_settings#whitelist()*
+efm_langserver_settings#whitelist()
+		Return a list of valid |filetype| s for running efm-langserver with lsp.
+		If included '*' in inner list, return ['*'].
+
+    				*efm_langserver_settings#whitelist_without_any()*
+efm_langserver_settings#whitelist_without_any()
+		Return a list of valid |filetype| s for running efm-langserver with lsp.
+		If included '*' in inner list, return exclude it list.
+
+
+					*efm_langserver_settings#config_path()*
+efm_langserver_settings#config_path()
+		Return efm-langserver's config file path.
+
+
+
+					*efm_langserver_settings#debug_path()*
+efm_langserver_settings#debug_path()
+		Return efm-langserver's debug file path.
+
+
+
+					*efm_langserver_settings#config_enable()*
+efm_langserver_settings#config_enable()
+		Return 1 if to use that efm-langserver config file.
+
+					*efm_langserver_settings#debug_enable()*
+efm_langserver_settings#debug_enable()
+		Return 1 if to use that efm-langserver debug file.
 
 
 ==============================================================================

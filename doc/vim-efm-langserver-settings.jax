@@ -1,4 +1,4 @@
-*vim-efm-langserver-settings.txt*	日本語ヘルプ
+*vim-efm-langserver-settings.txt*				日本語ヘルプ
 
 Version :
 Author  : Tsuyoshi CHO <Tsuyoshi.CHO+develop@Gmail.com>
@@ -23,17 +23,20 @@ License : MIT license  {{{
 }}}
 
 ==============================================================================
-目次						*vim-efm-langserver-settings-contents*
+目次					*vim-efm-langserver-settings-contents*
 
 概要				|vim-efm-langserver-settings-introduction|
 使い方				|vim-efm-langserver-settings-usage|
 インターフェイス		|vim-efm-langserver-settings-interface|
 設定				|vim-efm-langserver-settings-setting|
-  g:efm_langserver_settings#debug |g:efm_langserver_settings#debug|
+  g:efm_langserver_settings#config      |g:efm_langserver_settings#config|
+  g:efm_langserver_settings#debug       |g:efm_langserver_settings#debug|
+  g:efm_langserver_settings#config_file |g:efm_langserver_settings#config_file|
+  g:efm_langserver_settings#debug_file  |g:efm_langserver_settings#debug_file|
 
 
 ==============================================================================
-概要						*vim-efm-langserver-settings-introduction*
+概要					*vim-efm-langserver-settings-introduction*
 
 *vim-efm-langserver-settings* は efm-langserver
 (https://github.com/mattn/efm-langserver) を lsp クライアント下で自動的に有効
@@ -47,7 +50,7 @@ https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
 
 
 ==============================================================================
-使い方						*vim-efm-langserver-settings-usage*
+使い方					*vim-efm-langserver-settings-usage*
 
 プラグインマネージャの設定に沿ってインストールしてください。
 
@@ -61,26 +64,47 @@ https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
 
 
 ==============================================================================
-インターフェイス				*vim-efm-langserver-settings-interface*
+インターフェイス			*vim-efm-langserver-settings-interface*
 
 ありません。
 
 
 ==============================================================================
-設定						*vim-efm-langserver-settings-setting*
+設定					*vim-efm-langserver-settings-setting*
 
 
-g:efm_langserver_settings#debug			*g:efm_langserver_settings#debug*
+g:efm_langserver_settings#config	  *g:efm_langserver_settings#config*
+    Type: |Number|
+    Default: `1`
+
+    1を設定(デフォルト)すると efm-langserver の設定ファイルでの内部自動設定を
+    有効にします。
+    0を設定すると efm-langserver の設定を無効にします、efm-langserver を使うな
+    ら efm-langserver がデフォルトで読む設定ファイルを用意する必要があります。
+    (逆に言うと、下記の設定ファイルの指定
+     |g:efm_langserver_settings#config_file| をしないで自分の設定を反映できます)
+
+
+g:efm_langserver_settings#debug		  *g:efm_langserver_settings#debug*
     Type: |Number|
     Default: `0`
 
     1を設定すると efm-langserver のログ出力を有効にします。
-    現在ログファイルは "~/efm-langserver.log" 固定です。
 
-TODO:
-    ログファイル
-    設定ファイル(指定、ユーザーデフォルト)
-    の設定を実装する予定
+
+g:efm_langserver_settings#config_file	  *g:efm_langserver_settings#config_file*
+    Type: |String|
+    Default: `<repo_config>/config.yaml`
+
+    efm-langserver の設定ファイルを指定できます。
+    初期値はプラグイン同梱のファイルが設定されます。
+
+g:efm_langserver_settings#debug_file	  *g:efm_langserver_settings#debug_file*
+    Type: |String|
+    Default: `$HOME/efm-langserver.log`
+
+    efm-langserver のデバッグログファイルを指定できます。
+    初期値は $HOME 以下に生成するようになっています。
 
 
 ==============================================================================

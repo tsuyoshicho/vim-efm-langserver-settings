@@ -23,17 +23,20 @@ License : MIT license  {{{
 }}}
 
 ==============================================================================
-CONTENTS					*vim-efm-langserver-settings-contents*
+CONTENTS				*vim-efm-langserver-settings-contents*
 
 INTRODUCTION			|vim-efm-langserver-settings-introduction|
 USAGE				|vim-efm-langserver-settings-usage|
 INTERFACE			|vim-efm-langserver-settings-interface|
 SETTING				|vim-efm-langserver-settings-setting|
-  g:efm_langserver_settings#debug |g:efm_langserver_settings#debug|
+  g:efm_langserver_settings#config      |g:efm_langserver_settings#config|
+  g:efm_langserver_settings#debug       |g:efm_langserver_settings#debug|
+  g:efm_langserver_settings#config_file |g:efm_langserver_settings#config_file|
+  g:efm_langserver_settings#debug_file  |g:efm_langserver_settings#debug_file|
 
 
 ==============================================================================
-INTRODUCTION					*vim-efm-langserver-settings-introduction*
+INTRODUCTION				*vim-efm-langserver-settings-introduction*
 
 *vim-efm-langserver-settings* is a Vim plugin that auto-enable and work for
 efm-langserver (https://github.com/mattn/efm-langserver) under lsp clients.
@@ -46,7 +49,7 @@ https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
 
 
 ==============================================================================
-USAGE						*vim-efm-langserver-settings-usage*
+USAGE					*vim-efm-langserver-settings-usage*
 
 Installing under plugin-manger usage.
 
@@ -60,25 +63,46 @@ See README for supported commands.
 
 
 ==============================================================================
-INTERFACE					*vim-efm-langserver-settings-interface*
+INTERFACE				*vim-efm-langserver-settings-interface*
 
 Nothing.
 
 
 ==============================================================================
-SETTING						*vim-efm-langserver-settings-setting*
+SETTING					*vim-efm-langserver-settings-setting*
 
-g:efm_langserver_settings#debug			*g:efm_langserver_settings#debug*
+g:efm_langserver_settings#config	  *g:efm_langserver_settings#config*
+    Type: |Number|
+    Default: `1`
+
+    When set 1(default) to enable config file set to server.
+    When set 0 to disable config file set to server, at this setting use
+    efm-langserver: store config file to default path.
+    (Conversely, without below settings
+     |g:efm_langserver_settings#config_file| can be reflect custom
+     configuration file)
+
+
+g:efm_langserver_settings#debug		  *g:efm_langserver_settings#debug*
     Type: |Number|
     Default: `0`
 
     When set 1 to enable efm-langserver's log-file output.
-    Currently log file is fixed file at "~/efm-langserver.log".
 
-TODO:
-    logfile
-    config file (user default or custom path)
-    Will implement this configuration.
+
+g:efm_langserver_settings#config_file	  *g:efm_langserver_settings#config_file*
+    Type: |String|
+    Default: `<repo_config>/config.yaml`
+
+    Specify custom efm-langserver config file.
+    Default value is build-in inner config file.
+
+g:efm_langserver_settings#debug_file	  *g:efm_langserver_settings#debug_file*
+    Type: |String|
+    Default: `$HOME/efm-langserver.log`
+
+    Specify efm-langserver debug log file.
+    Default value is generated under $HOME.
 
 
 ==============================================================================

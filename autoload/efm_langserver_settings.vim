@@ -26,12 +26,12 @@ function! s:get_whitelist() abort
       let s:whitelist = uniq(sort(whitelist))
     endif
     " remove skiplist
-    let skiplist = get(g:, 'efm_langserver_settings#skip_filelist', [])
+    let skiplist = get(g:, 'efm_langserver_settings#skip_filetype_list', [])
 
     let wl = s:List.filter(s:whitelist, {v -> !s:List.has(skiplist, v)})
   else
     " use custom
-    let wl = get(g:, 'efm_langserver_settings#custom_filelist', [])
+    let wl = get(g:, 'efm_langserver_settings#custom_filetype_list', [])
   endif
   return wl
 endfunction

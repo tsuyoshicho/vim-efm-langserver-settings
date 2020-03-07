@@ -116,12 +116,12 @@ tools:
       - '%f:%l:%c: %m'
 
   rubocop-format: &rubocop-format
-    format-command: 'bundle exec rubocop --auto-correct --stdin ${INPUT}'
-    format-stdin: true
+    format-command: 'bundle exec rubocop --auto-correct ${INPUT}'
+    format-stdin: false
 
   rufo-format: &rufo-format
-    format-command: 'bundle exec rufo --filename=${INPUT}'
-    format-stdin: true
+    format-command: 'bundle exec rufo ${INPUT}'
+    format-stdin: false
 
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'

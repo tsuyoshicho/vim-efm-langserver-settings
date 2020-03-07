@@ -115,6 +115,12 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m'
 
+  rubocop-format: &rubocop-format
+    format-command: 'bundle exec rubocop --auto-correct --stdin ${INPUT}'
+
+  rufo-format: &rufo-format
+    format-command: 'bundle exec rufo --filename=${INPUT}'
+
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
     lint-stdin: false
@@ -241,6 +247,8 @@ languages:
 
   ruby:
     - <<: *rubocop-lint
+    - <<: *rubocop-format
+    - <<: *rufo-format
 
   graphql:
     - <<: *prettier-format

@@ -61,22 +61,26 @@ tools:
 
   nvcheck-format: &nvcheck-format
     format-command: 'nvcheck -r ${INPUT}'
+    format-stdin: false
 
   markdownlint-lint: &markdownlint-lint
-    lint-command: 'markdownlint -s'
+    lint-command: 'markdownlint --stdin'
     lint-stdin: true
     lint-formats:
       - '%f:%l %m'
       - '%f: %l: %m'
 
   markdownlint-format: &markdownlint-format
-    format-command: 'markdownlint -f ${INPUT}'
+    format-command: 'markdownlint --fix ${INPUT}'
+    format-stdin: false
 
   jq-format: &jq-format
     format-command: 'jq .'
+    format-stdin: true
 
   fixjson-format: &fixjson-format
     format-command: 'fixjson'
+    format-stdin: true
 
   shellcheck-lint: &shellcheck-lint
     lint-command: 'shellcheck -s bash -f gcc -x -o all -'
@@ -88,6 +92,7 @@ tools:
 
   shfmt-format: &shfmt-format
     format-command: 'shfmt -ln bash -kp'
+    format-stdin: true
 
   flake8-lint: &flake8-lint
     lint-command: 'flake8 --stdin-display-name ${INPUT} -'
@@ -134,6 +139,7 @@ tools:
 
   eslint-format: &eslint-format
     format-command: 'npx --no-install eslint --fix ${INPUT}'
+    format-stdin: false
 
   stylelint-lint: &stylelint-lint
     lint-command: 'npx --no-install stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
@@ -145,6 +151,7 @@ tools:
 
   prettier-format: &prettier-format
     format-command: 'npx --no-install prettier ${INPUT}'
+    format-stdin: false
 
   excitetranslate-hover: &excitetranslate-hover
     hover-command: 'excitetranslate'

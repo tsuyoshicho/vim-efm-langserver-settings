@@ -83,7 +83,7 @@ tools:
     format-stdin: true
 
   shellcheck-lint: &shellcheck-lint
-    lint-command: 'shellcheck -s bash -f gcc -x -o all -'
+    lint-command: 'shellcheck -s bash -f gcc -x -'
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %trror: %m'

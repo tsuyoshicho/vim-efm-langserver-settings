@@ -1,1 +1,4 @@
-disable=SC1090,SC2059,SC2155,SC2164
+shell=bash
+disable=SC1090  # not really fixable usually (ever?)
+disable=SC2128  # intentional style choice
+disable=SC2155  # TODO

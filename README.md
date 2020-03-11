@@ -63,7 +63,7 @@ If you contribute, fork and create PR.
 
 - Config Reload (any OS)
 - Open Editor (any OS)
-- Open Filer (mac)
+- Open Filer (mac,Windows)
 - Open Browser (mac)
 - Open Default Application (any OS)
 

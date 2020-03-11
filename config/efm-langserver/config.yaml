@@ -17,15 +17,19 @@ commands:
     arguments:
       - ${INPUT}
   - title: Editor
-    os: mac
+    os: darwin
     command: open
     arguments:
       - '-e'
       - ${INPUT}
 
   - title: Filer
-    os: mac
-    # Windows no handle file:// in explorer /select
+    os: windows
+    command: explorer
+    arguments:
+      - '/select,"${INPUT}"'
+  - title: Filer
+    os: darwin
     # Linux   no method generic filer open
     command: open
     arguments:
@@ -33,7 +37,7 @@ commands:
       - ${INPUT}
 
   - title: Browser
-    os: mac
+    os: darwin
     # Windows no browser file:// in run32dll url.dll,FileProtocolHandler like open
     # Linux   no method generic browser open
     command: open
@@ -54,7 +58,7 @@ commands:
     arguments:
       - ${INPUT}
   - title: Open
-    os: mac
+    os: darwin
     command: open
     arguments:
       - ${INPUT}

@@ -52,11 +52,20 @@ This plugin setting up efm-langserver to work.
 | [fixjson](https://www.npmjs.com/package/fixjson)                         | json, json5                                                                  | format       | npm                  | not need config                          |                                                                                                                                                                                                                                                                                                                           |
 | [yamllint](https://pypi.org/project/yamllint/)                           | yaml                                                                         | lint         | pip                  | not need config / user config affected   | `.yamllint` , `.yamllint.yaml` or `.yamllint.yml` in the current working directory<br> config in $XDG_CONFIG_HOME `~/.config/yamllint/config`(support?).                                                                                                                                                                  |
 | [restructuredtext-lint](https://pypi.org/project/restructuredtext-lint/) | rst                                                                          | lint         | pip                  | not need config                          |                                                                                                                                                                                                                                                                                                                           |
+| †[excitetranslate](https://github.com/mattn/excitetranslate)              | any (open file is not any defined type)                                      | hover        | go                   | not need config                          |                                                                                                                                                                                                                                                                                                                           |
 
 If not command exists, command's supporting type no setup.
 
 **Please contribute any other linter setting(mapping, efm-langserver setting, user setting sample)**
 If you contribute, fork and create PR.
+
+## support codeAction
+
+- Config Reload (any OS)
+- Open Editor (any OS)
+- Open Filer (mac)
+- Open Browser (mac)
+- Open Default Application (any OS)
 
 ## related
 

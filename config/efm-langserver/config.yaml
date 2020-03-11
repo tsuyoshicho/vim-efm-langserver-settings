@@ -9,59 +9,59 @@ commands:
     os: windows
     command: notepad
     arguments:
-      - "${INPUT}"
+      - "${FILENAME}"
   - title: Editor
     os: linux
     command: gedit
     # Linux no method generic GUI editor open
     arguments:
-      - ${INPUT}
+      - ${FILENAME}
   - title: Editor
     os: darwin
     command: open
     arguments:
       - '-e'
-      - ${INPUT}
+      - ${FILENAME}
 
   - title: Filer
     os: windows
     command: explorer
     arguments:
-      - '/select,"${INPUT}"'
+      - '/select,"${FILENAME}"'
   - title: Filer
     os: darwin
     # Linux   no method generic filer open
     command: open
     arguments:
       - '-R'
-      - ${INPUT}
+      - ${FILENAME}
 
   - title: Browser
     os: darwin
-    # Windows no browser file:// in run32dll url.dll,FileProtocolHandler like open
+    # Windows no method generic browser open
     # Linux   no method generic browser open
     command: open
     arguments:
       - '-a'
       - 'Safari'
-      - ${INPUT}
+      - ${FILENAME}
 
   - title: Open
     os: windows
     command: rundll32
     arguments:
       - "url.dll,FileProtocolHandler"
-      - "${INPUT}"
+      - "${FILENAME}"
   - title: Open
     os: linux
     command: xdg-open
     arguments:
-      - ${INPUT}
+      - ${FILENAME}
   - title: Open
     os: darwin
     command: open
     arguments:
-      - ${INPUT}
+      - ${FILENAME}
 
 # linter,formatter setting
 tools:

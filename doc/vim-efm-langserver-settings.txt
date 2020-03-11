@@ -114,9 +114,11 @@ efm_langserver_settings#debug_path()
 efm_langserver_settings#config_enable()
 		Return 1 if to use that efm-langserver config file.
 
+
 					*efm_langserver_settings#debug_enable()*
 efm_langserver_settings#debug_enable()
-		Return 1 if to use that efm-langserver debug file.
+		Return non-zero if to use that efm-langserver debug file.
+		Return value alse as loglevel.
 
 
 ==============================================================================
@@ -142,7 +144,8 @@ g:efm_langserver_settings#debug			*g:efm_langserver_settings#debug*
     Type: |Number|
     Default: `0`
 
-    When set 1 to enable efm-langserver's log-file output.
+    When set 1 or more to enable efm-langserver's log-file output.
+    And this value use efm-langserver'loglevel (1-5).
 
 
 					*g:efm_langserver_settings#config_file*

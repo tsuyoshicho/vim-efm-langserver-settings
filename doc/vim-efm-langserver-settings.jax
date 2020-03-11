@@ -93,6 +93,7 @@ efm_langserver_settings#whitelist()
 		を返します。
 		内部で '*' を含んでいた場合は ['*'] を返します。
 
+
     				*efm_langserver_settings#whitelist_without_any()*
 efm_langserver_settings#whitelist_without_any()
 		lsp で efm-langserver を動作させるに有効な |filetype| のリスト
@@ -120,6 +121,7 @@ efm_langserver_settings#config_enable()
 					*efm_langserver_settings#debug_enable()*
 efm_langserver_settings#debug_enable()
 		efm-langserver のデバッグファイルを使うかを返します。
+		戻り値はまた、ログレベルの値でもあります。
 
 
 
@@ -147,6 +149,7 @@ g:efm_langserver_settings#debug			*g:efm_langserver_settings#debug*
     Default: `0`
 
     1を設定すると efm-langserver のログ出力を有効にします。
+    また、この値は efm-langserver のログレベルとしても利用します(1-5)。
 
 
 					*g:efm_langserver_settings#config_file*

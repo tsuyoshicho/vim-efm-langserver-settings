@@ -18,7 +18,8 @@ if efm_langserver_settings#config_enable()
   let s:args = extend(s:args, ['-c', efm_langserver_settings#config_path()])
 endif
 if efm_langserver_settings#debug_enable()
-  let s:args = extend(s:args, ['-log', efm_langserver_settings#debug_path()])
+  let s:args = extend(s:args, ['-logfile', efm_langserver_settings#debug_path()])
+  let s:args = extend(s:args, ['-loglevel', efm_langserver_settings#debug_enable()])
 endif
 
 function s:coc_efm_langserver_setup() abort

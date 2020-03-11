@@ -13,6 +13,7 @@ commands:
   - title: Editor
     os: linux
     command: gedit
+    # Linux no method generic GUI editor open
     arguments:
       - ${INPUT}
   - title: Editor
@@ -22,16 +23,40 @@ commands:
       - '-e'
       - ${INPUT}
 
-  - title: Explorer
-    os: windows
-    command: explorer
-    arguments:
-      - '/select,"${INPUT}"'
-  - title: Explorer
+  - title: Filer
     os: mac
+    # Windows no handle file:// in explorer /select
+    # Linux   no method generic filer open
     command: open
     arguments:
       - '-R'
+      - ${INPUT}
+
+  - title: Browser
+    os: mac
+    # Windows no browser file:// in run32dll url.dll,FileProtocolHandler like open
+    # Linux   no method generic browser open
+    command: open
+    arguments:
+      - '-a'
+      - 'Safari'
+      - ${INPUT}
+
+  - title: Open
+    os: windows
+    command: rundll32
+    arguments:
+      - "url.dll,FileProtocolHandler"
+      - "${INPUT}"
+  - title: Open
+    os: linux
+    command: xdg-open
+    arguments:
+      - ${INPUT}
+  - title: Open
+    os: mac
+    command: open
+    arguments:
       - ${INPUT}
 
 # linter,formatter setting

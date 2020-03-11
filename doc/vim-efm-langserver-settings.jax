@@ -148,7 +148,7 @@ g:efm_langserver_settings#debug			*g:efm_langserver_settings#debug*
     Type: |Number|
     Default: `0`
 
-    1を設定すると efm-langserver のログ出力を有効にします。
+    1以上を設定すると efm-langserver のログ出力を有効にします。
     また、この値は efm-langserver のログレベルとしても利用します(1-5)。
 
 

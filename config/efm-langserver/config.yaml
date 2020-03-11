@@ -25,9 +25,10 @@ commands:
 
   - title: Filer
     os: windows
-    command: explorer
+    command: cmd
     arguments:
-      - '/select,"${FILENAME}"'
+      - '/c'
+      - 'explorer /select,${FILENAME}'
   - title: Filer
     os: darwin
     # Linux   no method generic filer open

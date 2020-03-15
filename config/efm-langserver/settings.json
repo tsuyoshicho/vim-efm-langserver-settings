@@ -92,6 +92,13 @@
     ]
   },
   {
+    "cmd": "pandoc",
+    "whitelist": [
+      "markdown",
+      "rst"
+    ]
+  },
+  {
     "cmd": "npx",
     "whitelist": [
       "css",

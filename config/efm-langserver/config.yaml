@@ -104,6 +104,14 @@ tools:
     format-command: 'markdownlint --fix ${INPUT}'
     format-stdin: false
 
+  pandoc-markdown-format: &pandoc-markdown-format
+    format-command: 'pandoc -f markdown -t gfm -sp --tab-stop=2'
+    format-stdin: true
+
+  pandoc-rst-format: &pandoc-rst-format
+    format-command: 'pandoc -f rst -t rst -s --columns=79'
+    format-stdin: true
+
   jq-format: &jq-format
     format-command: 'jq .'
     format-stdin: true
@@ -207,6 +215,7 @@ languages:
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
     - <<: *prettier-format
+    - <<: *pandoc-markdown-format
 
   json:
     - <<: *jq-format
@@ -246,6 +255,7 @@ languages:
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
+    - <<: *pandoc-rst-format
 
   javascript:
     - <<: *eslint-lint

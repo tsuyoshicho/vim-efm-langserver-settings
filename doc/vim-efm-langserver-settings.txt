@@ -152,7 +152,6 @@ g:efm_langserver_settings#customlist		*g:efm_langserver_settings#customlist*
     Type: |Number|
     Default: `0`
 
-    1を設定すると efm-langserver のファイルタイプ指定のカスタム設定を利用します。
     When set 1 to enable using custom |filetype| settings.
 
 

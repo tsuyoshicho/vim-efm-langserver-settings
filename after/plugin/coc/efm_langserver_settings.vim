@@ -29,7 +29,7 @@ function s:coc_efm_langserver_setup() abort
   let userconfig['languageserver']['efm'] = {
   \  'command': 'efm-langserver',
   \  'args': s:args,
-  \  'filetypes': efm_langserver_settings#whitelist_without_any(),
+  \  'filetypes': efm_langserver_settings#support_filetype_list(),
   \}
 
   call coc#config('languageserver',userconfig.languageserver)

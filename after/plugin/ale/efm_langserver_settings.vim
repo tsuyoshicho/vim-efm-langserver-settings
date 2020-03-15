@@ -48,7 +48,7 @@ if efm_langserver_settings#debug_enable()
 endif
 let s:cmd = join(s:args, ' ')
 
-for s:typename in efm_langserver_settings#whitelist_without_any()
+for s:typename in efm_langserver_settings#support_filetype_list()
   execute 'autocmd ale-efm-langserver-settings-init VimEnter *'
   \ . 'if get(g:, "loaded_ale", 0)'
   \ . '|  call ale#linter#Define("' . s:typename . '", {'

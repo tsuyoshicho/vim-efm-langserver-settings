@@ -14,7 +14,7 @@ let s:settings   = json_decode(join(readfile(s:config_dir . '/settings.json'), "
 
 function! s:get_whitelist() abort
   let wl = []
-  if get(g:, 'efm_langserver_settings#config', 1)
+  if get(g:, 'efm_langserver_settings#customlist', 1)
     " use inner
     if !exists('s:whitelist')
       let whitelist = []
@@ -25,15 +25,15 @@ function! s:get_whitelist() abort
       endfor
       let s:whitelist = uniq(sort(whitelist))
     endif
-    " remove skiplist
-    let skiplist = get(g:, 'efm_langserver_settings#skip_filetype_list', [])
-
-    let wl = s:List.filter(s:whitelist, {v -> !s:List.has(skiplist, v)})
   else
     " use custom
-    let wl = get(g:, 'efm_langserver_settings#custom_filetype_list', [])
+    let wl = get(g:, 'efm_langserver_settings#filetype_whitelist', [])
   endif
   return wl
+endfunction
+
+function! s:get_blacklist() abort
+  return get(g:, 'efm_langserver_settings#filetype_blacklist', [])
 endfunction
 
 function! efm_langserver_settings#whitelist() abort
@@ -44,8 +44,16 @@ function! efm_langserver_settings#whitelist() abort
   return wl
 endfunction
 
-function! efm_langserver_settings#whitelist_without_any() abort
-  return s:List.filter(s:get_whitelist(), 'v:val !=? "*"')
+function! efm_langserver_settings#blacklist() abort
+ return s:get_blacklist()
+endfunction
+
+function! efm_langserver_settings#support_filetype_list() abort
+  let wl = s:List.filter(s:get_whitelist(), 'v:val !=? "*"')
+  let bl = s:get_blacklist()
+
+  let support_list = s:List.filter(wl, {v -> !s:List.has(bl, v)})
+  return support_list
 endfunction
 
 function! efm_langserver_settings#config_path() abort

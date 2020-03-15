@@ -106,9 +106,11 @@ tools:
 
   pandoc-markdown-format: &pandoc-markdown-format
     format-command: 'pandoc -f markdown -t gfm -sp --tab-stop=2'
+    format-stdin: true
 
   pandoc-rst-format: &pandoc-rst-format
     format-command: 'pandoc -f rst -t rst -s --columns=79'
+    format-stdin: true
 
   jq-format: &jq-format
     format-command: 'jq .'

@@ -14,7 +14,7 @@ let s:settings   = json_decode(join(readfile(s:config_dir . '/settings.json'), "
 
 function! s:get_whitelist() abort
   let wl = []
-  if get(g:, 'efm_langserver_settings#customlist', 1)
+  if !get(g:, 'efm_langserver_settings#customlist', 0)
     " use inner
     if !exists('s:whitelist')
       let whitelist = []
@@ -25,6 +25,7 @@ function! s:get_whitelist() abort
       endfor
       let s:whitelist = uniq(sort(whitelist))
     endif
+    let wl = s:whitelist
   else
     " use custom
     let wl = get(g:, 'efm_langserver_settings#filetype_whitelist', [])

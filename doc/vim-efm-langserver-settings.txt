@@ -230,21 +230,43 @@ g:efm_langserver_settings#filetype_blacklist
     Default: `(see below)`
 
     A list to set which exclude |filetype| of lsp to run efm-langserver. >
-g:efm_langserver_settings#filetype_blacklist = [
-  \ 'denite',
-  \ 'denite-filter',
-  \ 'dirvish',
-  \ 'fugitiveblame',
-  \ 'fzf',
-  \ 'gitcommit',
-  \ 'gitrebase',
-  \ 'gitsendemail',
-  \ 'startify',
-  \ 'tagbar',
-  \ 'terminal',
-  \ 'unite',
-  \ 'vimfiler',
-  \ ]
+
+	g:efm_langserver_settings#filetype_blacklist = [
+	  \ 'capture',
+	  \ 'defx',
+	  \ 'denite',
+	  \ 'denite-filter',
+	  \ 'diff',
+	  \ 'dirvish',
+	  \ 'fern',
+	  \ 'fugitiveblame',
+	  \ 'fzf',
+	  \ 'gina-blame',
+	  \ 'gina-branch',
+	  \ 'gina-changes',
+	  \ 'gina-commit',
+	  \ 'gina-grep',
+	  \ 'gina-log',
+	  \ 'gina-ls',
+	  \ 'gina-reflog',
+	  \ 'gina-stash-list',
+	  \ 'gina-stash-show',
+	  \ 'gina-status',
+	  \ 'gina-tag',
+	  \ 'gitcommit',
+	  \ 'gitrebase',
+	  \ 'gitsendemail',
+	  \ 'man',
+	  \ 'qfreplace',
+	  \ 'startify',
+	  \ 'tagbar',
+	  \ 'terminal',
+	  \ 'unite',
+	  \ 'vimfiler',
+	  \ 'vista',
+	  \ 'vista_kind',
+	  \ 'vista_markdown',
+	  \ ]
 <
 
 

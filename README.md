@@ -14,7 +14,7 @@ trial vim lsp client - efm-langserver link and configure settings
 
 ex. with `vim-lsp` plugin
 
-```vim
+```toml
 [[plugins]]
 repo = 'tsuyoshicho/vim-efm-langserver-settings'
 depends = ['vim-lsp']

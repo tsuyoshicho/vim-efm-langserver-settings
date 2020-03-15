@@ -113,7 +113,7 @@ tools:
     format-stdin: true
 
   jq-lint: &jq-lint
-    lint-command: 'jq .'
+    lint-command: 'jq 2>&1'
     lint-stdin: true
     lint-formats:
       - '%m at line %l, column %c'

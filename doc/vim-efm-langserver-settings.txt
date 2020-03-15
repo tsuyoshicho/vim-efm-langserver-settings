@@ -31,8 +31,10 @@ INTERFACE			|vim-efm-langserver-settings-interface|
   FUNCTIONS			  |vim-efm_langserver_settings-functions|
   efm_langserver_settings#whitelist()
 					|efm_langserver_settings#whitelist()|
-  efm_langserver_settings#whitelist_without_any()
-    				|efm_langserver_settings#whitelist_without_any()|
+  efm_langserver_settings#blacklist()
+					|efm_langserver_settings#blacklist()|
+  efm_langserver_settings#support_filetype_list()
+    				|efm_langserver_settings#support_filetype_list()|
   efm_langserver_settings#config_path()
 					|efm_langserver_settings#config_path()|
   efm_langserver_settings#debug_path()
@@ -43,14 +45,15 @@ INTERFACE			|vim-efm-langserver-settings-interface|
 					|efm_langserver_settings#debug_enable()|
 SETTING				|vim-efm-langserver-settings-setting|
   VARIABLES			  |vim-efm_langserver_settings-variables|
+  g:efm_langserver_settings#customlist    |g:efm_langserver_settings#customlist|
   g:efm_langserver_settings#config        |g:efm_langserver_settings#config|
   g:efm_langserver_settings#debug         |g:efm_langserver_settings#debug|
   g:efm_langserver_settings#config_file   |g:efm_langserver_settings#config_file|
   g:efm_langserver_settings#debug_file    |g:efm_langserver_settings#debug_file|
-  g:efm_langserver_settings#skip_filetype_list
-				|g:efm_langserver_settings#skip_filetype_list|
-  g:efm_langserver_settings#custom_filetype_list
-				|g:efm_langserver_settings#custom_filetype_list|
+  g:efm_langserver_settings#filetype_whitelist
+				|g:efm_langserver_settings#filetype_whitelist|
+  g:efm_langserver_settings#filetype_blacklist
+				|g:efm_langserver_settings#filetype_blacklist|
 
 
 ==============================================================================
@@ -89,13 +92,30 @@ FUNCTIONS				  *vim-efm_langserver_settings-functions*
 
 					*efm_langserver_settings#whitelist()*
 efm_langserver_settings#whitelist()
-		Return a list of valid |filetype| s for running efm-langserver with lsp.
+		Return a list of valid |filetype| s for running efm-langserver
+		with lsp.
 		If included '*' in inner list, return ['*'].
+		(Use in vim-lsp)
 
-    				*efm_langserver_settings#whitelist_without_any()*
-efm_langserver_settings#whitelist_without_any()
-		Return a list of valid |filetype| s for running efm-langserver with lsp.
-		If included '*' in inner list, return exclude it list.
+
+					*efm_langserver_settings#blacklist()*
+efm_langserver_settings#blacklist()
+		Return a list of invalid |filetype| s for running
+		efm-langserver with lsp.
+		(Use in vim-lsp)
+
+
+    				*efm_langserver_settings#support_filetype_list()*
+efm_langserver_settings#support_filetype_list()
+		Return a list of valid |filetype| s for running efm-langserver
+		with lsp.
+		Join list at |g:efm_langserver_settings#filetype_whitelist|
+		and |g:efm_langserver_settings#filetype_blacklist|.
+		(Use in ale,coc)
+		NOTE:When |g:efm_langserver_settings#filetype_whitelist|
+		include '*', It is simply removed, it does not work properly
+		with ale and coc.
+
 
 
 					*efm_langserver_settings#config_path()*
@@ -126,6 +146,14 @@ SETTING					*vim-efm-langserver-settings-setting*
 
 ------------------------------------------------------------------------------
 VARIABLES				  *vim-efm_langserver_settings-variables*
+
+
+g:efm_langserver_settings#customlist		*g:efm_langserver_settings#customlist*
+    Type: |Number|
+    Default: `0`
+
+    1を設定すると efm-langserver のファイルタイプ指定のカスタム設定を利用します。
+    When set 1 to enable using custom |filetype| settings.
 
 
 g:efm_langserver_settings#config		*g:efm_langserver_settings#config*
@@ -183,6 +211,41 @@ g:efm_langserver_settings#custom_filetype_list
 
     A list to set which |filetype| of lsp to run efm-langserver when
     |g:efm_langserver_settings#config| is set to 0.
+
+
+				*g:efm_langserver_settings#filetype_whitelist*
+g:efm_langserver_settings#filetype_whitelist
+    Type: |List|
+    Default: `[]`
+
+    A list to set which |filetype| of lsp to run efm-langserver when
+    |g:efm_langserver_settings#customlist| is set to 1.
+    Can include "'*'" as any type, it work correctly with vim-lsp, it does not
+    work properly with ale and coc.
+
+
+				*g:efm_langserver_settings#filetype_blacklist*
+g:efm_langserver_settings#filetype_blacklist
+    Type: |List|
+    Default: `(see below)`
+
+    A list to set which exclude |filetype| of lsp to run efm-langserver. >
+g:efm_langserver_settings#filetype_blacklist = [
+  \ 'denite',
+  \ 'denite-filter',
+  \ 'dirvish',
+  \ 'fugitiveblame',
+  \ 'fzf',
+  \ 'gitcommit',
+  \ 'gitrebase',
+  \ 'gitsendemail',
+  \ 'startify',
+  \ 'tagbar',
+  \ 'terminal',
+  \ 'unite',
+  \ 'vimfiler',
+  \ ]
+<
 
 
 ==============================================================================

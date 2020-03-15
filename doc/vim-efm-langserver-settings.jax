@@ -31,8 +31,10 @@ License : MIT license  {{{
   関数				  |vim-efm_langserver_settings-functions|
   efm_langserver_settings#whitelist()
 					|efm_langserver_settings#whitelist()|
-  efm_langserver_settings#whitelist_without_any()
-    				|efm_langserver_settings#whitelist_without_any()|
+  efm_langserver_settings#blacklist()
+					|efm_langserver_settings#blacklist()|
+  efm_langserver_settings#support_filetype_list()
+    				|efm_langserver_settings#support_filetype_list()|
   efm_langserver_settings#config_path()
 					|efm_langserver_settings#config_path()|
   efm_langserver_settings#debug_path()
@@ -43,14 +45,15 @@ License : MIT license  {{{
 					|efm_langserver_settings#debug_enable()|
 設定				|vim-efm-langserver-settings-setting|
   変数				  |vim-efm_langserver_settings-variables|
+  g:efm_langserver_settings#customlist    |g:efm_langserver_settings#customlist|
   g:efm_langserver_settings#config        |g:efm_langserver_settings#config|
   g:efm_langserver_settings#debug         |g:efm_langserver_settings#debug|
   g:efm_langserver_settings#config_file   |g:efm_langserver_settings#config_file|
   g:efm_langserver_settings#debug_file    |g:efm_langserver_settings#debug_file|
-  g:efm_langserver_settings#skip_filetype_list
-				|g:efm_langserver_settings#skip_filetype_list|
-  g:efm_langserver_settings#custom_filetype_list
-				|g:efm_langserver_settings#custom_filetype_list|
+  g:efm_langserver_settings#filetype_whitelist
+				|g:efm_langserver_settings#filetype_whitelist|
+  g:efm_langserver_settings#filetype_blacklist
+				|g:efm_langserver_settings#filetype_blacklist|
 
 ==============================================================================
 概要					*vim-efm-langserver-settings-introduction*
@@ -92,13 +95,26 @@ efm_langserver_settings#whitelist()
 		lsp で efm-langserver を動作させるに有効な |filetype| のリスト
 		を返します。
 		内部で '*' を含んでいた場合は ['*'] を返します。
+		(vim-lspで利用)
 
 
-    				*efm_langserver_settings#whitelist_without_any()*
-efm_langserver_settings#whitelist_without_any()
+					*efm_langserver_settings#blacklist()*
+efm_langserver_settings#blacklist()
+		lsp で efm-langserver を動作させるに無効な |filetype| のリスト
+		を返します。
+		(vim-lspで利用)
+
+
+    				*efm_langserver_settings#support_filetype_list()*
+efm_langserver_settings#support_filetype_list()
 		lsp で efm-langserver を動作させるに有効な |filetype| のリスト
 		を返します。
-		内部で '*' を含んでいた場合は除外して返します。
+		|g:efm_langserver_settings#filetype_whitelist|,
+		|g:efm_langserver_settings#filetype_blacklist| を加味したリス
+		トになります。(ale,cocで利用)
+		NOTE:|g:efm_langserver_settings#filetype_whitelist| に '*' を
+		含んでいた場合、単純に除去され、ale,coc において適切に動作しま
+		せん。
 
 
 					*efm_langserver_settings#config_path()*
@@ -130,6 +146,14 @@ efm_langserver_settings#debug_enable()
 
 ------------------------------------------------------------------------------
 変数					  *vim-efm_langserver_settings-variables*
+
+
+g:efm_langserver_settings#customlist		*g:efm_langserver_settings#customlist*
+    Type: |Number|
+    Default: `0`
+
+
+    1を設定すると efm-langserver の |filetype| 指定のカスタム設定を利用します。
 
 
 g:efm_langserver_settings#config		*g:efm_langserver_settings#config*
@@ -170,23 +194,39 @@ g:efm_langserver_settings#debug_file
     初期値は $HOME 以下に生成するようになっています。
 
 
-				*g:efm_langserver_settings#skip_filetype_list*
-g:efm_langserver_settings#skip_filetype_list
+				*g:efm_langserver_settings#filetype_whitelist*
+g:efm_langserver_settings#filetype_whitelist
     Type: |List|
     Default: `[]`
 
-    現在の内部設定から除外する |filetype| のリスト。
-    ただし、以下の |g:efm_langserver_settings#custom_filetype_list| が利用され
-    る時には影響しません。
-
-
-				*g:efm_langserver_settings#custom_filetype_list*
-g:efm_langserver_settings#custom_filetype_list
-    Type: |List|
-    Default: `[]`
-
-    |g:efm_langserver_settings#config| を0に設定した際に、efm-langserver を
+    |g:efm_langserver_settings#customlist| を1に設定した際に、efm-langserver を
     lsp のどの |filetype| で動作するか設定させるためのリスト。
+    全タイプとして "'*'" を含めることができるが、vim-lsp のみ動作し、ale, coc
+    では動作しないため注意すること。
+
+
+				*g:efm_langserver_settings#filetype_blacklist*
+g:efm_langserver_settings#filetype_blacklist
+    Type: |List|
+    Default: `(後述)`
+
+    lspに efm-langserver の動作対象外として設定する |filetype| のリスト。 >
+g:efm_langserver_settings#filetype_blacklist = [
+  \ 'denite',
+  \ 'denite-filter',
+  \ 'dirvish',
+  \ 'fugitiveblame',
+  \ 'fzf',
+  \ 'gitcommit',
+  \ 'gitrebase',
+  \ 'gitsendemail',
+  \ 'startify',
+  \ 'tagbar',
+  \ 'terminal',
+  \ 'unite',
+  \ 'vimfiler',
+  \ ]
+<
 
 
 ==============================================================================

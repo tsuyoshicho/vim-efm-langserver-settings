@@ -113,8 +113,9 @@ tools:
     format-stdin: true
 
   jq-lint: &jq-lint
-    lint-command: 'jq 2>&1'
+    lint-command: 'jq'
     lint-stdin: true
+    lint-offset: 1
     lint-formats:
       - '%m at line %l, column %c'
 

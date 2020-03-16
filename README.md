@@ -2,7 +2,7 @@
 
 ## detail
 
-trial vim lsp client - efm-langserver link and configure settings
+vim lsp client - efm-langserver link and configure settings.
 
 ### support lsp client
 
@@ -20,7 +20,7 @@ repo = 'tsuyoshicho/vim-efm-langserver-settings'
 depends = ['vim-lsp']
 ```
 
-NOTE: If you install `vim-lsp-settings` plugin, Using LspInstallServer
+NOTE: If you install `[vim-lsp-settings](https://github.com/mattn/vim-lsp-settings)` plugin, Using LspInstallServer
 command are ok(need $PATH), but settings please keeping to disabled.
 This plugin setting up efm-langserver to work.
 
@@ -71,3 +71,9 @@ setting, user setting sample)** If you contribute, fork and create PR.
 ## related
 
 - [efm-langserver](https://github.com/mattn/efm-langserver)
+- [vim-lsp-settings](https://github.com/mattn/vim-lsp-settings)
+
+## Special Thanks
+
+- [mattn \(mattn\)](https://github.com/mattn)
+- [yaegassy \(yaegassy\)](https://github.com/yaegassy)

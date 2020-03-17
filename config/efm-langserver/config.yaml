@@ -100,9 +100,9 @@ tools:
       - '%f:%l %m'
       - '%f: %l: %m'
 
-  markdownlint-format: &markdownlint-format
-    format-command: 'markdownlint --fix ${INPUT}'
-    format-stdin: false
+  # markdownlint-format: &markdownlint-format
+  #   format-command: 'markdownlint --fix ${INPUT}'
+  #   format-stdin: false
 
   pandoc-markdown-format: &pandoc-markdown-format
     format-command: 'pandoc -f markdown -t gfm -sp --tab-stop=2'
@@ -210,7 +210,6 @@ languages:
 
   markdown:
     - <<: *markdownlint-lint
-    - <<: *markdownlint-format
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format

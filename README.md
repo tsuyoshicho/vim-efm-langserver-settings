@@ -20,7 +20,7 @@ repo = 'tsuyoshicho/vim-efm-langserver-settings'
 depends = ['vim-lsp']
 ```
 
-NOTE: If you install `[vim-lsp-settings](https://github.com/mattn/vim-lsp-settings)` plugin, Using LspInstallServer
+NOTE: If you install [`vim-lsp-settings`](https://github.com/mattn/vim-lsp-settings) plugin, Using LspInstallServer
 command are ok(need $PATH), but settings please keeping to disabled.
 This plugin setting up efm-langserver to work.
 

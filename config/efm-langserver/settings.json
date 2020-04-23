@@ -49,6 +49,12 @@
     ]
   },
   {
+    "cmd": "jsonlint",
+    "whitelist": [
+      "json"
+    ]
+  },
+  {
     "cmd": "jq",
     "whitelist": [
       "json"

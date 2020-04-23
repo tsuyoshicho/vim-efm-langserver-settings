@@ -113,6 +113,12 @@ tools:
     format-command: 'pandoc -f rst -t rst -s --columns=79'
     format-stdin: true
 
+  jsonlint-lint: &jsonlint-lint
+    lint-command: 'jsonlint -c'
+    lint-stdin: true
+    lint-formats:
+      - 'line %l, col %c, found: %m'
+
   # not work
   # jq-lint: &jq-lint
   #   lint-command: 'jq'
@@ -226,6 +232,7 @@ languages:
     - <<: *pandoc-markdown-format
 
   json:
+    - <<: *jsonlint-lint
     - <<: *jq-format
     - <<: *fixjson-format
     - <<: *prettier-format

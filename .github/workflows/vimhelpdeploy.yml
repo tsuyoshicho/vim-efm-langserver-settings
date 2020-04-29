@@ -14,6 +14,8 @@ jobs:
         uses: tsuyoshicho/action-vimhelp-html-generate@v1
         env:
           FOLDER: build
+          BACKGROUND: light
+          COLORSCHEME: github
       - name: deploy gh-pages
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:

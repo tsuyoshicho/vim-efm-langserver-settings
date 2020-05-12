@@ -144,7 +144,7 @@ tools:
       - '%f:%l:%c: %tote: %m'
 
   shfmt-format: &shfmt-format
-    format-command: 'shfmt -ln bash -kp'
+    format-command: 'shfmt -ln bash -i 2 -bn -ci -sr -kp'
     format-stdin: true
 
   flake8-lint: &flake8-lint

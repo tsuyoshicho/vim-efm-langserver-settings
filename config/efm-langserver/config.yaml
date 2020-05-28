@@ -210,6 +210,12 @@ tools:
       - '%f:%l:%c: %m [%trror]'
       - '%f:%l:%c: %m [%tarning]'
 
+  htmllint-lint: &htmllint-lint
+    lint-command: 'npx --no-install htmllint ${INPUT}'
+    lint-stdin: false
+    lint-formats:
+      - '%f: line %l, col %c, %m'
+
   prettier-format: &prettier-format
     format-command: 'npx --no-install prettier ${INPUT}'
     format-stdin: false
@@ -314,6 +320,7 @@ languages:
     - <<: *prettier-format
 
   html:
+    - <<: *htmllint-lint
     - <<: *prettier-format
 
   _:

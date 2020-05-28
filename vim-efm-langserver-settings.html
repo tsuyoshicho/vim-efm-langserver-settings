@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Vim documentation: vim-efm-langserver-settings</title>
+<meta name="Generator" content="Vim/8.2">
+<meta name="plugin-version" content="vim8.1_v2">
+<meta name="syntax" content="help">
+<meta name="settings" content="no_progress,ignore_folding,use_css,no_foldcolumn,expand_tabs,ignore_conceal,prevent_copy=,use_input_for_pc=fallback">
+<meta name="colorscheme" content="github">
+<style>
+<!--
+.MissingTag { background-color: black; color: white; }
+.EnglishTag { background-color: gray; color: white; }
+pre { font-family: monospace; color: #24292e; background-color: #ffffff; }
+body { font-family: monospace; color: #24292e; background-color: #ffffff; }
+* { font-size: 1em; }
+.Todo { color: #6f42c1; text-decoration: underline; }
+.PreProc { color: #d73a49; }
+.String { color: #032f62; }
+.helpExample { font-weight: bold; }
+.Ignore { color: #babbbc; background-color: #ffffff; padding-bottom: 1px; }
+.Statement { color: #d73a49; }
+-->
+</style>
+</head>
+<body>
+Language: <a href="./vim-efm-langserver-settings.html">en</a> <a href="././vim-efm-langserver-settings.ja.html">ja</a>
+<a name="top"></a><h1>Vim documentation: vim-efm-langserver-settings</h1>
+<a href="./index.html">main help file</a>
+<hr>
+<pre id='vimCodeElement'>
+<a class="String" href="././vim-efm-langserver-settings.html" name="vim-efm-langserver-settings.txt">vim-efm-langserver-settings.txt</a>       a summary
+
+Version :
+Author  : Tsuyoshi CHO &lt;Tsuyoshi.CHO+develop@Gmail.com&gt;
+License : MIT license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    &quot;Software&quot;), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+<span class="Statement">    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY</span>
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+<span class="Statement">    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+}}}
+
+<span class="PreProc">==============================================================================</span>
+<span class="Statement">CONTENTS</span>                                <a class="String" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings-contents" name="vim-efm-langserver-settings-contents">vim-efm-langserver-settings-contents</a>
+
+INTRODUCTION                    <a class="Identifier" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings-introduction">vim-efm-langserver-settings-introduction</a>
+USAGE                           <a class="Identifier" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings-usage">vim-efm-langserver-settings-usage</a>
+INTERFACE                       <a class="Identifier" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings-interface">vim-efm-langserver-settings-interface</a>
+  FUNCTIONS                       <a class="Identifier" href="././vim-efm-langserver-settings.html#vim-efm_langserver_settings-functions">vim-efm_langserver_settings-functions</a>
+  efm_langserver_settings#whitelist()
+                                        <a class="Identifier" href="././vim-efm-langserver-settings.html#efm_langserver_settings#whitelist()">efm_langserver_settings#whitelist()</a>
+  efm_langserver_settings#blacklist()
+                                        <a class="Identifier" href="././vim-efm-langserver-settings.html#efm_langserver_settings#blacklist()">efm_langserver_settings#blacklist()</a>
+  efm_langserver_settings#support_filetype_list()
+                                <a class="Identifier" href="././vim-efm-langserver-settings.html#efm_langserver_settings#support_filetype_list()">efm_langserver_settings#support_filetype_list()</a>
+  efm_langserver_settings#config_path()
+                                        <a class="Identifier" href="././vim-efm-langserver-settings.html#efm_langserver_settings#config_path()">efm_langserver_settings#config_path()</a>
+  efm_langserver_settings#debug_path()
+                                        <a class="Identifier" href="././vim-efm-langserver-settings.html#efm_langserver_settings#debug_path()">efm_langserver_settings#debug_path()</a>
+  efm_langserver_settings#config_enable()
+                                        <a class="Identifier" href="././vim-efm-langserver-settings.html#efm_langserver_settings#config_enable()">efm_langserver_settings#config_enable()</a>
+  efm_langserver_settings#debug_enable()
+                                        <a class="Identifier" href="././vim-efm-langserver-settings.html#efm_langserver_settings#debug_enable()">efm_langserver_settings#debug_enable()</a>
+SETTING                         <a class="Identifier" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings-setting">vim-efm-langserver-settings-setting</a>
+  VARIABLES                       <a class="Identifier" href="././vim-efm-langserver-settings.html#vim-efm_langserver_settings-variables">vim-efm_langserver_settings-variables</a>
+  g:efm_langserver_settings#customlist    <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#customlist">g:efm_langserver_settings#customlist</a>
+  g:efm_langserver_settings#config        <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#config">g:efm_langserver_settings#config</a>
+  g:efm_langserver_settings#debug         <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#debug">g:efm_langserver_settings#debug</a>
+  g:efm_langserver_settings#config_file   <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#config_file">g:efm_langserver_settings#config_file</a>
+  g:efm_langserver_settings#debug_file    <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#debug_file">g:efm_langserver_settings#debug_file</a>
+  g:efm_langserver_settings#filetype_whitelist
+                                <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#filetype_whitelist">g:efm_langserver_settings#filetype_whitelist</a>
+  g:efm_langserver_settings#filetype_blacklist
+                                <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#filetype_blacklist">g:efm_langserver_settings#filetype_blacklist</a>
+
+
+<span class="PreProc">==============================================================================</span>
+<span class="Statement">INTRODUCTION</span>                            <a class="String" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings-introduction" name="vim-efm-langserver-settings-introduction">vim-efm-langserver-settings-introduction</a>
+
+<a class="String" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings" name="vim-efm-langserver-settings">vim-efm-langserver-settings</a> is a Vim plugin that auto-enable and work for
+efm-langserver (<span class="String"><a href="https://github.com/mattn/efm-langserver">https://github.com/mattn/efm-langserver</a></span>) under lsp clients.
+
+This plugin are under development inspired by mattn/vim-lsp-settings
+(<span class="String"><a href="https://github.com/mattn/vim-lsp-settings">https://github.com/mattn/vim-lsp-settings</a></span>).
+
+Latest version:
+<span class="String"><a href="https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim">https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim</a></span>
+
+
+<span class="PreProc">==============================================================================</span>
+<span class="Statement">USAGE</span>                                   <a class="String" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings-usage" name="vim-efm-langserver-settings-usage">vim-efm-langserver-settings-usage</a>
+
+Installing under plugin-manger usage.
+
+Now, support lsp clients below:
+
+- vim-lsp (<span class="String"><a href="https://github.com/prabirshrestha/vim-lsp">https://github.com/prabirshrestha/vim-lsp</a></span>)
+- ale (<span class="String"><a href="https://github.com/dense-analysis/ale">https://github.com/dense-analysis/ale</a></span>)
+- coc.nvim (<span class="String"><a href="https://github.com/neoclide/coc.nvim">https://github.com/neoclide/coc.nvim</a></span>)
+
+See README for supported commands.
+
+
+<span class="PreProc">==============================================================================</span>
+<span class="Statement">INTERFACE</span>                               <a class="String" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings-interface" name="vim-efm-langserver-settings-interface">vim-efm-langserver-settings-interface</a>
+
+<span class="PreProc">------------------------------------------------------------------------------</span>
+<span class="Statement">FUNCTIONS</span>                                 <a class="String" href="././vim-efm-langserver-settings.html#vim-efm_langserver_settings-functions" name="vim-efm_langserver_settings-functions">vim-efm_langserver_settings-functions</a>
+
+
+                                        <a class="String" href="././vim-efm-langserver-settings.html#efm_langserver_settings#whitelist()" name="efm_langserver_settings#whitelist()">efm_langserver_settings#whitelist()</a>
+efm_langserver_settings#whitelist()
+                Return a list of valid <a href="https://www.google.com/search?q=vim+%22filetype%22&lr=lang_en"><span class="MissingTag">filetype</span></a> s for running efm-langserver
+                with lsp.
+                If included '*' in inner list, return ['*'].
+                (Use in vim-lsp)
+
+
+                                        <a class="String" href="././vim-efm-langserver-settings.html#efm_langserver_settings#blacklist()" name="efm_langserver_settings#blacklist()">efm_langserver_settings#blacklist()</a>
+efm_langserver_settings#blacklist()
+                Return a list of invalid <a href="https://www.google.com/search?q=vim+%22filetype%22&lr=lang_en"><span class="MissingTag">filetype</span></a> s for running
+                efm-langserver with lsp.
+                (Use in vim-lsp)
+
+
+<span class="Statement">    </span>                            <a class="String" href="././vim-efm-langserver-settings.html#efm_langserver_settings#support_filetype_list()" name="efm_langserver_settings#support_filetype_list()">efm_langserver_settings#support_filetype_list()</a>
+efm_langserver_settings#support_filetype_list()
+                Return a list of valid <a href="https://www.google.com/search?q=vim+%22filetype%22&lr=lang_en"><span class="MissingTag">filetype</span></a> s for running efm-langserver
+                with lsp.
+                Join list at <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#filetype_whitelist">g:efm_langserver_settings#filetype_whitelist</a>
+                and <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#filetype_blacklist">g:efm_langserver_settings#filetype_blacklist</a>.
+                (Use in ale,coc)
+                <span class="Todo">NOTE</span>:When <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#filetype_whitelist">g:efm_langserver_settings#filetype_whitelist</a>
+                include '*', It is simply removed, it does not work properly
+                with ale and coc.
+
+
+
+                                        <a class="String" href="././vim-efm-langserver-settings.html#efm_langserver_settings#config_path()" name="efm_langserver_settings#config_path()">efm_langserver_settings#config_path()</a>
+efm_langserver_settings#config_path()
+                Return efm-langserver's config file path.
+
+
+
+                                        <a class="String" href="././vim-efm-langserver-settings.html#efm_langserver_settings#debug_path()" name="efm_langserver_settings#debug_path()">efm_langserver_settings#debug_path()</a>
+efm_langserver_settings#debug_path()
+                Return efm-langserver's debug file path.
+
+
+
+                                        <a class="String" href="././vim-efm-langserver-settings.html#efm_langserver_settings#config_enable()" name="efm_langserver_settings#config_enable()">efm_langserver_settings#config_enable()</a>
+efm_langserver_settings#config_enable()
+                Return 1 if to use that efm-langserver config file.
+
+
+                                        <a class="String" href="././vim-efm-langserver-settings.html#efm_langserver_settings#debug_enable()" name="efm_langserver_settings#debug_enable()">efm_langserver_settings#debug_enable()</a>
+efm_langserver_settings#debug_enable()
+                Return non-zero if to use that efm-langserver debug file.
+                Return value alse as loglevel.
+
+
+<span class="PreProc">==============================================================================</span>
+<span class="Statement">SETTING</span>                                 <a class="String" href="././vim-efm-langserver-settings.html#vim-efm-langserver-settings-setting" name="vim-efm-langserver-settings-setting">vim-efm-langserver-settings-setting</a>
+
+<span class="PreProc">------------------------------------------------------------------------------</span>
+<span class="Statement">VARIABLES</span>                                 <a class="String" href="././vim-efm-langserver-settings.html#vim-efm_langserver_settings-variables" name="vim-efm_langserver_settings-variables">vim-efm_langserver_settings-variables</a>
+
+
+g:efm_langserver_settings#customlist            <a class="String" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#customlist" name="g:efm_langserver_settings#customlist">g:efm_langserver_settings#customlist</a>
+    Type: <a href="https://www.google.com/search?q=vim+%22Number%22&lr=lang_en"><span class="MissingTag">Number</span></a>
+    Default: <span class="Comment">0</span>
+
+    When set 1 to enable using custom <a href="https://www.google.com/search?q=vim+%22filetype%22&lr=lang_en"><span class="MissingTag">filetype</span></a> settings.
+
+
+g:efm_langserver_settings#config                <a class="String" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#config" name="g:efm_langserver_settings#config">g:efm_langserver_settings#config</a>
+    Type: <a href="https://www.google.com/search?q=vim+%22Number%22&lr=lang_en"><span class="MissingTag">Number</span></a>
+    Default: <span class="Comment">1</span>
+
+    When set 1(default) to enable config file set to server.
+    When set 0 to disable config file set to server, at this setting use
+    efm-langserver: store config file to default path.
+    (Conversely, without below settings
+     <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#config_file">g:efm_langserver_settings#config_file</a> can be reflect custom
+     configuration file)
+
+
+g:efm_langserver_settings#debug                 <a class="String" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#debug" name="g:efm_langserver_settings#debug">g:efm_langserver_settings#debug</a>
+    Type: <a href="https://www.google.com/search?q=vim+%22Number%22&lr=lang_en"><span class="MissingTag">Number</span></a>
+    Default: <span class="Comment">0</span>
+
+    When set 1 or more to enable efm-langserver's log-file output.
+    And this value use efm-langserver'loglevel (1-5).
+
+
+                                        <a class="String" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#config_file" name="g:efm_langserver_settings#config_file">g:efm_langserver_settings#config_file</a>
+g:efm_langserver_settings#config_file
+    Type: <a href="https://www.google.com/search?q=vim+%22String%22&lr=lang_en"><span class="MissingTag">String</span></a>
+    Default: <span class="Comment">&lt;repo_config&gt;/config.yaml</span>
+
+    Specify custom efm-langserver config file.
+    Default value is build-in inner config file.
+
+
+                                        <a class="String" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#debug_file" name="g:efm_langserver_settings#debug_file">g:efm_langserver_settings#debug_file</a>
+g:efm_langserver_settings#debug_file
+    Type: <a href="https://www.google.com/search?q=vim+%22String%22&lr=lang_en"><span class="MissingTag">String</span></a>
+    Default: <span class="Comment">$HOME/efm-langserver.log</span>
+
+    Specify efm-langserver debug log file.
+    Default value is generated under $HOME.
+
+
+                                <a class="String" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#skip_filetype_list" name="g:efm_langserver_settings#skip_filetype_list">g:efm_langserver_settings#skip_filetype_list</a>
+g:efm_langserver_settings#skip_filetype_list
+    Type: <a href="https://www.google.com/search?q=vim+%22List%22&lr=lang_en"><span class="MissingTag">List</span></a>
+    Default: <span class="Comment">[]</span>
+
+     <a href="https://www.google.com/search?q=vim+%22filetype%22&lr=lang_en"><span class="MissingTag">filetype</span></a> list that is ignored from built-in config settings.
+    But, when using below <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#custom_filetype_list">g:efm_langserver_settings#custom_filetype_list</a>
+    does not work.
+
+
+                                <a class="String" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#custom_filetype_list" name="g:efm_langserver_settings#custom_filetype_list">g:efm_langserver_settings#custom_filetype_list</a>
+g:efm_langserver_settings#custom_filetype_list
+    Type: <a href="https://www.google.com/search?q=vim+%22List%22&lr=lang_en"><span class="MissingTag">List</span></a>
+    Default: <span class="Comment">[]</span>
+
+    A list to set which <a href="https://www.google.com/search?q=vim+%22filetype%22&lr=lang_en"><span class="MissingTag">filetype</span></a> of lsp to run efm-langserver when
+    <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#config">g:efm_langserver_settings#config</a> is set to 0.
+
+
+                                <a class="String" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#filetype_whitelist" name="g:efm_langserver_settings#filetype_whitelist">g:efm_langserver_settings#filetype_whitelist</a>
+g:efm_langserver_settings#filetype_whitelist
+    Type: <a href="https://www.google.com/search?q=vim+%22List%22&lr=lang_en"><span class="MissingTag">List</span></a>
+    Default: <span class="Comment">[]</span>
+
+    A list to set which <a href="https://www.google.com/search?q=vim+%22filetype%22&lr=lang_en"><span class="MissingTag">filetype</span></a> of lsp to run efm-langserver when
+    <a class="Identifier" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#customlist">g:efm_langserver_settings#customlist</a> is set to 1.
+    Can include &quot;'*'&quot; as any type, it work correctly with vim-lsp, it does not
+    work properly with ale and coc.
+
+
+                                <a class="String" href="././vim-efm-langserver-settings.html#g:efm_langserver_settings#filetype_blacklist" name="g:efm_langserver_settings#filetype_blacklist">g:efm_langserver_settings#filetype_blacklist</a>
+g:efm_langserver_settings#filetype_blacklist
+    Type: <a href="https://www.google.com/search?q=vim+%22List%22&lr=lang_en"><span class="MissingTag">List</span></a>
+    Default: <span class="Comment">(see below)</span>
+
+    A list to set which exclude <a href="https://www.google.com/search?q=vim+%22filetype%22&lr=lang_en"><span class="MissingTag">filetype</span></a> of lsp to run efm-langserver.
+
+<span class="helpExample">        g:efm_langserver_settings#filetype_blacklist = [</span>
+<span class="helpExample">          \ 'capture',</span>
+<span class="helpExample">          \ 'defx',</span>
+<span class="helpExample">          \ 'denite',</span>
+<span class="helpExample">          \ 'denite-filter',</span>
+<span class="helpExample">          \ 'diff',</span>
+<span class="helpExample">          \ 'dirvish',</span>
+<span class="helpExample">          \ 'fern',</span>
+<span class="helpExample">          \ 'fugitiveblame',</span>
+<span class="helpExample">          \ 'fzf',</span>
+<span class="helpExample">          \ 'gina-blame',</span>
+<span class="helpExample">          \ 'gina-branch',</span>
+<span class="helpExample">          \ 'gina-changes',</span>
+<span class="helpExample">          \ 'gina-commit',</span>
+<span class="helpExample">          \ 'gina-grep',</span>
+<span class="helpExample">          \ 'gina-log',</span>
+<span class="helpExample">          \ 'gina-ls',</span>
+<span class="helpExample">          \ 'gina-reflog',</span>
+<span class="helpExample">          \ 'gina-stash-list',</span>
+<span class="helpExample">          \ 'gina-stash-show',</span>
+<span class="helpExample">          \ 'gina-status',</span>
+<span class="helpExample">          \ 'gina-tag',</span>
+<span class="helpExample">          \ 'gitcommit',</span>
+<span class="helpExample">          \ 'gitrebase',</span>
+<span class="helpExample">          \ 'gitsendemail',</span>
+<span class="helpExample">          \ 'man',</span>
+<span class="helpExample">          \ 'qfreplace',</span>
+<span class="helpExample">          \ 'startify',</span>
+<span class="helpExample">          \ 'tagbar',</span>
+<span class="helpExample">          \ 'terminal',</span>
+<span class="helpExample">          \ 'unite',</span>
+<span class="helpExample">          \ 'vimfiler',</span>
+<span class="helpExample">          \ 'vista',</span>
+<span class="helpExample">          \ 'vista_kind',</span>
+<span class="helpExample">          \ 'vista_markdown',</span>
+<span class="helpExample">          \ ]</span>
+
+
+
+<span class="PreProc">==============================================================================</span>
+vim&#0058;tw=78:ts=8:ft=help:norl:noet:fen:
+</pre>
+<hr>
+<a href="#top">top</a> - <a href="./index.html">main help file</a> - <a href="./tags.html">tag index</a> <br>
+Language: <a href="./vim-efm-langserver-settings.html">en</a> <a href="././vim-efm-langserver-settings.ja.html">ja</a>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

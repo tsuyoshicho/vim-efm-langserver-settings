@@ -105,6 +105,12 @@
     ]
   },
   {
+    "cmd": "htmllint",
+    "whitelist": [
+      "html"
+    ]
+  },
+  {
     "cmd": "npx",
     "whitelist": [
       "css",

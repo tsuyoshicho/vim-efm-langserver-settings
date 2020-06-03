@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
       - name: generate html
         uses: tsuyoshicho/action-vimhelp-html-generate@v1
         env:
@@ -17,7 +19,7 @@ jobs:
           BACKGROUND: light
           COLORSCHEME: github
       - name: deploy gh-pages
-        uses: JamesIves/github-pages-deploy-action@releases/v2
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages

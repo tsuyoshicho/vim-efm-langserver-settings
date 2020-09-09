@@ -26,8 +26,8 @@ function! s:lsp_efm_langserver_setup() abort
   call lsp#register_server({
   \  'name': 'efm-langserver',
   \  'cmd': { server_info->s:args },
-  \  'whitelist': efm_langserver_settings#whitelist(),
-  \  'blacklist': efm_langserver_settings#blacklist(),
+  \  'allowlist': efm_langserver_settings#whitelist(),
+  \  'blocklist': efm_langserver_settings#blacklist(),
   \})
 endfunction
 

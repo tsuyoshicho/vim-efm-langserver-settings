@@ -1,5 +1,15 @@
 ---
 version: 2
+root-markers:
+  - RCS/
+  - SCCS/
+  - CVS/
+  - .git/
+  - .svn/
+  - .hg/
+  - .bzr/
+  - _darcs/
+  - .git
 # command define
 commands:
   - title: Reload
@@ -71,6 +81,8 @@ tools:
     lint-stdin: false
     lint-formats:
       - '%f:%l:%c: %m'
+    root-markers:
+    - compile_commands.json
 
   vale-lint: &vale-lint
     lint-command: 'vale --relative --output line ${INPUT}'
@@ -88,10 +100,14 @@ tools:
     lint-stdin: false
     lint-formats:
       - '%f:%l: %m'
+    root-markers:
+    - dict.yml
 
   nvcheck-format: &nvcheck-format
     format-command: 'nvcheck -r ${INPUT}'
     format-stdin: false
+    root-markers:
+    - dict.yml
 
   markdownlint-lint: &markdownlint-lint
     lint-command: 'markdownlint --stdin'
@@ -152,6 +168,10 @@ tools:
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m'
+    root-markers:
+      - setup.cfg
+      - tox.ini
+      - .flake8
 
   mypy-lint: &mypy-lint
     lint-command: 'mypy --show-column-numbers'
@@ -159,7 +179,9 @@ tools:
       - '%f:%l:%c: %trror: %m'
       - '%f:%l:%c: %tarning: %m'
       - '%f:%l:%c: %tote: %m'
-
+    root-markers:
+      - setup.cfg
+      - mypy.ini
 
   rubocop-lint: &rubocop-lint
     lint-command: 'bundle exec rubocop --format emacs --force-exclusion --stdin ${INPUT}'
@@ -167,14 +189,26 @@ tools:
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m'
+    root-markers:
+    - Gemfile
+    - Rakefile
+    - .rubocop.yml
 
   rubocop-format: &rubocop-format
     format-command: 'bundle exec rubocop --auto-correct ${INPUT}'
     format-stdin: false
+    root-markers:
+    - Gemfile
+    - Rakefile
+    - .rubocop.yml
 
   rufo-format: &rufo-format
     format-command: 'bundle exec rufo ${INPUT}'
     format-stdin: false
+    root-markers:
+    - Gemfile
+    - Rakefile
+    - .rufo
 
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
@@ -197,10 +231,22 @@ tools:
     lint-command: 'npx --no-install eslint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
+    root-markers:
+      - package.json
+      - .eslintrc.js
+      - .eslintrc.yaml
+      - .eslintrc.yml
+      - .eslintrc.json
 
   eslint-format: &eslint-format
     format-command: 'npx --no-install eslint --fix ${INPUT}'
     format-stdin: false
+    root-markers:
+      - package.json
+      - .eslintrc.js
+      - .eslintrc.yaml
+      - .eslintrc.yml
+      - .eslintrc.json
 
   stylelint-lint: &stylelint-lint
     lint-command: 'npx --no-install stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
@@ -209,12 +255,16 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m [%trror]'
       - '%f:%l:%c: %m [%tarning]'
+    root-markers:
+      - .stylelintrc.json
 
   htmllint-lint: &htmllint-lint
     lint-command: 'npx --no-install htmllint ${INPUT}'
     lint-stdin: false
     lint-formats:
       - '%f: line %l, col %c, %m'
+    root-markers:
+      - .htmllintrc
 
   prettier-format: &prettier-format
     format-command: 'npx --no-install prettier ${INPUT}'

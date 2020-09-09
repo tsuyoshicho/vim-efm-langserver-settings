@@ -14,7 +14,7 @@ let g:loaded_vim_efm_langserver_settings = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-let g:efm_langserver_settings#filetype_blacklist = [
+let g:efm_langserver_settings#filetype_blacklist = get(g:, 'efm_langserver_settings#filetype_blacklist', [
   \ 'capture',
   \ 'defx',
   \ 'denite',
@@ -49,7 +49,7 @@ let g:efm_langserver_settings#filetype_blacklist = [
   \ 'vista',
   \ 'vista_kind',
   \ 'vista_markdown',
-  \ ]
+  \ ])
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

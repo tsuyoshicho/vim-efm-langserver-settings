@@ -195,8 +195,8 @@ tools:
     - .rubocop.yml
 
   rubocop-format: &rubocop-format
-    format-command: 'bundle exec rubocop --auto-correct ${INPUT}'
-    format-stdin: false
+    format-command: 'bundle exec rubocop --auto-correct-all --stdin ${INPUT} | sed -e "1,/^=/d"'
+    format-stdin: true
     root-markers:
     - Gemfile
     - Rakefile

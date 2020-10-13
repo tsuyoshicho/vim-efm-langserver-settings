@@ -227,6 +227,15 @@ tools:
       - '%tARNING %f:%l %m'
       - '%tRROR %f:%l %m'
 
+  textlint-lint: &textlint-lint
+    lint-command: 'npx --no-install textlint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m [%trror/%r]'
+    root-markers:
+      - .textlintrc
+
   eslint-lint: &eslint-lint
     lint-command: 'npx --no-install eslint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
@@ -281,6 +290,7 @@ languages:
 
   markdown:
     - <<: *markdownlint-lint
+    - <<: *textlint-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
@@ -298,11 +308,13 @@ languages:
     - <<: *prettier-format
 
   text:
+    - <<: *textlint-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
 
   help:
+    - <<: *textlint-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
@@ -323,6 +335,7 @@ languages:
 
   rst:
     - <<: *restructuredtext-lint-lint
+    - <<: *textlint-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format

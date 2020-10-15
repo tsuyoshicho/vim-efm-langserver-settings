@@ -26,6 +26,7 @@ License : MIT license  {{{
 CONTENTS				*vim-efm-langserver-settings-contents*
 
 INTRODUCTION			|vim-efm-langserver-settings-introduction|
+  VERSION			  |vim-efm_langserver_settings-version|
 USAGE				|vim-efm-langserver-settings-usage|
 INTERFACE			|vim-efm-langserver-settings-interface|
   FUNCTIONS			  |vim-efm_langserver_settings-functions|
@@ -68,6 +69,11 @@ This plugin are under development inspired by mattn/vim-lsp-settings
 Latest version:
 https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
 
+
+------------------------------------------------------------------------------
+VERSION					  *vim-efm_langserver_settings-version*
+
+version 1: support npm before v7.
 
 ==============================================================================
 USAGE					*vim-efm-langserver-settings-usage*

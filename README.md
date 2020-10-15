@@ -1,5 +1,7 @@
 # vim-efm-langserver-settings
 
+version 1: support npm before v7.
+
 ## detail
 
 vim lsp client - efm-langserver link and configure settings.

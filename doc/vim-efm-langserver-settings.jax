@@ -26,7 +26,7 @@ License : MIT license  {{{
 目次					*vim-efm-langserver-settings-contents*
 
 概要				|vim-efm-langserver-settings-introduction|
-  バージョン			  |vim-efm_langserver_settings-version|
+  バージョン			  |vim-efm-langserver-settings-version|
 使い方				|vim-efm-langserver-settings-usage|
 インターフェイス		|vim-efm-langserver-settings-interface|
   関数				  |vim-efm_langserver_settings-functions|
@@ -70,7 +70,7 @@ License : MIT license  {{{
 https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
 
 ------------------------------------------------------------------------------
-バージョン				  *vim-efm_langserver_settings-version*
+バージョン				  *vim-efm-langserver-settings-version*
 
 バージョン 1: npm v7以前をサポートします。
 

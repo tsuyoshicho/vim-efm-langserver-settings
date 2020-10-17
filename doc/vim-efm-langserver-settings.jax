@@ -67,7 +67,7 @@ License : MIT license  {{{
 (https://github.com/mattn/vim-lsp-settings) に触発されて開発中です。
 
 最新版:
-https://github.com/tsuyoshicho/vim-efm-langserver-settings.vim
+https://github.com/tsuyoshicho/vim-efm-langserver-settings
 
 ------------------------------------------------------------------------------
 バージョン				  *vim-efm-langserver-settings-version*

@@ -74,6 +74,7 @@ https://github.com/tsuyoshicho/vim-efm-langserver-settings
 
 バージョン 2: npm v7もしくはそれ以降をサポートします。
 npm v7以前とともに使う場合は、バージョン 1を使ってください。
+(タグ v1, v1.0, v1.0.0 かそれ以上/ブランチ release/v1)
 
 ==============================================================================
 使い方					*vim-efm-langserver-settings-usage*

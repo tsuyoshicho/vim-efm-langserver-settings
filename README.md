@@ -1,6 +1,7 @@
 # vim-efm-langserver-settings
 
-version 1: support npm before v7.
+version 2: support npm v7 or later.
+When you using with npm before v7, use version 1.
 
 ## detail
 

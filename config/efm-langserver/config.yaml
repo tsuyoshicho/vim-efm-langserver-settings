@@ -228,7 +228,7 @@ tools:
       - '%tRROR %f:%l %m'
 
   textlint-lint: &textlint-lint
-    lint-command: 'npx --no-install textlint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-command: 'npx --no textlint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:
@@ -237,7 +237,7 @@ tools:
       - .textlintrc
 
   eslint-lint: &eslint-lint
-    lint-command: 'npx --no-install eslint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-command: 'npx --no eslint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
     root-markers:
@@ -248,7 +248,7 @@ tools:
       - .eslintrc.json
 
   eslint-format: &eslint-format
-    format-command: 'npx --no-install eslint --fix ${INPUT}'
+    format-command: 'npx --no eslint --fix ${INPUT}'
     format-stdin: false
     root-markers:
       - package.json
@@ -258,7 +258,7 @@ tools:
       - .eslintrc.json
 
   stylelint-lint: &stylelint-lint
-    lint-command: 'npx --no-install stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
+    lint-command: 'npx --no stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: false
     lint-stdin: true
     lint-formats:
@@ -268,7 +268,7 @@ tools:
       - .stylelintrc.json
 
   htmllint-lint: &htmllint-lint
-    lint-command: 'npx --no-install htmllint ${INPUT}'
+    lint-command: 'npx --no htmllint ${INPUT}'
     lint-stdin: false
     lint-formats:
       - '%f: line %l, col %c, %m'
@@ -276,7 +276,7 @@ tools:
       - .htmllintrc
 
   prettier-format: &prettier-format
-    format-command: 'npx --no-install prettier ${INPUT}'
+    format-command: 'npx --no prettier ${INPUT}'
     format-stdin: false
 
   excitetranslate-hover: &excitetranslate-hover

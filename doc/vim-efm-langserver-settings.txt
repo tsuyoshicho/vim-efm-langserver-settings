@@ -73,7 +73,8 @@ https://github.com/tsuyoshicho/vim-efm-langserver-settings
 ------------------------------------------------------------------------------
 VERSION					  *vim-efm-langserver-settings-version*
 
-version 1: support npm before v7.
+version 2: support npm v7 or later.
+When you using with npm before v7, use version 1.
 
 ==============================================================================
 USAGE					*vim-efm-langserver-settings-usage*

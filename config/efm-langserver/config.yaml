@@ -256,7 +256,7 @@ tools:
     root-markers:
       - .textlintrc
 
-  textlint-format: &textlint- format
+  textlint-format: &textlint-format
     format-command: 'npx --no textlint --fix -f unix --stdin --stdin-filename ${INPUT}'
     format-stdin: true
     root-markers:

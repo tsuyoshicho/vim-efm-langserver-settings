@@ -91,7 +91,7 @@ tools:
     lint-formats:
       - '%f:%l:%c:%*[^:]:%m'
 
-  redpen-lint: &redpen-lint
+  redpen-lint-core: &redpen-lint-core
     lint-command: 'redpen -l 9999 -r plain ${INPUT}'
     lint-stdin: false
     lint-ignore-exit-code: true
@@ -101,15 +101,12 @@ tools:
       - redpen-conf.xml
       - redpen-conf-??.xml
 
+  redpen-lint: &redpen-lint
+    <<: *redpen-lint-core
+
   redpen-text-lint: &redpen-text-lint
+    <<: *redpen-lint-core
     lint-command: 'redpen -l 9999 -f plain -r plain ${INPUT}'
-    lint-stdin: false
-    lint-ignore-exit-code: true
-    lint-formats:
-      - '%f:%l: %m'
-    root-markers:
-      - redpen-conf.xml
-      - redpen-conf-??.xml
 
   vint-lint: &vint-lint
     lint-command: 'vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -'
@@ -262,10 +259,7 @@ tools:
     root-markers:
       - .textlintrc
 
-  eslint-lint: &eslint-lint
-    lint-command: 'npx --no eslint -f unix --stdin --stdin-filename ${INPUT}'
-    lint-ignore-exit-code: true
-    lint-stdin: true
+  eslint-core: &eslint-core
     root-markers:
       - package.json
       - .eslintrc.js
@@ -273,15 +267,16 @@ tools:
       - .eslintrc.yml
       - .eslintrc.json
 
+  eslint-lint: &eslint-lint
+    <<: *eslint-core
+    lint-command: 'npx --no eslint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+
   eslint-format: &eslint-format
+    <<: *eslint-core
     format-command: 'npx --no eslint --fix ${INPUT}'
     format-stdin: false
-    root-markers:
-      - package.json
-      - .eslintrc.js
-      - .eslintrc.yaml
-      - .eslintrc.yml
-      - .eslintrc.json
 
   stylelint-lint: &stylelint-lint
     lint-command: 'npx --no stylelint --formatter unix --stdin --stdin-filename ${INPUT}'

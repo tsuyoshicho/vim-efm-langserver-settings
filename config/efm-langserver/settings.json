@@ -134,6 +134,8 @@
       "text",
       "markdown",
       "rst",
+      "asciidoc",
+      "review",
       "help",
       "javascript",
       "typescript",

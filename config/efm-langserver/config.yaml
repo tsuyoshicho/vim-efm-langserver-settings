@@ -119,12 +119,9 @@ tools:
       - '%f:%l: %m'
     root-markers:
     - dict.yml
-
-  nvcheck-format: &nvcheck-format
-    format-command: 'nvcheck -r ${INPUT}'
-    format-stdin: false
-    root-markers:
-    - dict.yml
+    commands:
+      - command: 'nvcheck -i ${INPUT}'
+        title: 'nvcheck fix'
 
   markdownlint-lint: &markdownlint-lint
     lint-command: 'markdownlint --stdin'
@@ -132,11 +129,9 @@ tools:
     lint-formats:
       - '%f:%l %m'
       - '%f: %l: %m'
-
-  # not work
-  # markdownlint-format: &markdownlint-format
-  #   format-command: 'markdownlint --fix ${INPUT}'
-  #   format-stdin: false
+    commands:
+      - command: 'markdownlint --fix ${INPUT}'
+        title: 'markdownlint fix'
 
   pandoc-markdown-format: &pandoc-markdown-format
     format-command: 'pandoc -f markdown -t gfm -sp --tab-stop=2'
@@ -210,14 +205,9 @@ tools:
     - Gemfile
     - Rakefile
     - .rubocop.yml
-
-  rubocop-format: &rubocop-format
-    format-command: 'bundle exec rubocop --auto-correct-all --stdin ${INPUT} | sed -e "1,/^=/d"'
-    format-stdin: true
-    root-markers:
-    - Gemfile
-    - Rakefile
-    - .rubocop.yml
+    commands:
+      - command: 'bundle exec rubocop --auto-correct-all ${INPUT}'
+        title: 'rubocop fix'
 
   rufo-format: &rufo-format
     format-command: 'bundle exec rufo ${INPUT}'
@@ -252,31 +242,23 @@ tools:
       - '%f:%l:%c: %m [%trror/%r]'
     root-markers:
       - .textlintrc
+    commands:
+      - command: 'npx --no textlint --fix ${INPUT}'
+        title: 'textlint fix'
 
-  textlint-format: &textlint-format
-    format-command: 'npx --no textlint --fix -f unix --stdin --stdin-filename ${INPUT}'
-    format-stdin: true
-    root-markers:
-      - .textlintrc
-
-  eslint-core: &eslint-core
+  eslint-lint: &eslint-lint
+    lint-command: 'npx --no eslint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
     root-markers:
       - package.json
       - .eslintrc.js
       - .eslintrc.yaml
       - .eslintrc.yml
       - .eslintrc.json
-
-  eslint-lint: &eslint-lint
-    <<: *eslint-core
-    lint-command: 'npx --no eslint -f unix --stdin --stdin-filename ${INPUT}'
-    lint-ignore-exit-code: true
-    lint-stdin: true
-
-  eslint-format: &eslint-format
-    <<: *eslint-core
-    format-command: 'npx --no eslint --fix ${INPUT}'
-    format-stdin: false
+    commands:
+      - command: 'npx --no eslint --fix ${INPUT}'
+        title: 'eslint fix'
 
   stylelint-lint: &stylelint-lint
     lint-command: 'npx --no stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
@@ -296,9 +278,10 @@ tools:
     root-markers:
       - .htmllintrc
 
-  prettier-format: &prettier-format
-    format-command: 'npx --no prettier ${INPUT}'
-    format-stdin: false
+  prettier-action-fix: &prettier-action-fix
+    commands:
+      - command: 'npx --no prettier ${INPUT}'
+        title: 'prettier fix'
 
   excitetranslate-hover: &excitetranslate-hover
     hover-command: 'excitetranslate'
@@ -315,35 +298,30 @@ languages:
     - <<: *redpen-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
-    - <<: *textlint-format
-    - <<: *nvcheck-format
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
     - <<: *pandoc-markdown-format
 
   json:
     - <<: *jsonlint-lint
     - <<: *jq-format
     - <<: *fixjson-format
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
 
   json5:
     - <<: *fixjson-format
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
 
   text:
     - <<: *textlint-lint
     - <<: *redpen-text-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
-    - <<: *textlint-format
-    - <<: *nvcheck-format
 
   help:
     - <<: *textlint-lint
     - <<: *redpen-text-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
-    - <<: *nvcheck-format
 
   cpp:
     - <<: *cppcheck-lint
@@ -357,7 +335,7 @@ languages:
 
   yaml:
     - <<: *yamllint-lint
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
 
   rst:
     - <<: *restructuredtext-lint-lint
@@ -365,36 +343,30 @@ languages:
     - <<: *redpen-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
-    - <<: *textlint-format
-    - <<: *nvcheck-format
     - <<: *pandoc-rst-format
 
   asciidoc:
     - <<: *textlint-lint
     - <<: *redpen-lint
-    - <<: *textlint-format
 
   review:
     - <<: *textlint-lint
     - <<: *redpen-lint
-    - <<: *textlint-format
 
   javascript:
     - <<: *eslint-lint
-    - <<: *eslint-format
 
   typescript:
     - <<: *eslint-lint
-    - <<: *eslint-format
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
 
   css:
     - <<: *stylelint-lint
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
 
   scss:
     - <<: *stylelint-lint
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
 
   sass:
     - <<: *stylelint-lint
@@ -411,20 +383,18 @@ languages:
 
   ruby:
     - <<: *rubocop-lint
-    - <<: *rubocop-format
     - <<: *rufo-format
 
   graphql:
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
 
   vue:
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
 
   html:
     - <<: *textlint-lint
     - <<: *htmllint-lint
-    - <<: *textlint-format
-    - <<: *prettier-format
+    - <<: *prettier-action-fix
 
   _:
     - <<: *excitetranslate-hover

@@ -21,6 +21,17 @@
     ]
   },
   {
+    "cmd": "redpen",
+    "whitelist": [
+      "text",
+      "markdown",
+      "rst",
+      "asciidoc",
+      "review",
+      "help"
+    ]
+  },
+  {
     "cmd": "nvcheck",
     "whitelist": [
       "text",

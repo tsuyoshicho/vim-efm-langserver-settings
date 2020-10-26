@@ -256,6 +256,12 @@ tools:
     root-markers:
       - .textlintrc
 
+  textlint-format: &textlint- format
+    format-command: 'npx --no textlint --fix -f unix --stdin --stdin-filename ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - .textlintrc
+
   eslint-lint: &eslint-lint
     lint-command: 'npx --no eslint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
@@ -314,6 +320,7 @@ languages:
     - <<: *redpen-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
+    - <<: *textlint-format
     - <<: *nvcheck-format
     - <<: *prettier-format
     - <<: *pandoc-markdown-format
@@ -333,6 +340,7 @@ languages:
     - <<: *redpen-text-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
+    - <<: *textlint-format
     - <<: *nvcheck-format
 
   help:
@@ -362,16 +370,19 @@ languages:
     - <<: *redpen-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
+    - <<: *textlint-format
     - <<: *nvcheck-format
     - <<: *pandoc-rst-format
 
   asciidoc:
     - <<: *textlint-lint
     - <<: *redpen-lint
+    - <<: *textlint-format
 
   review:
     - <<: *textlint-lint
     - <<: *redpen-lint
+    - <<: *textlint-format
 
   javascript:
     - <<: *eslint-lint
@@ -417,6 +428,7 @@ languages:
   html:
     - <<: *textlint-lint
     - <<: *htmllint-lint
+    - <<: *textlint-format
     - <<: *prettier-format
 
   _:

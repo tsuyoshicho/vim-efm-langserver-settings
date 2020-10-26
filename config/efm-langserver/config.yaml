@@ -91,6 +91,26 @@ tools:
     lint-formats:
       - '%f:%l:%c:%*[^:]:%m'
 
+  redpen-lint: &redpen-lint
+    lint-command: 'redpen -l 9999 -r plain ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l: %m'
+    root-markers:
+      - redpen-conf.xml
+      - redpen-conf-??.xml
+
+  redpen-text-lint: &redpen-text-lint
+    lint-command: 'redpen -l 9999 -f plain -r plain ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l: %m'
+    root-markers:
+      - redpen-conf.xml
+      - redpen-conf-??.xml
+
   vint-lint: &vint-lint
     lint-command: 'vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -'
     lint-stdin: true
@@ -291,6 +311,7 @@ languages:
   markdown:
     - <<: *markdownlint-lint
     - <<: *textlint-lint
+    - <<: *redpen-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
@@ -309,12 +330,14 @@ languages:
 
   text:
     - <<: *textlint-lint
+    - <<: *redpen-text-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
 
   help:
     - <<: *textlint-lint
+    - <<: *redpen-text-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
@@ -336,10 +359,17 @@ languages:
   rst:
     - <<: *restructuredtext-lint-lint
     - <<: *textlint-lint
+    - <<: *redpen-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
     - <<: *nvcheck-format
     - <<: *pandoc-rst-format
+
+  asciidoc:
+    - <<: *redpen-lint
+
+  review:
+    - <<: *redpen-lint
 
   javascript:
     - <<: *eslint-lint

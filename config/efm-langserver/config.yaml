@@ -366,9 +366,11 @@ languages:
     - <<: *pandoc-rst-format
 
   asciidoc:
+    - <<: *textlint-lint
     - <<: *redpen-lint
 
   review:
+    - <<: *textlint-lint
     - <<: *redpen-lint
 
   javascript:
@@ -413,6 +415,7 @@ languages:
     - <<: *prettier-format
 
   html:
+    - <<: *textlint-lint
     - <<: *htmllint-lint
     - <<: *prettier-format
 

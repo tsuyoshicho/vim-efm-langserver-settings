@@ -38,7 +38,7 @@ This plugin setting up efm-langserver to work.
 | command                                                                  | type                                                                         | lint/format/action | require / limitation | config status                            | note                                                                                                                                                                                                                                                                                                                    |
 | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------- | ------------------ | -------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [vim-vint](https://pypi.org/project/vim-vint/)                           | vim                                                                          | lint               | pip                  | not need config                          |                                                                                                                                                                                                                                                                                                                         |
-| [markdownlint](https://www.npmjs.com/package/markdownlint)               | markdown                                                                     | lint, action(fix)  | npm (global)         | not need config / user config affected   | `.markdownlint.json` in the current directory.<br> [setting in project root sample](example/efm-langserver/root/.markdownlint.json).                                                                                                                                                                                    |
+| [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)    | markdown                                                                     | lint, action(fix)  | npm (global)         | not need config / user config affected   | `.markdownlint.json` in the current directory.<br> [setting in project root sample](example/efm-langserver/root/.markdownlint.json).                                                                                                                                                                                    |
 | [textlint](https://www.npmjs.com/package/textlint)                       | text, markdown, html, rst, asciidoc, review, help                            | lint, action(fix)  | npm (local)          | user config needed                       | `.textlintrc` in the project root.                                                                                                                                                                                                                                                                                      |
 | [redpen](https://redpen.cc/)                                             | text, markdown, rst, asciidoc, latex, review, help                           | lint               | java                 | not included config / user config needed | `redpen-conf.xml`, `redpen-conf-{lang}.xml` in the current directory.<br> or in `$REDPEN_HOME/conf` directory.                                                                                                                                                                                                          |
 | [errata-ai/vale](https://github.com/errata-ai/vale)                      | text, markdown, rst, help                                                    | lint               | go                   | not included config / user config needed | `.vale.ini` in the current directory.<br> or in `$HOME` directory. <br> [setting in home sample](example/efm-langserver/home/.vale.ini).                                                                                                                                                                                |
@@ -64,10 +64,15 @@ This plugin setting up efm-langserver to work.
 
 If not command exists, command’s supporting type no setup.
 
-**Please contribute any other linter setting(mapping, efm-langserver
-setting, user setting sample)** If you contribute, fork and create PR.
+**Please contribute any other linter setting(mapping, efm-langserver setting, user setting sample)** If you contribute, fork and create PR.
 
-## support codeAction
+### why variant?
+
+- bundle install need : call via bundle - need project version and/or setting.
+- npm (local) : call via npx (--no arg) - need project version and/or setting.
+- npm (global) : call direct - standalone command is that tool recommended method / not need project specific.
+
+## support codeAction (global)
 
 - Config Reload (any OS)
 - Open Editor (any OS)

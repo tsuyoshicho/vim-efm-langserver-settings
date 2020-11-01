@@ -1,6 +1,5 @@
 ---
 version: 2
-$schema: 'https://mattn.github.io/efm-langserver/schema.json'
 root-markers:
   - RCS/
   - SCCS/

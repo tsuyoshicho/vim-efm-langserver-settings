@@ -1,0 +1,11 @@
+{
+  "yaml-language-server": {
+    "workspace_config": {
+      "yaml": {
+        "schemas": {
+          "https://mattn.github.io/efm-langserver/schema.json": "config/efm-langserver/config.yaml"
+        }
+      }
+    }
+  }
+}

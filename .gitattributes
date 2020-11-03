@@ -12,5 +12,9 @@
 # Extension
 *.vim          text eol=lf
 *.vital        text eol=lf
-Makefile       text eol=lf
 *.sh           text eol=lf
+
+# File
+Makefile       text eol=lf
+
+# EOF

@@ -13,11 +13,12 @@ indent_size = 2
 [*.{vim,vital}]
 end_of_line = lf
 
+[*.sh]
+end_of_line = lf
+
+# File
 [Makefile]
 end_of_line = lf
 indent_style = tab
-
-[*.sh]
-end_of_line = lf
 
 # EOF

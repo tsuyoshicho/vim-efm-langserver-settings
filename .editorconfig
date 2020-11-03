@@ -10,11 +10,15 @@ indent_style = space
 indent_size = 2
 
 # Extension
-[*.vim]
+[*.{vim,vital}]
 end_of_line = lf
 
-# file
-[*.{txt,jax}]
-trim_trailing_whitespace = false
+[*.sh]
+end_of_line = lf
+
+# File
+[Makefile]
+end_of_line = lf
+indent_style = tab
 
 # EOF

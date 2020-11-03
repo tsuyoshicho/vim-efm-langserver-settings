@@ -1,0 +1,23 @@
+root = true
+
+# All
+[*]
+# end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Extension
+[*.{vim,vital}]
+end_of_line = lf
+
+[Makefile]
+end_of_line = lf
+indent_style = tab
+
+[*.sh]
+end_of_line = lf
+
+# EOF

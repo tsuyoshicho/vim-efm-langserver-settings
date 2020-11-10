@@ -163,15 +163,33 @@ tools:
     format-command: 'fixjson'
     format-stdin: true
 
-  shellcheck-lint: &shellcheck-lint
-    lint-command: 'shellcheck -s bash -f gcc -x -'
+  shellcheck-lint-core: &shellcheck-lint-core
+    lint-command: 'shellcheck -f gcc -x -'
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %t%*[^:]: %m [SC%n]'
 
-  shfmt-format: &shfmt-format
-    format-command: 'shfmt -ln bash -i 2 -bn -ci -sr -kp'
+  shellcheck-lint-sh: &shellcheck-lint-sh
+    <<: *shellcheck-lint-core
+    lint-command: 'shellcheck -s sh -f gcc -x -'
+
+  shellcheck-lint-bash: &shellcheck-lint-bash
+    <<: *shellcheck-lint-core
+    lint-command: 'shellcheck -s bash -f gcc -x -'
+
+  shellcheck-lint-zsh: &shellcheck-lint-zsh
+    <<: *shellcheck-lint-core
+
+  shfmt-format-core: &shfmt-format-core
+    format-command: 'shfmt -ln posix -i 2 -bn -ci -sr -kp'
     format-stdin: true
+
+  shfmt-format-posix: &shfmt-format-posix
+    <<: *shfmt-format-core
+
+  shfmt-format-bash: &shfmt-format-bash
+    <<: *shfmt-format-core
+    format-command: 'shfmt -ln bash -i 2 -bn -ci -sr -kp'
 
   flake8-lint: &flake8-lint
     lint-command: 'flake8 --stdin-display-name ${INPUT} -'
@@ -338,11 +356,15 @@ languages:
     - <<: *cppcheck-lint
 
   sh:
-    - <<: *shellcheck-lint
-    - <<: *shfmt-format
+    - <<: *shellcheck-lint-sh
+    - <<: *shfmt-format-posix
+
+  bash:
+    - <<: *shellcheck-lint-bash
+    - <<: *shfmt-format-bash
 
   zsh:
-    - <<: *shellcheck-lint
+    - <<: *shellcheck-lint-zsh
 
   yaml:
     - <<: *yamllint-lint

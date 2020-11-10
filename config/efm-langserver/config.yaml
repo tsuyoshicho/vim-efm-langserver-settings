@@ -333,6 +333,9 @@ languages:
     - <<: *shellcheck-lint
     - <<: *shfmt-format
 
+  zsh:
+    - <<: *shellcheck-lint
+
   yaml:
     - <<: *yamllint-lint
     - <<: *prettier-action-fix

@@ -110,6 +110,12 @@
     ]
   },
   {
+    "cmd": "rstcheck",
+    "whitelist": [
+      "rst"
+    ]
+  },
+  {
     "cmd": "pandoc",
     "whitelist": [
       "markdown",

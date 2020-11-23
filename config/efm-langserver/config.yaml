@@ -235,6 +235,15 @@ tools:
       - '%tARNING %f:%l %m'
       - '%tRROR %f:%l %m'
 
+  rstcheck-lint: &rstcheck-lint
+    lint-command: 'rstcheck -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l: (%tNFO/%r) %m'
+      - '%f:%l: (%tARNING/%r) %m'
+      - '%f:%l: (%tRROR/%r) %m'
+      - '%f:%l: (%tEVERE/%r) %m'
+
   textlint-lint: &textlint-lint
     lint-command: 'npx --no textlint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
@@ -343,6 +352,7 @@ languages:
 
   rst:
     - <<: *restructuredtext-lint-lint
+    - <<: *rstcheck-lint
     - <<: *textlint-lint
     - <<: *redpen-lint
     - <<: *vale-lint

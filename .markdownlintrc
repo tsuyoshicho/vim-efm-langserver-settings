@@ -2,5 +2,6 @@
   "default": true,
   "single-title": false,
   "line-length": false,
-  "whitespace": false
+  "whitespace": false,
+  "no-inline-html": false
 }

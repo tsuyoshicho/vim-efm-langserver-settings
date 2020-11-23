@@ -66,7 +66,7 @@ If not command exists, command’s supporting type no setup.
 
 **Please contribute any other linter setting(mapping, efm-langserver setting, user setting sample)** If you contribute, fork and create PR.
 
-### why variant?
+### why variant
 
 - bundle install need : call via bundle - need project version and/or setting.
 - npm (local) : call via npx (--no arg) - need project version and/or setting.

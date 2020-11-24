@@ -239,10 +239,7 @@ tools:
     lint-command: 'rstcheck -'
     lint-stdin: true
     lint-formats:
-      - '%f:%l: (%tNFO/%r) %m'
-      - '%f:%l: (%tARNING/%r) %m'
-      - '%f:%l: (%tRROR/%r) %m'
-      - '%f:%l: (%tEVERE/%r) %m'
+      - '%f:%l: (%t%*[^)]) %m'
 
   textlint-lint: &textlint-lint
     lint-command: 'npx --no textlint -f unix --stdin --stdin-filename ${INPUT}'

@@ -128,6 +128,7 @@ tools:
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c MD%n/%m'
+      - '%f:%l MD%n/%m'
     commands:
       - command: 'markdownlint --fix ${INPUT}'
         title: 'markdownlint fix'
@@ -216,7 +217,7 @@ tools:
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
     lint-stdin: false
     lint-formats:
-      - '%f:%l:%c: [%t%*[^]]] %m'
+      - '%f:%l:%c: [%t%*[a-z]] %m'
     env:
       - 'PYTHONIOENCODING=UTF-8'
 

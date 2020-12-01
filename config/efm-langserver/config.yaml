@@ -127,8 +127,8 @@ tools:
     lint-command: 'markdownlint --stdin'
     lint-stdin: true
     lint-formats:
-      - '%f:%l:%c MD%n/%m'
-      - '%f:%l MD%n/%m'
+      - '%f:%l:%c MD%n/%*[^ ] %m'
+      - '%f:%l MD%n/%*[^ ] %m'
     commands:
       - command: 'markdownlint --fix ${INPUT}'
         title: 'markdownlint fix'

@@ -96,7 +96,7 @@ tools:
     lint-stdin: false
     lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l: Validation%t%*[a-z]%m at line:%.%#'
+      - '%f:%l: Validation%t%*[a-z][%*[a-zA-Z]], %m at line:%r'
     root-markers:
       - redpen-conf.xml
       - redpen-conf-??.xml

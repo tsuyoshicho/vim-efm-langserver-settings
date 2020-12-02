@@ -198,9 +198,9 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m'
     root-markers:
-    - Gemfile
-    - Rakefile
-    - .rubocop.yml
+      - Gemfile
+      - Rakefile
+      - .rubocop.yml
     commands:
       - command: 'bundle exec rubocop --auto-correct-all ${INPUT}'
         title: 'rubocop fix'
@@ -209,9 +209,9 @@ tools:
     format-command: 'bundle exec rufo ${INPUT}'
     format-stdin: false
     root-markers:
-    - Gemfile
-    - Rakefile
-    - .rufo
+      - Gemfile
+      - Rakefile
+      - .rufo
 
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
@@ -222,17 +222,17 @@ tools:
       - 'PYTHONIOENCODING=UTF-8'
 
   restructuredtext-lint-lint: &restructuredtext-lint-lint
-    lint-command: 'restructuredtext-lint --encoding utf-8 --level warning --format text ${INPUT}'
+    lint-command: 'rst-lint --encoding utf-8 --level warning --format text ${INPUT}'
     lint-stdin: false
     lint-ignore-exit-code: true
     lint-formats:
       - '%t%*[A-Z] %f:%l %m'
 
   rstcheck-lint: &rstcheck-lint
-    lint-command: 'rstcheck -'
+    lint-command: 'rstcheck --report warning -'
     lint-stdin: true
     lint-formats:
-      - '%f:%l: (%t%*[^)]) %m'
+      - '%f:%l: (%t%*[^/]/%n) %m'
 
   textlint-lint: &textlint-lint
     lint-command: 'npx --no textlint -f unix --stdin --stdin-filename ${INPUT}'

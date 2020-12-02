@@ -300,6 +300,7 @@ languages:
     - <<: *redpen-lint
     - <<: *vale-lint
     - <<: *nvcheck-lint
+    - <<: *stylelint-lint
     - <<: *prettier-action-fix
     - <<: *pandoc-markdown-format
 
@@ -400,6 +401,7 @@ languages:
   html:
     - <<: *textlint-lint
     - <<: *htmllint-lint
+    - <<: *stylelint-lint
     - <<: *prettier-action-fix
 
   _:

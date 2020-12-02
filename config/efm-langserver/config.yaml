@@ -282,7 +282,7 @@ tools:
 
   prettier-action-fix: &prettier-action-fix
     commands:
-      - command: 'npx prettier ${INPUT}'
+      - command: 'npx prettier --fix --write ${INPUT}'
         title: 'prettier fix'
 
   excitetranslate-hover: &excitetranslate-hover

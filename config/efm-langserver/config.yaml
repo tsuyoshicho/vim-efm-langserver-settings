@@ -235,7 +235,7 @@ tools:
       - '%f:%l: (%t%*[^/]/%n) %m'
 
   textlint-lint: &textlint-lint
-    lint-command: 'npx --no textlint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-command: 'npx textlint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:
@@ -243,11 +243,11 @@ tools:
     root-markers:
       - .textlintrc
     commands:
-      - command: 'npx --no textlint --fix ${INPUT}'
+      - command: 'npx textlint --fix ${INPUT}'
         title: 'textlint fix'
 
   eslint-lint: &eslint-lint
-    lint-command: 'npx --no eslint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-command: 'npx eslint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
     root-markers:
@@ -257,20 +257,23 @@ tools:
       - .eslintrc.yml
       - .eslintrc.json
     commands:
-      - command: 'npx --no eslint --fix ${INPUT}'
+      - command: 'npx eslint --fix ${INPUT}'
         title: 'eslint fix'
 
   stylelint-lint: &stylelint-lint
-    lint-command: 'npx --no stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
+    lint-command: 'npx stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: false
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m [%t%*[a-z]]'
     root-markers:
       - .stylelintrc.json
+    commands:
+      - command: 'npx stylelint --fix ${INPUT}'
+        title: 'stylelint fix'
 
   htmllint-lint: &htmllint-lint
-    lint-command: 'npx --no htmllint ${INPUT}'
+    lint-command: 'npx htmllint ${INPUT}'
     lint-stdin: false
     lint-formats:
       - '%f: line %l, col %c, %m'
@@ -279,7 +282,7 @@ tools:
 
   prettier-action-fix: &prettier-action-fix
     commands:
-      - command: 'npx --no prettier ${INPUT}'
+      - command: 'npx prettier ${INPUT}'
         title: 'prettier fix'
 
   excitetranslate-hover: &excitetranslate-hover

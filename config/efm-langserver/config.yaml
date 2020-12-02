@@ -96,7 +96,7 @@ tools:
     lint-stdin: false
     lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l: Validation%t%*[a-z]%m at line:%.\*'
+      - '%f:%l: Validation%t%*[a-z][%*[a-zA-Z]], %m at line:%r'
     root-markers:
       - redpen-conf.xml
       - redpen-conf-??.xml
@@ -127,9 +127,8 @@ tools:
     lint-command: 'markdownlint --stdin'
     lint-stdin: true
     lint-formats:
-      - '%f:%l:%c %m'
-      - '%f:%l %m'
-      - '%f: %l: %m'
+      - '%f:%l:%c MD%n/%*[^ ] %m'
+      - '%f:%l MD%n/%*[^ ] %m'
     commands:
       - command: 'markdownlint --fix ${INPUT}'
         title: 'markdownlint fix'
@@ -168,9 +167,7 @@ tools:
     lint-command: 'shellcheck -s bash -f gcc -x -'
     lint-stdin: true
     lint-formats:
-      - '%f:%l:%c: %trror: %m'
-      - '%f:%l:%c: %tarning: %m'
-      - '%f:%l:%c: %tote: %m'
+      - '%f:%l:%c: %t%*[^:]: %m [SC%n]'
 
   shfmt-format: &shfmt-format
     format-command: 'shfmt -ln bash -i 2 -bn -ci -sr -kp'
@@ -189,9 +186,7 @@ tools:
   mypy-lint: &mypy-lint
     lint-command: 'mypy --show-column-numbers'
     lint-formats:
-      - '%f:%l:%c: %trror: %m'
-      - '%f:%l:%c: %tarning: %m'
-      - '%f:%l:%c: %tote: %m'
+      - '%f:%l:%c: %t%*[^:]: %m'
     root-markers:
       - setup.cfg
       - mypy.ini
@@ -203,9 +198,9 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m'
     root-markers:
-    - Gemfile
-    - Rakefile
-    - .rubocop.yml
+      - Gemfile
+      - Rakefile
+      - .rubocop.yml
     commands:
       - command: 'bundle exec rubocop --auto-correct-all ${INPUT}'
         title: 'rubocop fix'
@@ -214,32 +209,30 @@ tools:
     format-command: 'bundle exec rufo ${INPUT}'
     format-stdin: false
     root-markers:
-    - Gemfile
-    - Rakefile
-    - .rufo
+      - Gemfile
+      - Rakefile
+      - .rufo
 
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
     lint-stdin: false
     lint-formats:
-      - '%f:%l:%c: [%trror] %m'
-      - '%f:%l:%c: [%tarning] %m'
+      - '%f:%l:%c: [%t%*[a-z]] %m'
     env:
       - 'PYTHONIOENCODING=UTF-8'
 
   restructuredtext-lint-lint: &restructuredtext-lint-lint
-    lint-command: 'restructuredtext-lint --encoding utf-8 --level warning --format text ${INPUT}'
+    lint-command: 'rst-lint --encoding utf-8 --level warning --format text ${INPUT}'
     lint-stdin: false
     lint-ignore-exit-code: true
     lint-formats:
-      - '%tARNING %f:%l %m'
-      - '%tRROR %f:%l %m'
+      - '%t%*[A-Z] %f:%l %m'
 
   rstcheck-lint: &rstcheck-lint
-    lint-command: 'rstcheck -'
+    lint-command: 'rstcheck --report warning -'
     lint-stdin: true
     lint-formats:
-      - '%f:%l: (%t%*[^)]) %m'
+      - '%f:%l: (%t%*[^/]/%n) %m'
 
   textlint-lint: &textlint-lint
     lint-command: 'npx --no textlint -f unix --stdin --stdin-filename ${INPUT}'
@@ -272,8 +265,7 @@ tools:
     lint-ignore-exit-code: false
     lint-stdin: true
     lint-formats:
-      - '%f:%l:%c: %m [%trror]'
-      - '%f:%l:%c: %m [%tarning]'
+      - '%f:%l:%c: %m [%t%*[a-z]]'
     root-markers:
       - .stylelintrc.json
 

@@ -191,6 +191,11 @@ tools:
       - setup.cfg
       - mypy.ini
 
+  black-action-fix: &black-action-fix
+    commands:
+      - command: 'black --quiet --safe ${INPUT}'
+        title: 'black fix'
+
   rubocop-lint: &rubocop-lint
     lint-command: 'bundle exec rubocop --format emacs --force-exclusion --stdin ${INPUT}'
     lint-ignore-exit-code: true
@@ -387,6 +392,7 @@ languages:
   python:
     - <<: *flake8-lint
     - <<: *mypy-lint
+    - <<: *black-action-fix
 
   ruby:
     - <<: *rubocop-lint

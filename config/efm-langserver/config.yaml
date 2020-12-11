@@ -164,7 +164,7 @@ tools:
     format-stdin: true
 
   shellcheck-lint: &shellcheck-lint
-    lint-command: 'shellcheck -s bash -f gcc -x -'
+    lint-command: 'shellcheck -f gcc -x -'
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %t%*[^:]: %m [SC%n]'
@@ -340,9 +340,6 @@ languages:
   sh:
     - <<: *shellcheck-lint
     - <<: *shfmt-format
-
-  zsh:
-    - <<: *shellcheck-lint
 
   yaml:
     - <<: *yamllint-lint

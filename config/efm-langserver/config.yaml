@@ -169,16 +169,9 @@ tools:
     lint-formats:
       - '%f:%l:%c: %t%*[^:]: %m [SC%n]'
 
-  shfmt-format-core: &shfmt-format-core
+  shfmt-format: &shfmt-format
     format-command: 'shfmt -ln posix -i 2 -bn -ci -sr -kp'
     format-stdin: true
-
-  shfmt-format-posix: &shfmt-format-posix
-    <<: *shfmt-format-core
-
-  shfmt-format-bash: &shfmt-format-bash
-    <<: *shfmt-format-core
-    format-command: 'shfmt -ln bash -i 2 -bn -ci -sr -kp'
 
   flake8-lint: &flake8-lint
     lint-command: 'flake8 --stdin-display-name ${INPUT} -'
@@ -346,7 +339,7 @@ languages:
 
   sh:
     - <<: *shellcheck-lint
-    - <<: *shfmt-format-posix
+    - <<: *shfmt-format
 
   yaml:
     - <<: *yamllint-lint

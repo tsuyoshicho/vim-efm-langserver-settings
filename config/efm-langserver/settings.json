@@ -50,9 +50,7 @@
   {
     "cmd": "shellcheck",
     "whitelist": [
-      "sh",
-      "bash",
-      "zsh"
+      "sh"
     ]
   },
   {

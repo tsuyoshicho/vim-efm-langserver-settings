@@ -184,10 +184,9 @@ tools:
       - .flake8
 
   mypy-lint: &mypy-lint
-    lint-command: 'mypy --show-column-numbers'
+    lint-command: 'mypy --show-column-numbers --strict --strict-equality'
     lint-formats:
       - '%f:%l:%c: %t%*[^:]: %m'
-      - '%f:%l: %t%*[^:]: %m'
     root-markers:
       - setup.cfg
       - mypy.ini

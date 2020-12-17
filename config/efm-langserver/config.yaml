@@ -196,6 +196,14 @@ tools:
       - command: 'black --quiet --safe ${INPUT}'
         title: 'black format'
 
+  pydocstyle-lint: &pydocstyle-lint
+    lint-command: 'pydocstyle ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%I%f:%l %.%#:'
+      - '%Z%*\sD%n: %m'
+
   rubocop-lint: &rubocop-lint
     lint-command: 'bundle exec rubocop --format emacs --force-exclusion --stdin ${INPUT}'
     lint-ignore-exit-code: true
@@ -390,6 +398,7 @@ languages:
     - <<: *flake8-lint
     - <<: *mypy-lint
     - <<: *black-action-format
+    - <<: *pydocstyle-lint
 
   ruby:
     - <<: *rubocop-lint

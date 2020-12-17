@@ -103,6 +103,12 @@
     ]
   },
   {
+    "cmd": "pydocstyle",
+    "whitelist": [
+      "python"
+    ]
+  },
+  {
     "cmd": "bundle",
     "whitelist": [
       "ruby"

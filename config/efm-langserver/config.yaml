@@ -253,6 +253,8 @@ tools:
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m [%trror/%r]'
+      - '%f:%l:%c: 【%r】 %m'
+      - '%f:%l:%c: %m'
     root-markers:
       - .textlintrc
     commands:

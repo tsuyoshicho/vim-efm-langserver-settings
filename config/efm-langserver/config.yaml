@@ -177,7 +177,7 @@ tools:
     lint-command: 'flake8 --stdin-display-name ${INPUT} -'
     lint-stdin: true
     lint-formats:
-      - '%f:%l:%c: %t%n %m'
+      - '%f:%l:%c: %m'
     root-markers:
       - setup.cfg
       - tox.ini

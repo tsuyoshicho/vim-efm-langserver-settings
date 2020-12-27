@@ -226,6 +226,11 @@ tools:
       - Rakefile
       - .rufo
 
+  rbprettier-action-format: &rbprettier-action-format
+    commands:
+      - command: 'bundle exec rbprettier --write ${INPUT}'
+        title: 'rbprettier format'
+
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
     lint-stdin: false
@@ -415,6 +420,8 @@ languages:
   ruby:
     - <<: *rubocop-lint
     - <<: *rufo-format
+    - <<: *rbprettier-action-format
+    - <<: *prettier-action-fix
 
   graphql:
     - <<: *prettier-action-fix

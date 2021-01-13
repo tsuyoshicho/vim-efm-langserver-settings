@@ -23,16 +23,11 @@ if efm_langserver_settings#debug_enable()
 endif
 
 function s:coc_efm_langserver_setup() abort
-  let userconfig = get(g:, 'coc_user_config', {})
-  let userconfig['languageserver'] = get(userconfig,'languageserver', {})
-
-  let userconfig['languageserver']['efm'] = {
+  call coc#config('languageserver.efm', {
   \  'command': 'efm-langserver',
   \  'args': s:args,
   \  'filetypes': efm_langserver_settings#support_filetype_list(),
-  \}
-
-  call coc#config('languageserver',userconfig.languageserver)
+  \})
 endfunction
 
 augroup coc-efm-langserver-settings-init

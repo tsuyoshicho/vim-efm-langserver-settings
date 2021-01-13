@@ -297,6 +297,9 @@ tools:
     root-markers:
       - .htmllintrc
 
+  buf-lint: &buf-lint
+    lint-command: 'buf lint --path'
+
   prettier-action-fix: &prettier-action-fix
     commands:
       - command: 'npx prettier --fix --write ${INPUT}'
@@ -397,6 +400,9 @@ languages:
 
   sugarss:
     - <<: *stylelint-lint
+
+  proto:
+    - <<: *buf-lint
 
   python:
     - <<: *flake8-lint

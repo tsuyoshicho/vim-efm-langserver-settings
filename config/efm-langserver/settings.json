@@ -164,6 +164,12 @@
     ]
   },
   {
+    "cmd": "buf",
+    "whitelist": [
+      "proto"
+    ]
+  },
+  {
     "cmd": "excitetranslate",
     "whitelist": [
       "*"

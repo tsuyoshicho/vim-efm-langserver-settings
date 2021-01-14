@@ -299,6 +299,8 @@ tools:
 
   buf-lint: &buf-lint
     lint-command: 'buf lint --path'
+    root-markers:
+    - buf.yaml
 
   prettier-action-fix: &prettier-action-fix
     commands:

@@ -91,6 +91,12 @@
     ]
   },
   {
+    "cmd": "pylint",
+    "whitelist": [
+      "python"
+    ]
+  },
+  {
     "cmd": "mypy",
     "whitelist": [
       "python"

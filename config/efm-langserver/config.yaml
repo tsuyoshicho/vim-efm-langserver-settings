@@ -188,6 +188,9 @@ tools:
     lint-stdin: false
     lint-formats:
       - '%f:%l:%c: C%n: %m'
+    root-markers:
+      - setup.cfg
+      - .pylintrc
 
   mypy-lint: &mypy-lint
     lint-command: 'mypy --show-column-numbers --strict --strict-equality'

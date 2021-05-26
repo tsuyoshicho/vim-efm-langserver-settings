@@ -321,6 +321,16 @@ tools:
       - command: 'npx --no-install prettier --fix --write ${INPUT}'
         title: 'prettier fix'
 
+  credo-lint: &credo-lint
+    lint-command: "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}"
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %t: %m'
+      - '%f:%l: %t: %m'
+    root-markers:
+      - mix.lock
+      - mix.exs
+
   excitetranslate-hover: &excitetranslate-hover
     hover-command: 'excitetranslate'
     hover-stdin: true
@@ -444,6 +454,9 @@ languages:
     - <<: *htmllint-lint
     - <<: *stylelint-lint
     - <<: *prettier-action-fix
+
+  elixir:
+    - <<: *credo-lint
 
   _:
     - <<: *excitetranslate-hover

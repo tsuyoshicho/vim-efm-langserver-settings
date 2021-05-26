@@ -177,6 +177,12 @@
     ]
   },
   {
+    "cmd": "mix",
+    "whitelist": [
+      "elixir"
+    ]
+  },
+  {
     "cmd": "excitetranslate",
     "whitelist": [
       "*"

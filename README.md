@@ -66,6 +66,7 @@ This plugin setting up efm-langserver to work.
 | [restructuredtext-lint](https://pypi.org/project/restructuredtext-lint/) | rst                                                                          | lint               | pip                               | not need config                          |                                                                                                                                                                                                                                                                                                                            |
 | [rstcheck](https://pypi.org/project/rstcheck/)                           | rst                                                                          | lint               | pip                               | not need config / user config affected   | `.rstcheck.cfg` in same or upper directory.<br/> `setup.cfg` in project root.<br/> `.rstcheck.ini` in `$HOME` directory.                                                                                                                                                                                                   |
 | [Pandoc](https://pandoc.org/)                                            | markdown, rst                                                                | format             |                                   | not need config                          |                                                                                                                                                                                                                                                                                                                            |
+| [Credo](https://github.com/rrrene/credo)                                 | elixir                                                                       | lint               | mix                               | not need config / user config affected   | `.credo.exs` in project root or `config/` dir.                                                                                                                                                                                                                                                                                              |
 | †[excitetranslate](https://github.com/mattn/excitetranslate)            | any (open file is not any defined type)                                      | hover              | go                                | not need config                          |                                                                                                                                                                                                                                                                                                                            |
 
 If not command exists, command’s supporting type no setup.
@@ -85,6 +86,11 @@ If not command exists, command’s supporting type no setup.
 - Open Filer (mac,Windows)
 - Open Browser (mac)
 - Open Default Application (any OS)
+
+## tips
+
+Use vim-lsp, run command `:LspDocumentFormatSync --server=efm-langserver` affect only efm-langserver formatting result (other lsp do not format).
+Above command under support `format` type command installed filetypes.
 
 ## related
 

@@ -227,6 +227,10 @@ tools:
       - command: 'bundle exec rubocop --auto-correct-all ${INPUT}'
         title: 'rubocop fix'
 
+  rubocop-format: &rubocop-format
+    format-commandd: 'bundle exec rubocop -A -f quiet --stderr -s ${INPUT}'
+    format-stdin: true
+
   rufo-format: &rufo-format
     format-command: 'bundle exec rufo ${INPUT}'
     format-stdin: false
@@ -439,6 +443,7 @@ languages:
 
   ruby:
     - <<: *rubocop-lint
+    - <<: *rubocop-format
     - <<: *rufo-format
     - <<: *rbprettier-action-format
     - <<: *prettier-action-fix

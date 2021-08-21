@@ -60,6 +60,12 @@
     ]
   },
   {
+    "cmd": "checkmake",
+    "whitelist": [
+      "make"
+    ]
+  },
+  {
     "cmd": "jsonlint",
     "whitelist": [
       "json"

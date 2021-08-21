@@ -187,6 +187,10 @@ tools:
     format-command: 'shfmt -ln bash -i 2 -bn -ci -sr -kp'
     format-stdin: true
 
+  checkmake-lint: &checkmake-lint
+    lint-command: 'checkmake'
+    lint-stdin: true
+
   flake8-lint: &flake8-lint
     prefix: flake8
     lint-command: 'flake8 --stdin-display-name ${INPUT} -'
@@ -471,6 +475,9 @@ languages:
   sh:
     - <<: *shellcheck-lint
     - <<: *shfmt-format
+
+  make:
+    - <<: *checkmake-lint
 
   yaml:
     - <<: *yamllint-lint

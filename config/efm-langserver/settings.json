@@ -85,6 +85,12 @@
     ]
   },
   {
+    "cmd": "actionlint",
+    "whitelist": [
+      "yaml"
+    ]
+  },
+  {
     "cmd": "flake8",
     "whitelist": [
       "python"
@@ -180,6 +186,12 @@
     "cmd": "mix",
     "whitelist": [
       "elixir"
+    ]
+  },
+  {
+    "cmd": "hadolint",
+    "whitelist": [
+      "dockerfile"
     ]
   },
   {

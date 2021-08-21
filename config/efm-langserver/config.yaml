@@ -15,39 +15,39 @@ commands:
   - title: Reload
     command: :reload-config
 
-  - title: Editor
+  - title: Editor (notepad)
     os: windows
     command: notepad
     arguments:
-      - "${FILENAME}"
-  - title: Editor
+      - '${FILENAME}'
+  - title: Editor (gedit)
     os: linux
     command: gedit
     # Linux no method generic GUI editor open
     arguments:
-      - ${FILENAME}
-  - title: Editor
+      - '${FILENAME}'
+  - title: Editor (default)
     os: darwin
     command: open
     arguments:
       - '-e'
-      - ${FILENAME}
+      - '${FILENAME}'
 
-  - title: Filer
+  - title: Filer (explorer)
     os: windows
     command: cmd
     arguments:
       - '/c'
       - 'explorer /select,${FILENAME}'
-  - title: Filer
+  - title: Filer (Finder)
     os: darwin
-    # Linux   no method generic filer open
+    # Linux no method generic filer open
     command: open
     arguments:
       - '-R'
-      - ${FILENAME}
+      - '${FILENAME}'
 
-  - title: Browser
+  - title: Browser (default)
     os: darwin
     # Windows no method generic browser open
     # Linux   no method generic browser open
@@ -55,24 +55,24 @@ commands:
     arguments:
       - '-a'
       - 'Safari'
-      - ${FILENAME}
+      - '${FILENAME}'
 
-  - title: Open
+  - title: Open (system default)
     os: windows
     command: rundll32
     arguments:
-      - "url.dll,FileProtocolHandler"
-      - "${FILENAME}"
-  - title: Open
+      - 'url.dll,FileProtocolHandler'
+      - '${FILENAME}'
+  - title: Open (system default)
     os: linux
     command: xdg-open
     arguments:
-      - ${FILENAME}
-  - title: Open
+      - '${FILENAME}'
+  - title: Open (system default)
     os: darwin
     command: open
     arguments:
-      - ${FILENAME}
+      - '${FILENAME}'
 
 # linter,formatter setting
 tools:
@@ -120,8 +120,11 @@ tools:
     root-markers:
     - dict.yml
     commands:
-      - command: 'nvcheck -i ${INPUT}'
-        title: 'nvcheck fix'
+      - title: 'nvcheck fix'
+        command: nvcheck
+        arguments:
+          - '-i'
+          - '${INPUT}'
 
   markdownlint-lint: &markdownlint-lint
     lint-command: 'markdownlint --stdin'
@@ -130,8 +133,11 @@ tools:
       - '%f:%l:%c MD%n/%*[^ ] %m'
       - '%f:%l MD%n/%*[^ ] %m'
     commands:
-      - command: 'markdownlint --fix ${INPUT}'
-        title: 'markdownlint fix'
+      - title: 'markdownlint fix'
+        command: markdownlint
+        arguments:
+          - '--fix'
+          - '${INPUT}'
 
   pandoc-markdown-format: &pandoc-markdown-format
     format-command: 'pandoc -f markdown -t gfm -sp --tab-stop=2'
@@ -202,8 +208,12 @@ tools:
 
   black-action-format: &black-action-format
     commands:
-      - command: 'black --quiet --safe ${INPUT}'
-        title: 'black format'
+      - title: 'black format'
+        command: black
+        arguments:
+          - '--quiet'
+          - '--safe'
+          - '${INPUT}'
 
   pydocstyle-lint: &pydocstyle-lint
     lint-command: 'pydocstyle ${INPUT}'
@@ -224,8 +234,13 @@ tools:
       - Rakefile
       - .rubocop.yml
     commands:
-      - command: 'bundle exec rubocop --auto-correct-all ${INPUT}'
-        title: 'rubocop fix'
+      - title: 'rubocop fix'
+        command: bundle
+        arguments:
+          - 'exec'
+          - 'rubocop'
+          - '--auto-correct-all'
+          - '${INPUT}'
 
   rubocop-format: &rubocop-format
     format-commandd: 'bundle exec rubocop -A -f quiet --stderr -s ${INPUT}'
@@ -241,8 +256,13 @@ tools:
 
   rbprettier-action-format: &rbprettier-action-format
     commands:
-      - command: 'bundle exec rbprettier --write ${INPUT}'
-        title: 'rbprettier format'
+      - title: 'rbprettier format'
+        command: bundle
+        arguments:
+          - 'exec'
+          - 'rbprettier'
+          - '--write'
+          - '${INPUT}'
 
   yamllint-lint: &yamllint-lint
     lint-command: 'yamllint --strict --format parsable ${INPUT}'
@@ -278,8 +298,13 @@ tools:
     root-markers:
       - .textlintrc
     commands:
-      - command: 'npx --no-install textlint --fix ${INPUT}'
-        title: 'textlint fix'
+      - title: 'textlint fix'
+        command: npx
+        arguments:
+          - '--no-install'
+          - 'textlint'
+          - '--fix'
+          - '${INPUT}'
 
   eslint-lint: &eslint-lint
     lint-command: 'npx --no-install eslint -f unix --stdin --stdin-filename ${INPUT}'
@@ -292,8 +317,13 @@ tools:
       - .eslintrc.yml
       - .eslintrc.json
     commands:
-      - command: 'npx --no-install eslint --fix ${INPUT}'
-        title: 'eslint fix'
+      - title: 'eslint fix'
+        command: npx
+        arguments:
+          - '--no-install'
+          - 'eslint'
+          - '--fix'
+          - '${INPUT}'
 
   stylelint-lint: &stylelint-lint
     lint-command: 'npx --no-install stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
@@ -304,8 +334,13 @@ tools:
     root-markers:
       - .stylelintrc.json
     commands:
-      - command: 'npx --no-install stylelint --fix ${INPUT}'
-        title: 'stylelint fix'
+      - title: 'stylelint fix'
+        command: npx
+        arguments:
+          - '--no-install'
+          - 'stylelint'
+          - '--fix'
+          - '${INPUT}'
 
   htmllint-lint: &htmllint-lint
     lint-command: 'npx --no-install htmllint ${INPUT}'
@@ -322,11 +357,17 @@ tools:
 
   prettier-action-fix: &prettier-action-fix
     commands:
-      - command: 'npx --no-install prettier --fix --write ${INPUT}'
-        title: 'prettier fix'
+      - title: 'prettier fix'
+        command: npx
+        arguments:
+          - '--no-install'
+          - 'prettier'
+          - '--fix'
+          - '--write'
+          - '${INPUT}'
 
   credo-lint: &credo-lint
-    lint-command: "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}"
+    lint-command: 'mix credo suggest --format=flycheck --read-from-stdin ${INPUT}'
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %t: %m'

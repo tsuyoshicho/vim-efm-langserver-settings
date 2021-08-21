@@ -189,6 +189,12 @@
     ]
   },
   {
+    "cmd": "hadolint",
+    "whitelist": [
+      "dockerfile"
+    ]
+  },
+  {
     "cmd": "excitetranslate",
     "whitelist": [
       "*"

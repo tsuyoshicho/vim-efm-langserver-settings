@@ -415,6 +415,12 @@ tools:
       - mix.lock
       - mix.exs
 
+  hadolint-lint: &hadolint-lint
+    prefix: hadolint
+    lint-command: 'hadolint'
+    lint-formats:
+      - '%f:%l %m'
+
   excitetranslate-hover: &excitetranslate-hover
     hover-command: 'excitetranslate'
     hover-stdin: true
@@ -543,6 +549,9 @@ languages:
 
   elixir:
     - <<: *credo-lint
+
+  dockerfile:
+    - <<: *hadolint-lint
 
   _:
     - <<: *excitetranslate-hover

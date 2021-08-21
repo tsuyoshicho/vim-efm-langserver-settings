@@ -296,7 +296,7 @@ tools:
 
   actionlint-lint: &actionlint-lint
     prefix: actionlint
-    lint-command: 'actionlint -oneline -no-color -'
+    lint-command: "bash -c \"[[ '${INPUT}' =~ \\\\.github/workflows/ ]]\" && actionlint -oneline -no-color -"
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m'

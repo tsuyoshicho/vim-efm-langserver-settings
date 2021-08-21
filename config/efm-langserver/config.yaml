@@ -294,6 +294,15 @@ tools:
     env:
       - 'PYTHONIOENCODING=UTF-8'
 
+  actionlint-lint: &actionlint-lint
+    prefix: actionlint
+    lint-command: 'actionlint -oneline -no-color -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+    root-markers:
+      - .github
+
   restructuredtext-lint-lint: &restructuredtext-lint-lint
     prefix: rstlint
     lint-command: 'rst-lint --encoding utf-8 --level warning --format text ${INPUT}'
@@ -460,6 +469,7 @@ languages:
   yaml:
     - <<: *yamllint-lint
     - <<: *prettier-action-fix
+    - <<: *actionlint-lint
 
   rst:
     - <<: *restructuredtext-lint-lint

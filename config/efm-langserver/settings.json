@@ -85,6 +85,12 @@
     ]
   },
   {
+    "cmd": "actionlint",
+    "whitelist": [
+      "yaml"
+    ]
+  },
+  {
     "cmd": "flake8",
     "whitelist": [
       "python"

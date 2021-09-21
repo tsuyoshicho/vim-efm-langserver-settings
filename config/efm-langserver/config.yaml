@@ -268,7 +268,7 @@ tools:
           - '${INPUT}'
 
   rubocop-format: &rubocop-format
-    format-commandd: 'bundle exec rubocop -A -f quiet --stderr -s ${INPUT}'
+    format-command: 'bundle exec rubocop -A -f quiet --stderr -s ${INPUT}'
     format-stdin: true
 
   rufo-format: &rufo-format

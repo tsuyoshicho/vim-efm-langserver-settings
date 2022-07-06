@@ -121,6 +121,12 @@
     ]
   },
   {
+    "cmd": "yapf",
+    "whitelist": [
+      "python"
+    ]
+  },
+  {
     "cmd": "pydocstyle",
     "whitelist": [
       "python"

@@ -238,6 +238,14 @@ tools:
           - '--safe'
           - '${INPUT}'
 
+  yapf-action-format: &yapf-action-format
+    commands:
+      - title: 'yapf format'
+        command: yapf
+        arguments:
+          - '-i'
+          - '${INPUT}'
+
   pydocstyle-lint: &pydocstyle-lint
     prefix: pydocstyle
     lint-command: 'pydocstyle ${INPUT}'
@@ -533,6 +541,7 @@ languages:
     - <<: *pylint-lint
     - <<: *mypy-lint
     - <<: *black-action-format
+    - <<: *yapf-action-format
     - <<: *pydocstyle-lint
 
   ruby:

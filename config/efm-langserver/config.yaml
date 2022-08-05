@@ -333,9 +333,8 @@ tools:
 
   textlint-lint: &textlint-lint
     prefix: textlint
-    lint-command: 'npx --no-install textlint -f unix --no-color --stdin --stdin-filename ${INPUT}'
+    lint-command: 'npx --no-install textlint -f unix --no-color ${INPUT}'
     lint-ignore-exit-code: true
-    lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m [%trror/%r]'
       - '%f:%l:%c: 【%r】 %m'

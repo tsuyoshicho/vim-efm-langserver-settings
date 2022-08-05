@@ -332,7 +332,7 @@ tools:
 
   textlint-lint: &textlint-lint
     prefix: textlint
-    lint-command: 'npx --no-install textlint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-command: 'npx --no-install textlint -f unix --no-color --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:

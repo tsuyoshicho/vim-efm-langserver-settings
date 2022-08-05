@@ -113,8 +113,9 @@ tools:
 
   vint-lint: &vint-lint
     prefix: vint
-    lint-command: 'vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -'
-    lint-stdin: true
+    lint-command: 'vint --enable-neovim --style-problem ${INPUT}'
+    lint-formats:
+      - '%f:%l:%c: %m'
 
   nvcheck-lint: &nvcheck-lint
     prefix: nvcheck
@@ -332,9 +333,8 @@ tools:
 
   textlint-lint: &textlint-lint
     prefix: textlint
-    lint-command: 'npx --no-install textlint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-command: 'npx --no-install textlint -f unix --no-color ${INPUT}'
     lint-ignore-exit-code: true
-    lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m [%trror/%r]'
       - '%f:%l:%c: 【%r】 %m'
@@ -342,6 +342,7 @@ tools:
       - '%Z%m [%trror/%r]'
       - '%C%m'
     root-markers:
+      - package.json
       - .textlintrc
     commands:
       - title: 'textlint fix'
@@ -380,6 +381,7 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m [%t%*[a-z]]'
     root-markers:
+      - package.json
       - .stylelintrc.json
     commands:
       - title: 'stylelint fix'
@@ -397,6 +399,7 @@ tools:
     lint-formats:
       - '%f: line %l, col %c, %m'
     root-markers:
+      - package.json
       - .htmllintrc
 
   buf-lint: &buf-lint

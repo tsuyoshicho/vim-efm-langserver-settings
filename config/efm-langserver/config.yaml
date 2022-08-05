@@ -342,6 +342,7 @@ tools:
       - '%Z%m [%trror/%r]'
       - '%C%m'
     root-markers:
+      - package.json
       - .textlintrc
     commands:
       - title: 'textlint fix'
@@ -380,6 +381,7 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m [%t%*[a-z]]'
     root-markers:
+      - package.json
       - .stylelintrc.json
     commands:
       - title: 'stylelint fix'
@@ -397,6 +399,7 @@ tools:
     lint-formats:
       - '%f: line %l, col %c, %m'
     root-markers:
+      - package.json
       - .htmllintrc
 
   buf-lint: &buf-lint

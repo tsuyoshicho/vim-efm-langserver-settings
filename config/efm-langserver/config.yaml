@@ -504,7 +504,7 @@ languages:
     - <<: *nvcheck-lint
     - <<: *pandoc-rst-format
 
-  asciidoctor:
+  asciidoc:
     - <<: *textlint-lint
     - <<: *redpen-lint
 

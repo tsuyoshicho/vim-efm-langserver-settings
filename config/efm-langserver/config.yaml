@@ -514,6 +514,7 @@ languages:
 
   javascript:
     - <<: *eslint-lint
+    - <<: *prettier-action-fix
 
   typescript:
     - <<: *eslint-lint

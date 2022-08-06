@@ -26,7 +26,7 @@
       "text",
       "markdown",
       "rst",
-      "asciidoc",
+      "asciidoctor",
       "review",
       "help"
     ]
@@ -176,7 +176,7 @@
       "text",
       "markdown",
       "rst",
-      "asciidoc",
+      "asciidoctor",
       "review",
       "help",
       "ruby",

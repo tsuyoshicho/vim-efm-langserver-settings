@@ -436,6 +436,26 @@ tools:
     lint-formats:
       - '%f:%l %m'
 
+  cspell-lint: &cspell-lint
+    prefix: cspell
+    lint-command: 'npx --no-install cspell lint --no-progress --no-summary --no-color ${INPUT}'
+    lint-formats:
+      - '%f:%l:%c - %m'
+      - '%f:%l:%c %m'
+    root-markers:
+      - package.json
+      - .cspell.json
+      - cspell.json
+      - .cSpell.json
+      - cSpell.json
+      - cspell.config.js
+      - cspell.config.cjs
+      - cspell.config.json
+      - cspell.config.yaml
+      - cspell.config.yml
+      - cspell.yaml
+      - cspell.yml
+
   excitetranslate-hover: &excitetranslate-hover
     hover-command: 'excitetranslate'
     hover-stdin: true
@@ -575,4 +595,5 @@ languages:
 
   =:
     - <<: *excitetranslate-hover
+    - <<: *cspell-lint
 ...

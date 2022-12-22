@@ -573,6 +573,6 @@ languages:
   dockerfile:
     - <<: *hadolint-lint
 
-  _:
+  =:
     - <<: *excitetranslate-hover
 ...

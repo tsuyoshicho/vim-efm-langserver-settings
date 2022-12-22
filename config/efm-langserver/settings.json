@@ -166,26 +166,7 @@
   {
     "cmd": "npx",
     "whitelist": [
-      "css",
-      "scss",
-      "sass",
-      "less",
-      "sugarss",
-      "graphql",
-      "html",
-      "text",
-      "markdown",
-      "rst",
-      "asciidoc",
-      "review",
-      "help",
-      "ruby",
-      "javascript",
-      "typescript",
-      "vue",
-      "yaml",
-      "json",
-      "json5"
+      "*"
     ]
   },
   {

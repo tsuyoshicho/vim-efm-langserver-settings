@@ -27,7 +27,7 @@ NOTE: If you install [`vim-lsp-settings`](https://github.com/mattn/vim-lsp-setti
 command are ok(need $PATH), but settings please keeping to disabled.
 This plugin setting up efm-langserver to work.
 
-### Install command/plugin
+### Install Command/Plugin
 
 - [efm-langserver](https://github.com/mattn/efm-langserver)
 - lsp plugin

@@ -3,17 +3,17 @@
 version 2: support npm v7 or later.
 When you using with npm before v7, use version 1(tag v1, v1.0, v1.0.0 or some upper/branch release/v1).
 
-## detail
+## Detail
 
 vim lsp client - efm-langserver link and configure settings.
 
-### support lsp client
+### Support LSP Client
 
 - [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
 - [ale](https://github.com/dense-analysis/ale)
 - [coc.nvim](https://github.com/neoclide/coc.nvim)
 
-## installation
+## Installation
 
 ex. with `vim-lsp` plugin
 
@@ -27,18 +27,18 @@ NOTE: If you install [`vim-lsp-settings`](https://github.com/mattn/vim-lsp-setti
 command are ok(need $PATH), but settings please keeping to disabled.
 This plugin setting up efm-langserver to work.
 
-### install command/plugin
+### Install command/plugin
 
 - [efm-langserver](https://github.com/mattn/efm-langserver)
 - lsp plugin
 - linter/formatter commands if you need
 
-## support command
+## Support Command
 
 | command                                                                  | type                                                                         | lint/format/action        | require / limitation              | config status                                  | note                                                                                                                                                                                                                                                                                                                       |
 |--------------------------------------------------------------------------|------------------------------------------------------------------------------|---------------------------|-----------------------------------|------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [vim-vint](https://pypi.org/project/vim-vint/)                           | vim                                                                          | lint                      | pip                               | not need config                                |                                                                                                                                                                                                                                                                                                                            |
-| [markdownlint-cli](https://www.npmjs.com/package/markdownlint-cli)       | markdown                                                                     | lint, action(fix)         | npm (global)                      | not need config / user config affected         | `.markdownlint.json`, `.markdownlint.yaml (yml)` in the current directory.<br/> `.markdownlintrc` in the project root.<br/> [setting in project root sample](example/efm-langserver/root/.markdownlintrc).                                                                                                                 |
+| [markdownlint-cli](https://www.npmjs.com/package/markdownlint-cli)       | markdown                                                                     | lint, action(fix)         | npm (global)                      | not need config / user config affected         | `.markdownlint.jsonc (json)`, `.markdownlint.yaml (yml)` in the current directory.<br/> `.markdownlintrc` in the current or parent directory.<br/> [setting in project root sample](example/efm-langserver/root/.markdownlintrc).                                                                                                                 |
 | [textlint](https://www.npmjs.com/package/textlint)                       | text, markdown, html, rst, asciidoc, review, help                            | lint, action(fix)         | npm (local)                       | user config needed                             | `.textlintrc`, `.textlintrc.js`, `.textlintrc.json`, `.textlintrc.yaml (yml)` or `package.json` textlint section in the project root.                                                                                                                                                                                      |
 | [Redpen](https://redpen.cc/)                                             | text, markdown, rst, asciidoc, latex, review, help                           | lint                      | java                              | not included config / user config needed       | `redpen-conf.xml`, `redpen-conf-{lang}.xml` in the current directory.<br/> or in `$REDPEN_HOME/conf` directory.                                                                                                                                                                                                            |
 | [Vale](https://github.com/errata-ai/vale)                                | text, markdown, rst, help                                                    | lint                      | go                                | not included config / user config needed       | `.vale.ini` in the current directory.<br/> or in `$HOME` directory. <br/> [setting in home sample](example/efm-langserver/home/.vale.ini).                                                                                                                                                                                 |
@@ -78,14 +78,14 @@ If not command exists, command’s supporting type no setup.
 
 **Please contribute any other linter setting(mapping, efm-langserver setting, user setting sample)** If you contribute, fork and create PR.
 
-### why variant
+### Why Variant?
 
 - bundle install need : call via bundle - need project version and/or setting.
 - npm (local) : call via npx (currently `--no-install` arg / future use `--no`) - need project version and/or setting.
 - npm (global) : call direct - standalone command is that tool recommended method / not need project specific.
 - bash : call bash for file operation. If Windows, that need to install msys2/Git for Windows and other bash.
 
-## support codeAction (global)
+## Support codeAction (global)
 
 - Config Reload (any OS)
 - Open Editor (any OS)
@@ -93,12 +93,12 @@ If not command exists, command’s supporting type no setup.
 - Open Browser (mac)
 - Open Default Application (any OS)
 
-## tips
+## Tips
 
 Use vim-lsp, run command `:LspDocumentFormatSync --server=efm-langserver` affect only efm-langserver formatting result (other lsp do not format).
 Above command under support `format` type command installed filetypes.
 
-## related
+## Related
 
 - [efm-langserver](https://github.com/mattn/efm-langserver)
 - [vim-lsp-settings](https://github.com/mattn/vim-lsp-settings)

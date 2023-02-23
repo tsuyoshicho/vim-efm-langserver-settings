@@ -1,7 +1,7 @@
 {
   "default": true,
-  "single-title": false,
+  "no-trailing-spaces": false,
   "line-length": false,
-  "whitespace": false,
+  "single-title": false,
   "no-inline-html": false
 }

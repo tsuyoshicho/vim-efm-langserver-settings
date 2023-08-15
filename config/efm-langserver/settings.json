@@ -158,6 +158,12 @@
     ]
   },
   {
+    "cmd": "mdformat",
+    "whitelist": [
+      "markdown"
+    ]
+  },
+  {
     "cmd": "htmllint",
     "whitelist": [
       "html"

@@ -146,6 +146,19 @@ tools:
           - '--fix'
           - '${INPUT}'
 
+  mdformat-action-format: &mdformat-action-format
+    commands:
+      - title: 'mdformat format'
+        command: mdformat
+        arguments:
+          - '--number'
+          - '--wrap'
+          - 'keep'
+          - '--end-of-line'
+          - 'keep'
+          - '${INPUT}'
+
+
   pandoc-markdown-format: &pandoc-markdown-format
     format-command: 'pandoc -f markdown -t gfm -sp --tab-stop=2'
     format-stdin: true
@@ -474,6 +487,7 @@ languages:
     - <<: *stylelint-lint
     - <<: *prettier-action-fix
     - <<: *pandoc-markdown-format
+    - <<: *mdformat-action-format
 
   json:
     - <<: *jsonlint-lint

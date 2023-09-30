@@ -281,12 +281,19 @@ tools:
       - Rakefile
       - .rubocop.yml
     commands:
-      - title: 'rubocop fix'
+      - title: 'rubocop fix(safe)'
         command: bundle
         arguments:
           - 'exec'
           - 'rubocop'
-          - '--auto-correct-all'
+          - '--autocorrect'
+          - '${INPUT}'
+      - title: 'rubocop fix(all)'
+        command: bundle
+        arguments:
+          - 'exec'
+          - 'rubocop'
+          - '--autocorrect-all'
           - '${INPUT}'
 
   rubocop-format: &rubocop-format

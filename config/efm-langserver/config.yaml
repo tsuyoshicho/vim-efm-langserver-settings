@@ -134,7 +134,7 @@ tools:
 
   markdownlint-lint: &markdownlint-lint
     prefix: markdownlint
-    lint-command: 'markdownlint --stdin'
+    lint-command: 'markdownlint --stdin'  # markdownlint do not support --stdin-filename like option
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c MD%n/%*[^ ] %m'
@@ -346,7 +346,7 @@ tools:
 
   textlint-lint: &textlint-lint
     prefix: textlint
-    lint-command: 'npx --no-install textlint -f unix --no-color --stdin'
+    lint-command: 'npx --no-install textlint -f unix --no-color --stdin --stdin-filename ${INPUT}'
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m [%trror/%r]'

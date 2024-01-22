@@ -127,6 +127,12 @@
     ]
   },
   {
+    "cmd": "ruff",
+    "whitelist": [
+      "python"
+    ]
+  },
+  {
     "cmd": "pydocstyle",
     "whitelist": [
       "python"

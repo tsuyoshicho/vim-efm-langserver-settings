@@ -260,6 +260,25 @@ tools:
           - '-i'
           - '${INPUT}'
 
+  ruff-action-format: &ruff-action-format
+    commands:
+      - title: 'ruff format'
+        command: ruff
+        arguments:
+          - 'format'
+          - '${INPUT}'
+
+  ruff-action-fix: &ruff-action-fix
+    commands:
+      - title: 'ruff fix'
+        command: ruff
+        arguments:
+          - 'check'
+          - '--fix'
+          - '--fix-only'
+          - '--exit-zero'
+          - '${INPUT}'
+
   pydocstyle-lint: &pydocstyle-lint
     prefix: pydocstyle
     lint-command: 'pydocstyle ${INPUT}'
@@ -588,6 +607,8 @@ languages:
     - <<: *black-action-format
     - <<: *yapf-action-format
     - <<: *pydocstyle-lint
+    - <<: *ruff-action-format
+    - <<: *ruff-action-fix
 
   ruby:
     - <<: *rubocop-lint

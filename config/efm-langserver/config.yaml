@@ -95,7 +95,6 @@ tools:
 
   redpen-lint-core: &redpen-lint-core
     prefix: redpen
-    lint-command: 'redpen -l 9999 -r plain ${INPUT}'
     lint-stdin: false
     lint-ignore-exit-code: true
     lint-formats:
@@ -104,8 +103,9 @@ tools:
       - redpen-conf.xml
       - redpen-conf-??.xml
 
-  redpen-lint: &redpen-lint
+  redpen-generic-lint: &redpen-generic-lint
     <<: *redpen-lint-core
+    lint-command: 'redpen -l 9999 -r plain ${INPUT}'
 
   redpen-text-lint: &redpen-text-lint
     <<: *redpen-lint-core
@@ -117,7 +117,7 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m'
 
-  nvcheck-lint: &nvcheck-lint
+  nvcheck-lint-action: &nvcheck-lint-action
     prefix: nvcheck
     lint-command: 'nvcheck ${INPUT}'
     lint-stdin: false
@@ -132,7 +132,7 @@ tools:
           - '-i'
           - '${INPUT}'
 
-  markdownlint-lint: &markdownlint-lint
+  markdownlint-lint-action: &markdownlint-lint-action
     prefix: markdownlint
     lint-command: 'markdownlint --stdin'  # markdownlint do not support --stdin-filename like option
     lint-stdin: true
@@ -146,7 +146,7 @@ tools:
           - '--fix'
           - '${INPUT}'
 
-  mdformat-action-format: &mdformat-action-format
+  mdformat-action: &mdformat-action
     commands:
       - title: 'mdformat format'
         command: mdformat
@@ -201,6 +201,7 @@ tools:
     format-stdin: true
 
   checkmake-lint: &checkmake-lint
+    prefix: checkmake
     lint-command: 'checkmake'
     lint-stdin: true
 
@@ -245,7 +246,7 @@ tools:
       - pyproject.toml
       - mypy.ini
 
-  black-action-format: &black-action-format
+  black-action: &black-action
     root-markers:
       - pyproject.toml
     commands:
@@ -256,7 +257,7 @@ tools:
           - '--safe'
           - '${INPUT}'
 
-  yapf-action-format: &yapf-action-format
+  yapf-action: &yapf-action
     root-markers:
       - setup.cfg
       - .style.yapf
@@ -267,24 +268,17 @@ tools:
           - '-i'
           - '${INPUT}'
 
-  ruff-action-core: &ruff-action-core
+  ruff-action: &ruff-action
     root-markers:
       - pyproject.toml
       - ruff.toml
       - .ruff.toml
-
-  ruff-action-format: &ruff-action-format
-    <<: *ruff-action-core
     commands:
       - title: 'ruff format'
         command: ruff
         arguments:
           - 'format'
           - '${INPUT}'
-
-  ruff-action-fix: &ruff-action-fix
-    <<: *ruff-action-core
-    commands:
       - title: 'ruff fix'
         command: ruff
         arguments:
@@ -311,13 +305,15 @@ tools:
       - .pydocstylerc
       - .pydocstylerc.ini
 
-  rubocop-lint: &rubocop-lint
+  rubocop-lint-format-action: &rubocop-lint-format-action
     prefix: rubocop
     lint-command: 'bundle exec rubocop --format emacs --force-exclusion --stdin ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %m'
+    format-command: 'bundle exec rubocop -A -f quiet --stderr -s ${INPUT}'
+    format-stdin: true
     root-markers:
       - Gemfile
       - Rakefile
@@ -338,10 +334,6 @@ tools:
           - '--autocorrect-all'
           - '${INPUT}'
 
-  rubocop-format: &rubocop-format
-    format-command: 'bundle exec rubocop -A -f quiet --stderr -s ${INPUT}'
-    format-stdin: true
-
   rufo-format: &rufo-format
     format-command: 'bundle exec rufo ${INPUT}'
     format-stdin: false
@@ -350,7 +342,7 @@ tools:
       - Rakefile
       - .rufo
 
-  rbprettier-action-format: &rbprettier-action-format
+  rbprettier-action: &rbprettier-action
     commands:
       - title: 'rbprettier format'
         command: bundle
@@ -393,7 +385,7 @@ tools:
     lint-formats:
       - '%f:%l: (%t%*[^/]/%n) %m'
 
-  textlint-lint: &textlint-lint
+  textlint-lint-action: &textlint-lint-action
     prefix: textlint
     lint-command: 'npx --no-install textlint -f unix --no-color --stdin --stdin-filename ${INPUT}'
     lint-stdin: true
@@ -419,7 +411,7 @@ tools:
           - '--fix'
           - '${INPUT}'
 
-  eslint-lint: &eslint-lint
+  eslint-lint-action: &eslint-lint-action
     prefix: eslint
     lint-command: 'npx --no-install eslint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
@@ -439,7 +431,7 @@ tools:
           - '--fix'
           - '${INPUT}'
 
-  stylelint-lint: &stylelint-lint
+  stylelint-lint-action: &stylelint-lint-action
     prefix: stylelint
     lint-command: 'npx --no-install stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: false
@@ -483,7 +475,7 @@ tools:
     root-markers:
     - buf.yaml
 
-  prettier-action-fix: &prettier-action-fix
+  prettier-action: &prettier-action
     commands:
       - title: 'prettier fix'
         command: npx
@@ -555,37 +547,37 @@ languages:
     - <<: *vint-lint
 
   markdown:
-    - <<: *markdownlint-lint
-    - <<: *textlint-lint
-    - <<: *redpen-lint
+    - <<: *markdownlint-lint-action
+    - <<: *textlint-lint-action
+    - <<: *redpen-generic-lint
     - <<: *vale-lint
-    - <<: *nvcheck-lint
-    - <<: *stylelint-lint
-    - <<: *prettier-action-fix
+    - <<: *nvcheck-lint-action
+    - <<: *stylelint-lint-action
+    - <<: *prettier-action
     - <<: *pandoc-markdown-format
-    - <<: *mdformat-action-format
+    - <<: *mdformat-action
 
   json:
     - <<: *jsonlint-lint
     - <<: *jq-format
     - <<: *fixjson-format
-    - <<: *prettier-action-fix
+    - <<: *prettier-action
 
   json5:
     - <<: *fixjson-format
-    - <<: *prettier-action-fix
+    - <<: *prettier-action
 
   text:
-    - <<: *textlint-lint
+    - <<: *textlint-lint-action
     - <<: *redpen-text-lint
     - <<: *vale-lint
-    - <<: *nvcheck-lint
+    - <<: *nvcheck-lint-action
 
   help:
-    - <<: *textlint-lint
+    - <<: *textlint-lint-action
     - <<: *redpen-text-lint
     - <<: *vale-lint
-    - <<: *nvcheck-lint
+    - <<: *nvcheck-lint-action
 
   cpp:
     - <<: *cppcheck-lint
@@ -602,50 +594,50 @@ languages:
 
   yaml:
     - <<: *yamllint-lint
-    - <<: *prettier-action-fix
+    - <<: *prettier-action
     - <<: *actionlint-lint
 
   rst:
     - <<: *restructuredtext-lint-lint
     - <<: *rstcheck-lint
-    - <<: *textlint-lint
-    - <<: *redpen-lint
+    - <<: *textlint-lint-action
+    - <<: *redpen-generic-lint
     - <<: *vale-lint
-    - <<: *nvcheck-lint
+    - <<: *nvcheck-lint-action
     - <<: *pandoc-rst-format
 
   asciidoc:
-    - <<: *textlint-lint
-    - <<: *redpen-lint
+    - <<: *textlint-lint-action
+    - <<: *redpen-generic-lint
 
   review:
-    - <<: *textlint-lint
-    - <<: *redpen-lint
+    - <<: *textlint-lint-action
+    - <<: *redpen-generic-lint
 
   javascript:
-    - <<: *eslint-lint
-    - <<: *prettier-action-fix
+    - <<: *eslint-lint-action
+    - <<: *prettier-action
 
   typescript:
-    - <<: *eslint-lint
-    - <<: *prettier-action-fix
+    - <<: *eslint-lint-action
+    - <<: *prettier-action
 
   css:
-    - <<: *stylelint-lint
-    - <<: *prettier-action-fix
+    - <<: *stylelint-lint-action
+    - <<: *prettier-action
 
   scss:
-    - <<: *stylelint-lint
-    - <<: *prettier-action-fix
+    - <<: *stylelint-lint-action
+    - <<: *prettier-action
 
   sass:
-    - <<: *stylelint-lint
+    - <<: *stylelint-lint-action
 
   less:
-    - <<: *stylelint-lint
+    - <<: *stylelint-lint-action
 
   sugarss:
-    - <<: *stylelint-lint
+    - <<: *stylelint-lint-action
 
   proto:
     - <<: *buf-lint
@@ -654,30 +646,28 @@ languages:
     - <<: *flake8-lint
     - <<: *pylint-lint
     - <<: *mypy-lint
-    - <<: *black-action-format
-    - <<: *yapf-action-format
+    - <<: *black-action
+    - <<: *yapf-action
     - <<: *pydocstyle-lint
-    - <<: *ruff-action-format
-    - <<: *ruff-action-fix
+    - <<: *ruff-action
 
   ruby:
-    - <<: *rubocop-lint
-    - <<: *rubocop-format
+    - <<: *rubocop-lint-format-action
     - <<: *rufo-format
-    - <<: *rbprettier-action-format
-    - <<: *prettier-action-fix
+    - <<: *rbprettier-action
+    - <<: *prettier-action
 
   graphql:
-    - <<: *prettier-action-fix
+    - <<: *prettier-action
 
   vue:
-    - <<: *prettier-action-fix
+    - <<: *prettier-action
 
   html:
-    - <<: *textlint-lint
+    - <<: *textlint-lint-action
     - <<: *htmllint-lint
-    - <<: *stylelint-lint
-    - <<: *prettier-action-fix
+    - <<: *stylelint-lint-action
+    - <<: *prettier-action
 
   elixir:
     - <<: *credo-lint

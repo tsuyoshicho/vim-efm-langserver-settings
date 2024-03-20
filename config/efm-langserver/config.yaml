@@ -246,6 +246,8 @@ tools:
       - mypy.ini
 
   black-action-format: &black-action-format
+    root-markers:
+      - pyproject.toml
     commands:
       - title: 'black format'
         command: black
@@ -255,6 +257,9 @@ tools:
           - '${INPUT}'
 
   yapf-action-format: &yapf-action-format
+    root-markers:
+      - setup.cfg
+      - .style.yapf
     commands:
       - title: 'yapf format'
         command: yapf
@@ -262,7 +267,14 @@ tools:
           - '-i'
           - '${INPUT}'
 
+  ruff-action-core: &ruff-action-core
+    root-markers:
+      - pyproject.toml
+      - ruff.toml
+      - .ruff.toml
+
   ruff-action-format: &ruff-action-format
+    <<: *ruff-action-core
     commands:
       - title: 'ruff format'
         command: ruff
@@ -271,6 +283,7 @@ tools:
           - '${INPUT}'
 
   ruff-action-fix: &ruff-action-fix
+    <<: *ruff-action-core
     commands:
       - title: 'ruff fix'
         command: ruff
@@ -289,6 +302,14 @@ tools:
     lint-formats:
       - '%I%f:%l %.%#:'
       - '%Z%*\sD%n: %m'
+    root-markers:
+      - setup.cfg
+      - pyproject.toml
+      - tox.ini
+      - .pydocstyle
+      - .pydocstyle.ini
+      - .pydocstylerc
+      - .pydocstylerc.ini
 
   rubocop-lint: &rubocop-lint
     prefix: rubocop
@@ -385,6 +406,10 @@ tools:
     root-markers:
       - package.json
       - .textlintrc
+      - .textlintrc.js
+      - .textlintrc.json
+      - .textlintrc.yml
+      - .textlintrc.yaml
     commands:
       - title: 'textlint fix'
         command: npx
@@ -423,7 +448,16 @@ tools:
       - '%f:%l:%c: %m [%t%*[a-z]]'
     root-markers:
       - package.json
+      - stylelint.config.js
+      - .stylelintrc.js
+      - stylelint.config.mjs
+      - .stylelintrc.mjs
+      - stylelint.config.cjs
+      - .stylelintrc.cjs
       - .stylelintrc.json
+      - .stylelintrc.yml
+      - .stylelintrc.yaml
+      - .stylelintrc
     commands:
       - title: 'stylelint fix'
         command: npx

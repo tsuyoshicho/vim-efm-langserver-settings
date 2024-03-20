@@ -213,6 +213,7 @@ tools:
       - '%f:%l:%c: %m'
     root-markers:
       - setup.cfg
+      - pyproject.toml
       - tox.ini
       - .flake8
 
@@ -232,6 +233,7 @@ tools:
       F: E
     root-markers:
       - setup.cfg
+      - pyproject.toml
       - .pylintrc
 
   mypy-lint: &mypy-lint
@@ -241,6 +243,7 @@ tools:
       - '%f:%l:%c: %t%*[^:]: %m'
     root-markers:
       - setup.cfg
+      - pyproject.toml
       - mypy.ini
 
   black-action-format: &black-action-format

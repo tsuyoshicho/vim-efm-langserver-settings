@@ -476,15 +476,6 @@ tools:
     - buf.yaml
 
   prettier-action: &prettier-action
-    commands:
-      - title: 'prettier fix'
-        command: npx
-        arguments:
-          - '--no-install'
-          - 'prettier'
-          - '--fix'
-          - '--write'
-          - '${INPUT}'
     require-marker: true
     root-markers:
       - .prettierrc
@@ -499,6 +490,27 @@ tools:
       - prettier.config.js
       - prettier.config.cjs
       - prettier.config.mjs
+    commands:
+      - title: 'prettier format'
+        command: npx
+        arguments:
+          - '--no-install'
+          - 'prettier'
+          - '--fix'
+          - '--write'
+          - '${INPUT}'
+
+  deno-action: &deno-action
+    require-marker: true
+    root-markers:
+      - deno.json
+      - deno.jsonc
+    commands:
+      - title: 'deno fmt'
+        command: deno
+        arguments:
+          - 'fmt'
+          - '${INPUT}'
 
   credo-lint: &credo-lint
     prefix: credo
@@ -556,12 +568,14 @@ languages:
     - <<: *prettier-action
     - <<: *pandoc-markdown-format
     - <<: *mdformat-action
+    - <<: *deno-action
 
   json:
     - <<: *jsonlint-lint
     - <<: *jq-format
     - <<: *fixjson-format
     - <<: *prettier-action
+    - <<: *deno-action
 
   json5:
     - <<: *fixjson-format
@@ -617,10 +631,22 @@ languages:
   javascript:
     - <<: *eslint-lint-action
     - <<: *prettier-action
+    - <<: *deno-action
+
+  javascriptreact:
+    - <<: *eslint-lint-action
+    - <<: *prettier-action
+    - <<: *deno-action
 
   typescript:
     - <<: *eslint-lint-action
     - <<: *prettier-action
+    - <<: *deno-action
+
+  typescriptreact:
+    - <<: *eslint-lint-action
+    - <<: *prettier-action
+    - <<: *deno-action
 
   css:
     - <<: *stylelint-lint-action

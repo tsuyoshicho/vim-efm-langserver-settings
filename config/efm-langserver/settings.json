@@ -182,6 +182,17 @@
     ]
   },
   {
+    "cmd": "deno",
+    "whitelist": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "markdown",
+      "json"
+    ]
+  },
+  {
     "cmd": "buf",
     "whitelist": [
       "proto"

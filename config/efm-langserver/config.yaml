@@ -475,9 +475,26 @@ tools:
     root-markers:
     - buf.yaml
 
-  prettier-action: &prettier-action
+  prettier-format-action: &prettier-format-action
+    prefix: prettier
+    format-command: 'prettier --stdin --stdin-filepath ${INPUT}'
+    format-stdin: true
+    require-marker: true
+    root-markers:
+      - .prettierrc
+      - .prettierrc.js
+      - .prettierrc.mjs
+      - .prettierrc.cjs
+      - .prettierrc.json
+      - .prettierrc.json5
+      - .prettierrc.toml
+      - .prettierrc.yml
+      - .prettierrc.yaml
+      - prettier.config.js
+      - prettier.config.cjs
+      - prettier.config.mjs
     commands:
-      - title: 'prettier fix'
+      - title: 'prettier format'
         command: npx
         arguments:
           - '--no-install'
@@ -485,20 +502,21 @@ tools:
           - '--fix'
           - '--write'
           - '${INPUT}'
+
+  deno-format-action: &deno-format-action
+    prefix: deno
+    format-command: 'deno fmt - --ext ${FILEEXT}'
+    format-stdin: true
     require-marker: true
     root-markers:
-      - .prettierrc
-      - .prettierrc.json
-      - .prettierrc.js
-      - .prettierrc.yml
-      - .prettierrc.yaml
-      - .prettierrc.json5
-      - .prettierrc.mjs
-      - .prettierrc.cjs
-      - .prettierrc.toml
-      - prettier.config.js
-      - prettier.config.cjs
-      - prettier.config.mjs
+      - deno.json
+      - deno.jsonc
+    commands:
+      - title: 'deno fmt'
+        command: deno
+        arguments:
+          - 'fmt'
+          - '${INPUT}'
 
   credo-lint: &credo-lint
     prefix: credo
@@ -553,19 +571,21 @@ languages:
     - <<: *vale-lint
     - <<: *nvcheck-lint-action
     - <<: *stylelint-lint-action
-    - <<: *prettier-action
+    - <<: *prettier-format-action
     - <<: *pandoc-markdown-format
     - <<: *mdformat-action
+    - <<: *deno-format-action
 
   json:
     - <<: *jsonlint-lint
     - <<: *jq-format
     - <<: *fixjson-format
-    - <<: *prettier-action
+    - <<: *prettier-format-action
+    - <<: *deno-format-action
 
   json5:
     - <<: *fixjson-format
-    - <<: *prettier-action
+    - <<: *prettier-format-action
 
   text:
     - <<: *textlint-lint-action
@@ -594,7 +614,7 @@ languages:
 
   yaml:
     - <<: *yamllint-lint
-    - <<: *prettier-action
+    - <<: *prettier-format-action
     - <<: *actionlint-lint
 
   rst:
@@ -616,19 +636,31 @@ languages:
 
   javascript:
     - <<: *eslint-lint-action
-    - <<: *prettier-action
+    - <<: *prettier-format-action
+    - <<: *deno-format-action
+
+  javascriptreact:
+    - <<: *eslint-lint-action
+    - <<: *prettier-format-action
+    - <<: *deno-format-action
 
   typescript:
     - <<: *eslint-lint-action
-    - <<: *prettier-action
+    - <<: *prettier-format-action
+    - <<: *deno-format-action
+
+  typescriptreact:
+    - <<: *eslint-lint-action
+    - <<: *prettier-format-action
+    - <<: *deno-format-action
 
   css:
     - <<: *stylelint-lint-action
-    - <<: *prettier-action
+    - <<: *prettier-format-action
 
   scss:
     - <<: *stylelint-lint-action
-    - <<: *prettier-action
+    - <<: *prettier-format-action
 
   sass:
     - <<: *stylelint-lint-action
@@ -655,19 +687,19 @@ languages:
     - <<: *rubocop-lint-format-action
     - <<: *rufo-format
     - <<: *rbprettier-action
-    - <<: *prettier-action
+    - <<: *prettier-format-action
 
   graphql:
-    - <<: *prettier-action
+    - <<: *prettier-format-action
 
   vue:
-    - <<: *prettier-action
+    - <<: *prettier-format-action
 
   html:
     - <<: *textlint-lint-action
     - <<: *htmllint-lint
     - <<: *stylelint-lint-action
-    - <<: *prettier-action
+    - <<: *prettier-format-action
 
   elixir:
     - <<: *credo-lint

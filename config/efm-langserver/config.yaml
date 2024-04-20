@@ -520,7 +520,7 @@ tools:
 
   credo-lint: &credo-lint
     prefix: credo
-    lint-command: 'mix credo suggest --format=flycheck --read-from-stdin ${INPUT}'
+    lint-command: 'mix credo suggest --format flycheck --read-from-stdin ${INPUT}'
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %t: %m'

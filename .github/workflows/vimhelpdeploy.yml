@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
       - name: generate html
-        uses: tsuyoshicho/action-vimhelp-html-generate@592689c2d37fa81c623c2156a02ef50d2691fc59 # v1
+        uses: tsuyoshicho/action-vimhelp-html-generate@592689c2d37fa81c623c2156a02ef50d2691fc59 # v1.2.1
         env:
           FOLDER: build
       - name: deploy gh-pages
-        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
